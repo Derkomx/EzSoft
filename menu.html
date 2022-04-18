@@ -9,12 +9,59 @@
     <!------------------>
     <link rel="stylesheet" href="CSS/style-menu.css">
     <!----------------->
-    
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
     <title>Document</title>
     
 </head>
+<!--------------->
+
+<nav role="navigation">
+    <div id="menuToggle">
+      <!--
+      A fake / hidden checkbox is used as click reciever,
+      so you can use the :checked selector on it.
+      -->
+      <input type="checkbox" />
+  
+      <!--
+      Some spans to act as a hamburger.
+      
+      They are acting like a real hamburger,
+      not that McDonalds stuff.
+      -->
+      <span></span>
+      <span></span>
+      <span></span>
+  
+      <!--
+      Too bad the menu has to be inside of the button
+      but hey, it's pure CSS magic.
+      -->
+      <ul id="menu">
+        <a href="#">
+          <li>Home</li>
+        </a>
+        <a href="#">
+          <li>About</li>
+        </a>
+        <a href="#">
+          <li>Info</li>
+        </a>
+        <a href="#">
+          <li>Contact</li>
+        </a>
+        <a href="https://erikterwan.com/" target="_blank">
+          <li>Show me more</li>
+        </a>
+      </ul>
+    </div>
+  </nav>
+
+<!--------------->
+
+
 <body>
     <div class="mobile-menu">
         <ul>
