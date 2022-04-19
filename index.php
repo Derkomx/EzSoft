@@ -1,3 +1,3 @@
 <?php
-include "paginas/menu.html";
+include "paginas/menu.php";
 ?>
