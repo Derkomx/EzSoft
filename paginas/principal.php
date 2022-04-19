@@ -1,14 +1,17 @@
 <?php
 
 	//trae el lvl de usuario
-	$lvlusr = $_SESSION['nivel'];
+	//$lvlusr = $_SESSION['nivel'];
+	$lvlusr = 3;
 	//muestra errores en pantalla si usuario es lvl administrador
 	if ($lvlusr == 3){
 		error_reporting(0);
 	}
-	$id_usuario = $_SESSION['id_usuario'];
-	//trae array con los nombres de distintos Menu
-	$arraymenu = itemsmenu($id_usuario,$mysqli);
+	//$id_usuario = $_SESSION['id_usuario'];
+	$id_usuario = 1;
+	//trae array con los nombres de librerias/lteintos Menu
+	//$arraymenu = itemsmenu($id_usuario,$mysqli);
+	$arraymenu = [];
 	// Array limpio
 	$MenuArr = [];
 
@@ -20,10 +23,15 @@
                 "Archivo" => "404.php",
             ],
 
-            "Carpetas" => [
-                "Icono" => "nav-icon fas fa-atlas",
+            "Productos" => [
+                "Icono" => "nav-icon fa fa-cubes",
                 "Tipo" => "Sub-menu",
                 "Menu" => [
+					"Todos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "carpeta&core=0",
+                        "Archivo" => "m1/inicio.php",
+                    ],
                     "$arraymenu[0]" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "carpeta&core=1",
@@ -102,11 +110,32 @@
                     ],
                 ],
             ],
-			"Crear Carpetas" => [
-                "Icono" => "nav-icon fa fa-cogs",
+			"Carro de compra" => [
+                "Icono" => "nav-icon fa fa-shopping-cart",
                 "Seccion" => "CrearCarpeta",
                 "Archivo" => "crear/crearc.php",
             ],
+			"Administracion" => [
+                "Icono" => "nav-icon fa fa-suitcase",
+                "Tipo" => "Sub-menu",
+                "Menu" => [
+					"Cargar Productos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "carpeta&core=0",
+                        "Archivo" => "m1/inicio.php",
+                    ],
+					"Ventas" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "carpeta&core=0",
+                        "Archivo" => "m1/inicio.php",
+                    ],
+					"Estadisticas" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "carpeta&core=0",
+                        "Archivo" => "m1/inicio.php",
+                    ],
+				],
+			],
     ];
 // Clase del menú
 	class Menu {
@@ -243,21 +272,15 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Font Awesome -->
-	<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="librerias/fontawesome-free/css/all.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<!-- iCheck -->
-	<link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-	<!-- JQVMap -->
-	<link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="dist/css/adminlte.min.css">
+	<link rel="stylesheet" href="librerias/lte/css/adminlte.min.css">
 	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-	<!-- Daterange picker -->
-	<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" href="librerias/overlayScrollbars/css/OverlayScrollbars.min.css">
 	<!-- summernote -->
-	<link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+	<link rel="stylesheet" href="librerias/summernote/summernote-bs4.css">
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<!-- Librería jQuery -->
@@ -266,27 +289,20 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	<script src="librerias/jquery.maskedinput.js"></script>
 	<!-- Librería Notiflix -->
 	<link rel="stylesheet" href="librerias/Notiflix/notiflix-2.6.0.min.css" />
-	<script src="librerias/Notiflix/notiflix-2.6.0.min.js"></script>	
-	<!-- Librería SHA512 -->
+	<script src="librerias/Notiflix/notiflix-2.6.0.min.js"></script>		
+	<!-- Librería SHA512 codificar contraseñas-->
+<!--	
 	<script src="librerias/sha512.js"></script>
-	<!-- Librería CropperJS -->
+-->	
+	<!-- Librería CropperJS Recorta imagenes -->
 	<link  href="librerias/CropperJS/cropper.css" rel="stylesheet">
 	<script src="librerias/CropperJS/cropper.js"></script>
-	<!-- Librería PSWmeter -->
-	<script src="librerias/pswmeter.min.js"></script>	
 	<!-- Bootstrap -->
 	<link href="librerias/Bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-	<!-- Owl Carousel -->
-    <link href="librerias/OwlCarousel/owl.carousel.css" rel="stylesheet" type="text/css"/>
-    <link href="librerias/OwlCarousel/owl.theme.default.css" rel="stylesheet" type="text/css"/>
 	<!-- Modernizr JS -->
 	<script src="librerias/modernizr-3.5.0.min.js"></script>	
 	<!-- SweetAlert 2 -->
 	<script src="librerias/sweetalert2.all.min.js"></script>	
-	<!-- Librería Moment -->
-	<script src="plugins/moment/moment-with-locales.min.js"></script>
-	<link rel="stylesheet" href="librerias/flatpickr.min.css">
-	<script src="librerias/flatpickr.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed single">
 	<div class="wrapper">
@@ -313,7 +329,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
                     	if (file_exists("Perfil/".$ID.".jpeg")) {
 							echo '<img src="Perfil/'.$ID.'.jpeg?='.filemtime("Perfil/".$ID.".jpeg").'" alt="" class="brand-image img-circle elevation-3" style="opacity: .8" >';
 						} else {
-						    echo '<img src="dist/img/logo.jpg" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">';
+						    echo '<img src="librerias/lte/img/logo.jpg" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">';
 						}
 						?>
 				
@@ -375,41 +391,27 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	</div>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<!-- jQuery -->
-	<script src="plugins/jquery/jquery.min.js"></script>
+	<script src="librerias/jquery/jquery.min.js"></script>
 	<!-- jQuery UI 1.11.4 -->
-	<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="librerias/jquery-ui/jquery-ui.min.js"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<script>
 	$.widget.bridge('uibutton', $.ui.button)
 	</script>
 	<!-- ChartJS -->
-	<script src="plugins/chart.js/Chart.min.js"></script>
-	<!-- Sparkline -->
-	<script src="plugins/sparklines/sparkline.js"></script>
+	<script src="librerias/chart.js/Chart.min.js"></script>
 	<!-- jQuery Knob Chart -->
-	<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-	<!-- daterangepicker -->
-	<script src="plugins/moment/moment.min.js"></script>
-	<script src="plugins/daterangepicker/daterangepicker.js"></script>
+	<script src="librerias/jquery-knob/jquery.knob.min.js"></script>
 	<!-- Summernote -->
-	<script src="plugins/summernote/summernote-bs4.min.js"></script>
-	<script src="plugins/summernote/lang/summernote-es-ES.min.js"></script>
+	<script src="librerias/summernote/summernote-bs4.min.js"></script>
+	<script src="librerias/summernote/lang/summernote-es-ES.min.js"></script>
 	<!-- overlayScrollbars -->
-	<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script src="librerias/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE App -->
-	<script src="dist/js/adminlte.js"></script>
+	<script src="librerias/lte/js/adminlte.js"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="dist/js/demo.js"></script>
-	
-	<script src="librerias/Bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+	<script src="librerias/lte/js/demo.js"></script>	
+	<script src="librerias/Bootstrap/js/bootstrap.bundle.min.js"></script>	
 	<script src="librerias/bootbox.min.js"></script>
-	<!-- DataTables -->
-	<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-	<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-	<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-	
-	<script src="librerias/OwlCarousel/owl.carousel.min.js"></script>
 </body>
 </html>
