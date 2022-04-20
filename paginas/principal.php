@@ -1,8 +1,8 @@
 <?php
 
 	//trae el lvl de usuario
-	//$lvlusr = $_SESSION['nivel'];
-	$lvlusr = 3;
+	$lvlusr = $_SESSION['nivel'];
+	//$lvlusr = 3;
 	//muestra errores en pantalla si usuario es lvl administrador
 	if ($lvlusr == 3){
 		error_reporting(0);
@@ -10,8 +10,8 @@
 	//$id_usuario = $_SESSION['id_usuario'];
 	$id_usuario = 1;
 	//trae array con los nombres de librerias/lteintos Menu
-	//$arraymenu = itemsmenu($id_usuario,$mysqli);
-	$arraymenu = [];
+	$arraymenu = itemsmenu($id_usuario,$mysqli);
+	//$arraymenu = [];
 	// Array limpio
 	$MenuArr = [];
 
@@ -315,7 +315,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 					<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 				</li>
 				<li class="nav-item d-none d-sm-inline-block">
-					<a href="#" class="nav-link">Pagina de Prueba</a>
+					<a href="#" class="nav-link">Ez-Soft</a>
 				</li>
 			</ul>
 		</nav>
@@ -378,7 +378,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
-			Copyright &copy; 2022 <a href="">Pagina de Prueba</a>.
+			Copyright &copy; 2022 <a href="">Ez-Soft</a>.
 			<div class="float-right d-none d-sm-inline-block">
 				<b> Ver.</b> 1.0.0
 			</div>

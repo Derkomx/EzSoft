@@ -10,6 +10,9 @@
  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
  <script src="librerias/jQuery.js"></script>
  <script src="librerias/jquery.maskedinput.js"></script>
+ <script src="librerias/sha512.js"></script>
+ <link rel="stylesheet" href="./librerias/notiflix-2.4.0.min.css" />
+ <script src="./librerias/notiflix-2.4.0.min.js"></script>
  <title>-Ez Soft-</title>
 </head>
 <body>
@@ -17,8 +20,6 @@
         <div class="form-container">
           <img src=""
            alt="logo" class="logo">
-    
-          
           <form class="form">
             <label for="user" 
             class="label">Usuario</label>
@@ -42,7 +43,7 @@
 						<span class="checkmark"></span>
 					  </div>
 				    </label>
-            <input type="submit"
+            <input 
             onclick="InicioSesion()" 
             class="primary-button 
             login-button">
