@@ -266,7 +266,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 <head>
   <meta charset="utf-8">
   <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-  <title>Menu</title>
+  <title>-Ez Soft-</title>
   <link rel="shortcut icon" href="Media/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="Media/favicon.ico" type="image/x-icon">
 	<!-- Tell the browser to be responsive to screen width -->

@@ -8,40 +8,48 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link rel="stylesheet" href="CSS/style-login.css">
  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+ <script src="librerias/jQuery.js"></script>
+ <script src="librerias/jquery.maskedinput.js"></script>
  <title>-Ez Soft-</title>
 </head>
 <body>
     <div class="login">
         <div class="form-container">
-          <img src="./logos/logo_yard_sale.svg"
+          <img src=""
            alt="logo" class="logo">
     
           
-          <form action="/" class="form">
-            <label for="email" 
-            class="label">Email address</label>
+          <form class="form">
+            <label for="user" 
+            class="label">Usuario</label>
+            <div>
             <input type="text" 
-            id="email" 
-            placeholder="ejemplo@tucorreo.com" 
+            id="user" 
+            placeholder="Usuario" 
             class="input input-email">
-    
-            <label for="password" 
+            </div>
+            <label for="clave" 
             class="label">Password</label>
+            <div>
             <input type="password" 
-            id="password" 
+            id="clave" 
             placeholder="*********" 
             class="input input-password">
-    
+            </div>
+            <label class="">Recordar usuario
+					  <div>
+						<input type="checkbox" id="Recordar">
+						<span class="checkmark"></span>
+					  </div>
+				    </label>
             <input type="submit"
-            value="Log in" 
+            onclick="InicioSesion()" 
             class="primary-button 
             login-button">
-            <a href="/">Forgot my password</a>
           </form>
-          <button 
-          class="secondary-button">Sign up</button>
         </div>
       </div>
     
 </body>
+<script src="scripts/Ingreso.js"></script>
 </html>

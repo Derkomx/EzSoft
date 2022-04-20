@@ -1,3 +1,4 @@
 <?php
-include "paginas/principal.php";
+include "paginas/login.php";
+//include "paginas/principal.php";
 ?>
