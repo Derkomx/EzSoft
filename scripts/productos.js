@@ -19,9 +19,28 @@ document.addEventListener('DOMContentLoaded', e => {
 cards.addEventListener('click', e => { addCarrito(e) });
 items.addEventListener('click', e => { btnAumentarDisminuir(e) })
 
+function getjson(data) {
+    var user = document.getElementById("user").value;
+    $.ajax({
+        type: 'POST',
+        url: './Inyector.php',
+        data: { Archivo: 'productos.php', user: user},
+        cache:false,
+        processData: false,
+        contentType: false,
+        dataType: 'html',
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (MLHttpRequest, textStatus, errorThrown) {
+            console.log("ERROR", errorThrown);
+        }
+    });
+}
+
 // Traer productos
 const fetchData = async () => {
-    const res = await fetch('api.json');
+    const res = await fetch(getjson(data));
     const data = await res.json()
     // console.log(data)
     pintarCards(data)
