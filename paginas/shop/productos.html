@@ -80,64 +80,72 @@
     <script src="scripts/productos.js"></script>
     <script>
     function comprar() {
-        //var x = JSON.parse(localStorage.getItem('carrito'));
+        //toma los datos almacenados en el cache
+        var x = JSON.parse(localStorage.getItem('carrito'));
         Notiflix.Loading.Circle('Cargando...');
         var tipo = 'remito';
+        const cCantidad = Object.values(carrito).reduce((acc, {
+        cantidad
+        }) => acc + cantidad, 0)
+        const cPrecio = Object.values(carrito).reduce((acc, {
+        cantidad,
+        precio
+        }) => acc + cantidad * precio, 0)
+        var subtotal = cPrecio;
+        //crea un registro en tabla remitos y devuelve el id del registro
         $.ajax({
             type: 'POST',
             url: 'Inyector.php',
-            data: {Archivo: 'productos2.php', Tipo: tipo},
+            data: {Archivo: 'productos2.php', Tipo: tipo, subtotal: subtotal},
             dataType: 'html',
             success: function(data) {
                 var Resultado = JSON.parse(data);
-                console.log(Resultado.success)
+                //console.log(Resultado.success)
                 Notiflix.Loading.Remove();
 
                 if (Resultado.error) {
                     Notiflix.Notify.Failure(Resultado.error);
                     return;
                 }
-                }
-            //}
-        });
-    }
-    </script>
-    <!--
+                ////////////////////////////////////////////////////
+                if (Resultado.success) {
+                Object.values(carrito).forEach(producto => {
+                        var prodc = producto.cantidad;
+                        var prodv = producto.id;
+                        var precio = producto.precio * producto.cantidad;
+                        //console.log(y)
+                ////////////////////////////////////////////////////        
+                        $.ajax({
+                            type: 'POST',
+                            url: 'Inyector.php',
+                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultado.success, cant: prodc, precio: precio},
+                            dataType: 'html',
+                            success: function(data) {
+                                var Resultado = JSON.parse(data);
+                                Notiflix.Loading.Remove();
 
-                //if (Resultado.success) {
-                    Object.values(carrito).forEach(producto => {
-                        var y = producto.id;
-                        console.log(y)
-                    })
-                    
-                    // Activa la pantalla de carga
-                    Notiflix.Loading.Circle('Cargando...');
-
-                    $.ajax({
-                        type: 'POST',
-                        url: './Inyector.php',
-                        data: {
-                            Archivo: 'productos.php',
-                            datos: JSON.stringify(x),
-                            tipo: "2"
-                        },
-                        dataType: 'html',
-                        success: function(data) {
-                            var Resultado = JSON.parse(data);
-                            console.log(JSON.stringify(data))
-                            console.log(Resultado)
-                            Notiflix.Loading.Remove();
-
-                            if (Resultado.error) {
-                                Notiflix.Notify.Failure(Resultado.error);
-                                return;
-                                console.log(x);
-                                console.log(Resultado.error)
-                            }
+                                if (Resultado.error) {
+                                    Notiflix.Notify.Failure(Resultado.error);
+                                    return;
+                                    console.log(Resultado.error)
+                                
+                                }
+                                if (Resultado.success){
+                                    carrito = {}
+                                    pintarCarrito()
+                                }
+                        /////////////////////////////////////////////  
                         }
                     });
+                    })
+                ///////////////////////////////////////////////////// 
+                }
+            }
+        });
+    }
+    </script>                
 
-    -->
+    
 </body>
 
 

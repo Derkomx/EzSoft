@@ -4,15 +4,21 @@ $usuario = 1;
 $tipo = $_POST['Tipo'];
     
     if($tipo == 'prodvend'){
-        //$datos = $_POST['datos'];
-        
+        $datos = $_POST['datos'];
+        $remito = $_POST['remito'];
+        $cant = $_POST['cant'];
+        $precio = $_POST['precio'];
+        $sql = "INSERT INTO prodvend (id, id_remito, id_prod, cant, precio) VALUES ('', $remito, $datos, $cant, $precio)";
+        $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
+
         echo json_encode(array("success" => "aber"));
 
     }else if($tipo == 'remito'){
         $usu = $usuario;
         $cli = 1;
         $now = time();
-        $sql = "INSERT INTO remitos (id_remito, id_usu, id_cli, fecha) VALUES ('', $usu, $cli, $now)";
+        $subtotal = $_POST['subtotal'];
+        $sql = "INSERT INTO remitos (id_remito, id_usu, id_cli, fecha, subtotal) VALUES ('', $usu, $cli, $now, $subtotal)";
         $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
         
         if ($stmt = $mysqli->prepare("SELECT id_remito FROM remitos WHERE id_usu = ? ORDER BY id_remito DESC LIMIT 1")) {

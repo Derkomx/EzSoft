@@ -53,6 +53,9 @@
                                         <div class="col-12">
                                             <h4>
                                                 <i class="fas fa-globe"></i> Ez Soft
+                                                <?php
+                                                $fecha = fecharemito(); 
+                                                ?>
                                                 <small class="float-right">Fecha: 2/10/2014</small>
                                             </h4>
                                         </div>
@@ -63,6 +66,10 @@
                                         <div class="col-sm-4 invoice-col">
                                             De:
                                             <address>
+                                                <?php 
+                                                $vendedor = [];
+                                                $vendedor = datosvendedor();
+                                                ?>
                                                 <strong>Nombre Vendedor</strong><br>
                                                 Direccion<br>
                                                 Provincia, Codigo Postal<br>
@@ -74,14 +81,21 @@
                                         <div class="col-sm-4 invoice-col">
                                             Para
                                             <address>
+                                                <?php
+                                                $cliente = [];
+                                                $cliente = datoscliente();                                                
+                                                ?>
                                                 <strong>nombre del que se le vendio</strong><br>
                                             </address>
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-sm-4 invoice-col">
+                                            <?php
+                                            $nremito = numeroremito();
+                                            ?>
                                             <b>Remito N° ?</b><br>
                                             <br>
-                                            <b>Fecha de Pago:</b> <br>
+                                            <b>Fecha de Pago: <?php echo $fecha; ?></b> <br>
                                         </div>
                                         <!-- /.col -->
                                     </div>
@@ -102,6 +116,10 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
+                                                        <?php
+                                                        $productos = [];
+                                                        $productos = prodenremito();
+                                                        ?>
                                                         <td>1</td>
                                                         <td>Tintura Roja marca random</td>
                                                         <td>43</td>
@@ -118,17 +136,20 @@
                                     <div class="row">
                                         <!-- /.col -->
                                         <div class="col-6">
-                                            <p class="lead">Fecha de presupuesto:</p>
+                                            <p class="lead">Fecha de presupuesto: <?php echo $fecha; ?></p>
 
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <tr>
+                                                        <?php 
+                                                        $subtotal = subtotal();
+                                                        ?>
                                                         <th style="width:50%">Subtotal:</th>
-                                                        <td>$250.30</td>
+                                                        <td><?php echo $subtotal; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Descuento:</th>
-                                                        <td>%?</td>
+                                                        <td><input>%?</input></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Total:</th>
