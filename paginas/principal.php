@@ -1,5 +1,5 @@
 <?php
-
+	$_SESSION['nivel'] = 3;
 	//trae el lvl de usuario
 	$lvlusr = $_SESSION['nivel'];
 	//$lvlusr = 3;
@@ -372,7 +372,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 				} elseif (null !== $nMenu->obtenerArchivo()) {
 					include './paginas/'.$nMenu->obtenerArchivo();
 				} else {
-					include './paginas/404.php';
+					include './paginas/shop/productos.html';
 				}
 			?>
 		</div>

@@ -5,6 +5,7 @@ include_once 'includes/MySQL.php';
 include_once 'includes/functions.php';
 
 
+
 session_start();
 
 // Se chequea si hay una función especial
@@ -13,7 +14,8 @@ if (isset($_GET['Token']) || isset($_GET['Recovery']) || isset($_GET['cambiarEma
     die();
 }
     // Se chequea si el usuario está en una sesión
-if(!isLogged()){
+    //agregar un ! en isLogged cuando se pueda registrar usuarios :v
+if(isLogged()){
     // Se chequea si hay un enlace
     if (isset($_GET['Enlace'])) {
         // Se obtiene el enlace donde se encuentra el usuario

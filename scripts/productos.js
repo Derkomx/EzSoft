@@ -26,10 +26,11 @@ items.addEventListener('click', e => {
 async function myAjax(param) {
   let result
   try {
+    
     result = await $.ajax({
       type: 'POST',
-      url: '../../Inyector.php',
-      data: {Archivo: 'productos.php'},
+      url: 'Inyector.php',
+      data: {Archivo: 'productos.php', Tipo: 'carga'},
       dataType: 'html',     
     })
     
@@ -61,8 +62,8 @@ const pintarCards = data => {
 // Agregar al carrito
 const addCarrito = e => {
     if (e.target.classList.contains('btn-dark')) {
-        console.log(e.target.dataset.id)
-         console.log(e.target.parentElement)
+        //console.log(e.target.dataset.id)
+        //console.log(e.target.parentElement)
         setCarrito(e.target.parentElement)
     }
     e.stopPropagation()
@@ -131,7 +132,7 @@ const pintarFooter = () => {
     }) => acc + cantidad * precio, 0)
     // console.log(nPrecio)
 
-    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+    //templateFooter.querySelectorAll('td')[0].textContent = nCantidad
     templateFooter.querySelector('span').textContent = nPrecio
 
     const clone = templateFooter.cloneNode(true)
