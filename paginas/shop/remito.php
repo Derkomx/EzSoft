@@ -56,9 +56,9 @@
                                                 <?php
                                                 include '../../includes/remito.php';
                                                 $nremito = $_GET['remito'];
-                                                //$fecha = fecharemito(); 
+                                                $fecha = fecharemito($nremito, $mysqli); 
                                                 ?>
-                                                <small class="float-right">Fecha: 2/10/2014</small>
+                                                <small class="float-right">Fecha: <?php echo $fecha; ?></small>
                                             </h4>
                                         </div>
                                         <!-- /.col -->
@@ -70,13 +70,13 @@
                                             <address>
                                                 <?php 
                                                 $vendedor = [];
-                                                //$vendedor = datosvendedor();
+                                                $vendedor = datosvendedor($mysqli);
                                                 ?>
-                                                <strong>Nombre Vendedor</strong><br>
-                                                Direccion<br>
-                                                Provincia, Codigo Postal<br>
-                                                Telefono<br>
-                                                Email
+                                                <strong><?php echo $vendedor[0];?></strong><br>
+                                                <?php echo $vendedor[1];?><br>
+                                                <?php echo $vendedor[2];?>, <?php echo $vendedor[3];?><br>
+                                                <?php echo $vendedor[4];?><br>
+                                                <?php echo $vendedor[5];?>
                                             </address>
                                         </div>
                                         <!-- /.col -->
@@ -85,16 +85,20 @@
                                             <address>
                                                 <?php
                                                 $cliente = [];
-                                                //$cliente = datoscliente();                                                
+                                                $cliente = datoscliente($mysqli);                                                
                                                 ?>
-                                                <strong>nombre del que se le vendio</strong><br>
+                                                <strong><?php echo $cliente[0];?></strong><br>
+                                                <?php echo $cliente[1];?><br>
+                                                <?php echo $cliente[2];?>, <?php echo $cliente[3];?><br>
+                                                <?php echo $cliente[4];?><br>
+                                                <?php echo $cliente[5];?>
                                             </address>
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-sm-4 invoice-col">
                                             <b>Remito N° <?php echo $nremito; ?></b><br>
                                             <br>
-                                            <b>Fecha de Pago: <?php //echo $fecha; ?></b> <br>
+                                            <b>Fecha de Pago: <?php echo $fecha; ?></b> <br>
                                         </div>
                                         <!-- /.col -->
                                     </div>
@@ -118,11 +122,10 @@
                                                         <?php
                                                         $productos = [];
                                                         $productos = prodenremito($nremito, $mysqli);
-                                                            foreach($productos as $ID) {    
-                                                                $s = 'nombre';                                                       
+                                                            foreach($productos as $ID) {                                                                                                                      
                                                                 echo    '<tr>'.
                                                                         '<td>'.$ID[1].'</td>'.
-                                                                        '<td>'.$s.'</td>'.
+                                                                        '<td>'.$ID[4].'</td>'.
                                                                         '<td>'.$ID[0].'</td>'.
                                                                         '<td>'.$ID[2].'</td>'.
                                                                         '<td>$'.$ID[3].'</td>'.
@@ -139,16 +142,16 @@
                                     <div class="row">
                                         <!-- /.col -->
                                         <div class="col-6">
-                                            <p class="lead">Fecha de presupuesto: <?php //echo $fecha; ?></p>
+                                            <p class="lead">Fecha de presupuesto: <?php echo $fecha; ?></p>
 
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <tr>
                                                         <?php 
-                                                        //$subtotal = subtotal();
+                                                        $subtotal = subtotal($nremito, $mysqli);
                                                         ?>
                                                         <th style="width:50%">Subtotal:</th>
-                                                        <td><?php //echo $subtotal; ?></td>
+                                                        <td>$<?php echo $subtotal; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Descuento:</th>
