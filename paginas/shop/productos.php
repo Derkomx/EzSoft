@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-
+<?php
+$cliente = $_GET['hash'];
+?>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -133,9 +133,10 @@
                                 }
                                 if (Resultado.success){
                                     carrito = {}
+                                    hash = <?php echo $cliente?>;
                                     pintarCarrito()
                                     /////////////////////////////////////////////
-                                    window.open('/ezSoft/paginas/shop/remito.php?remito='+Resultad.success)
+                                    window.open('/ezSoft/paginas/shop/remito.php?remito='+Resultad.success+'&hash='+hash)
                                     /////////////////////////////////////////////
                                 }
                         /////////////////////////////////////////////  
@@ -151,6 +152,3 @@
 
     
 </body>
-
-
-</html>

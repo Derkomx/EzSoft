@@ -56,6 +56,8 @@
                                                 <?php
                                                 include '../../includes/remito.php';
                                                 $nremito = $_GET['remito'];
+                                                $client = $_GET['hash'];
+                                                $vend = 1;
                                                 $fecha = fecharemito($nremito, $mysqli); 
                                                 ?>
                                                 <small class="float-right">Fecha: <?php echo $fecha; ?></small>
@@ -70,7 +72,7 @@
                                             <address>
                                                 <?php 
                                                 $vendedor = [];
-                                                $vendedor = datosvendedor($mysqli);
+                                                $vendedor = datosvendedor($vend, $mysqli);
                                                 ?>
                                                 <strong><?php echo $vendedor[0];?></strong><br>
                                                 <?php echo $vendedor[1];?><br>
@@ -85,7 +87,7 @@
                                             <address>
                                                 <?php
                                                 $cliente = [];
-                                                $cliente = datoscliente($mysqli);                                                
+                                                $cliente = datoscliente($client, $vend, $mysqli);                                                
                                                 ?>
                                                 <strong><?php echo $cliente[0];?></strong><br>
                                                 <?php echo $cliente[1];?><br>

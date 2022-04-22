@@ -13,9 +13,9 @@
 	// Secciones de nivel 3 (Usuario)
 	$Secciones[3] = [
 		"Inicio" => "404.php",
-		"carpeta" => "m1/inicio.php",
-		"VerPublicacion" => "texto/verPublicacion.php",
-		"Publicar" => "texto/Publicar.php",
+		"carrito" => "shop/selcliente.php",
+		"carrito2" => "shop/productos.php",
+		"productos" => "shop/productos.php",
 		"CrearCarpeta" => "crear/crearc.php",
 	];
 

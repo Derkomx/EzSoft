@@ -29,8 +29,8 @@
                 "Menu" => [
 					"Todos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "carpeta&core=0",
-                        "Archivo" => "m1/inicio.php",
+                        "Seccion" => "carrito2&hash=1",
+                        "Archivo" => "shop/productos.php",
                     ],
                     "$arraymenu[0]" => [
                         "Icono" => "nav-icon fa fa-caret-right",
@@ -110,29 +110,34 @@
                     ],
                 ],
             ],
-			"Carro de compra" => [
+			"Comprar" => [
                 "Icono" => "nav-icon fa fa-shopping-cart",
-                "Seccion" => "CrearCarpeta",
-                "Archivo" => "crear/crearc.php",
+                "Seccion" => "carrito",
+                "Archivo" => "shop/selcliente.php",
             ],
 			"Administracion" => [
                 "Icono" => "nav-icon fa fa-suitcase",
                 "Tipo" => "Sub-menu",
                 "Menu" => [
+					"Cargar Cliente" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "nuevocliente",
+                        "Archivo" => "administracion/clientenuevo.php",
+                    ],
 					"Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "carpeta&core=0",
-                        "Archivo" => "m1/inicio.php",
+                        "Seccion" => "Inicio",
+                        "Archivo" => "404.php",
                     ],
 					"Ventas" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "carpeta&core=0",
-                        "Archivo" => "m1/inicio.php",
+                        "Seccion" => "Inicio",
+                        "Archivo" => "404.php",
                     ],
 					"Estadisticas" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "carpeta&core=0",
-                        "Archivo" => "m1/inicio.php",
+                        "Seccion" => "Inicio",
+                        "Archivo" => "404.php",
                     ],
 				],
 			],
@@ -290,6 +295,8 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	<!-- Librería Notiflix -->
 	<link rel="stylesheet" href="librerias/Notiflix/notiflix-2.6.0.min.css" />
 	<script src="librerias/Notiflix/notiflix-2.6.0.min.js"></script>		
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="librerias/daterangepicker/daterangepicker.css">
 	<!-- Librería SHA512 codificar contraseñas-->
 <!--	
 	<script src="librerias/sha512.js"></script>
@@ -372,7 +379,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 				} elseif (null !== $nMenu->obtenerArchivo()) {
 					include './paginas/'.$nMenu->obtenerArchivo();
 				} else {
-					include './paginas/shop/productos.html';
+					include './paginas/404.php';
 				}
 			?>
 		</div>
@@ -398,6 +405,9 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	<script>
 	$.widget.bridge('uibutton', $.ui.button)
 	</script>
+	<!-- daterangepicker -->
+	<script src="librerias/moment/moment.min.js"></script>
+	<script src="librerias/daterangepicker/daterangepicker.js"></script>
 	<!-- ChartJS -->
 	<script src="librerias/chart.js/Chart.min.js"></script>
 	<!-- jQuery Knob Chart -->
@@ -413,5 +423,11 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	<script src="librerias/lte/js/demo.js"></script>	
 	<script src="librerias/Bootstrap/js/bootstrap.bundle.min.js"></script>	
 	<script src="librerias/bootbox.min.js"></script>
+	<!-- DataTables -->
+	<script src="librerias/datatables/jquery.dataTables.min.js"></script>
+	<script src="librerias/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="librerias/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="librerias/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	
 </body>
 </html>
