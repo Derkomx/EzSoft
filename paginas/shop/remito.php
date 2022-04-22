@@ -54,7 +54,9 @@
                                             <h4>
                                                 <i class="fas fa-globe"></i> Ez Soft
                                                 <?php
-                                                $fecha = fecharemito(); 
+                                                include '../../includes/remito.php'
+                                                $nremito = $_GET['remito'];
+                                                //$fecha = fecharemito(); 
                                                 ?>
                                                 <small class="float-right">Fecha: 2/10/2014</small>
                                             </h4>
@@ -68,7 +70,7 @@
                                             <address>
                                                 <?php 
                                                 $vendedor = [];
-                                                $vendedor = datosvendedor();
+                                                //$vendedor = datosvendedor();
                                                 ?>
                                                 <strong>Nombre Vendedor</strong><br>
                                                 Direccion<br>
@@ -83,19 +85,16 @@
                                             <address>
                                                 <?php
                                                 $cliente = [];
-                                                $cliente = datoscliente();                                                
+                                                //$cliente = datoscliente();                                                
                                                 ?>
                                                 <strong>nombre del que se le vendio</strong><br>
                                             </address>
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-sm-4 invoice-col">
-                                            <?php
-                                            $nremito = numeroremito();
-                                            ?>
-                                            <b>Remito N° ?</b><br>
+                                            <b>Remito N° <?php echo $nremito; ?></b><br>
                                             <br>
-                                            <b>Fecha de Pago: <?php echo $fecha; ?></b> <br>
+                                            <b>Fecha de Pago: <?php //echo $fecha; ?></b> <br>
                                         </div>
                                         <!-- /.col -->
                                     </div>
@@ -118,7 +117,26 @@
                                                     <tr>
                                                         <?php
                                                         $productos = [];
-                                                        $productos = prodenremito();
+                                                        $productos = prodenremito($nremito);
+                                                        
+                                                            foreach($productos as $ID) {
+                                                                $HTML = file_get_contents('Publicaciones/HTML/'.$ID[0].'.html');
+
+                                                                echo '<div class="row pb-4">'.
+                                                                    '<div class="col-md-5">'.
+                                                                        '<div class="fh5co_hover_news_img">'.
+                                                                            '<div class="fh5co_news_img"><img src="Publicaciones/Preview/'.$ID[0].'.jpeg" alt=""/></div>'.
+                                                                            '<div></div>'.
+                                                                        '</div>'.
+                                                                    '</div>'.
+                                                                    '<div class="col-md-7 animate-box">'.
+                                                                        '<a href="?Seccion=VerPublicacion&Publicacion='.$ID[0].'" class="fh5co_magna py-2">'.$ID[1].'</a> <a href="?Seccion=VerPublicacion&Publicacion='.$ID[0].'" class="fh5co_mini_time py-3">'.$ID[2].'</a>
+                                                                        <div class="fh5co_consectetur">
+                                                                            '.substr(strip_tags($HTML, '<br>'), 0, 256).'...
+                                                                        </div>
+                                                                    </div>
+                                                                </div>';
+                                                            }
                                                         ?>
                                                         <td>1</td>
                                                         <td>Tintura Roja marca random</td>
@@ -136,16 +154,16 @@
                                     <div class="row">
                                         <!-- /.col -->
                                         <div class="col-6">
-                                            <p class="lead">Fecha de presupuesto: <?php echo $fecha; ?></p>
+                                            <p class="lead">Fecha de presupuesto: <?php //echo $fecha; ?></p>
 
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <tr>
                                                         <?php 
-                                                        $subtotal = subtotal();
+                                                        //$subtotal = subtotal();
                                                         ?>
                                                         <th style="width:50%">Subtotal:</th>
-                                                        <td><?php echo $subtotal; ?></td>
+                                                        <td><?php //echo $subtotal; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Descuento:</th>
@@ -222,7 +240,7 @@
         ventana.document.close();
         ventana.onload = function() {
             ventana.print();
-            
+
         };
         return true;
     }

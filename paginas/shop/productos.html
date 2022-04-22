@@ -99,16 +99,14 @@
             data: {Archivo: 'productos2.php', Tipo: tipo, subtotal: subtotal},
             dataType: 'html',
             success: function(data) {
-                var Resultado = JSON.parse(data);
+                var Resultad = JSON.parse(data);
                 //console.log(Resultado.success)
-                Notiflix.Loading.Remove();
-
-                if (Resultado.error) {
-                    Notiflix.Notify.Failure(Resultado.error);
+                if (Resultad.error) {
+                    Notiflix.Notify.Failure(Resultad.error);
                     return;
                 }
                 ////////////////////////////////////////////////////
-                if (Resultado.success) {
+                if (Resultad.success) {
                 Object.values(carrito).forEach(producto => {
                         var prodc = producto.cantidad;
                         var prodv = producto.id;
@@ -118,7 +116,7 @@
                         $.ajax({
                             type: 'POST',
                             url: 'Inyector.php',
-                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultado.success, cant: prodc, precio: precio},
+                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, precio: precio},
                             dataType: 'html',
                             success: function(data) {
                                 var Resultado = JSON.parse(data);
@@ -133,6 +131,9 @@
                                 if (Resultado.success){
                                     carrito = {}
                                     pintarCarrito()
+                                    /////////////////////////////////////////////
+                                    window.open('http://localhost/ezSoft/paginas/shop/remito.php?remito='+Resultad.success)
+                                    /////////////////////////////////////////////
                                 }
                         /////////////////////////////////////////////  
                         }

@@ -48,8 +48,6 @@ if(isLogged()){
 }
 
     $Nivel = isLogged();
-
-
     include 'paginas/principal.php';
 
 ?>
