@@ -110,13 +110,15 @@
                 Object.values(carrito).forEach(producto => {
                         var prodc = producto.cantidad;
                         var prodv = producto.id;
+                        var preciou = producto.precio;
                         var precio = producto.precio * producto.cantidad;
+                        //console.log(preciou);
                         //console.log(y)
                 ////////////////////////////////////////////////////        
                         $.ajax({
                             type: 'POST',
                             url: 'Inyector.php',
-                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, precio: precio},
+                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, preciou: preciou, precio: precio},
                             dataType: 'html',
                             success: function(data) {
                                 var Resultado = JSON.parse(data);

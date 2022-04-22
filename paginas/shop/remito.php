@@ -54,7 +54,7 @@
                                             <h4>
                                                 <i class="fas fa-globe"></i> Ez Soft
                                                 <?php
-                                                include '../../includes/remito.php'
+                                                include '../../includes/remito.php';
                                                 $nremito = $_GET['remito'];
                                                 //$fecha = fecharemito(); 
                                                 ?>
@@ -117,25 +117,14 @@
                                                     <tr>
                                                         <?php
                                                         $productos = [];
-                                                        $productos = prodenremito($nremito);
-                                                        
-                                                            foreach($productos as $ID) {
-                                                                $HTML = file_get_contents('Publicaciones/HTML/'.$ID[0].'.html');
-
-                                                                echo '<div class="row pb-4">'.
-                                                                    '<div class="col-md-5">'.
-                                                                        '<div class="fh5co_hover_news_img">'.
-                                                                            '<div class="fh5co_news_img"><img src="Publicaciones/Preview/'.$ID[0].'.jpeg" alt=""/></div>'.
-                                                                            '<div></div>'.
-                                                                        '</div>'.
-                                                                    '</div>'.
-                                                                    '<div class="col-md-7 animate-box">'.
-                                                                        '<a href="?Seccion=VerPublicacion&Publicacion='.$ID[0].'" class="fh5co_magna py-2">'.$ID[1].'</a> <a href="?Seccion=VerPublicacion&Publicacion='.$ID[0].'" class="fh5co_mini_time py-3">'.$ID[2].'</a>
-                                                                        <div class="fh5co_consectetur">
-                                                                            '.substr(strip_tags($HTML, '<br>'), 0, 256).'...
-                                                                        </div>
-                                                                    </div>
-                                                                </div>';
+                                                        $productos = prodenremito($nremito, $mysqli);
+                                                            foreach($productos as $ID) {                                                           
+                                                                echo 
+                                                                        '<td>'.$ID[1].'</td>'.
+                                                                        '<td>'.NOMBRE.'</td>'.
+                                                                        '<td>'.$ID[0].'</td>'.
+                                                                        '<td>'.$ID[2].'</td>'.
+                                                                        '<td>$'.$ID[3].'</td>';
                                                             }
                                                         ?>
                                                         <td>1</td>

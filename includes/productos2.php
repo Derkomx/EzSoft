@@ -8,7 +8,8 @@ $tipo = $_POST['Tipo'];
         $remito = $_POST['remito'];
         $cant = $_POST['cant'];
         $precio = $_POST['precio'];
-        $sql = "INSERT INTO prodvend (id, id_remito, id_prod, cant, precio) VALUES ('', $remito, $datos, $cant, $precio)";
+        $preciou = $_POST['preciou'];
+        $sql = "INSERT INTO prodvend (id, id_remito, id_prod, cant, preciou, precio) VALUES ('', $remito, $datos, $cant, $preciou, $precio)";
         $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
 
         echo json_encode(array("success" => "aber"));
