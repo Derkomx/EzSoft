@@ -76,5 +76,20 @@ function todosclientes($id_usuario, $mysqli){
 		
 	}
 }
+function ventastot($id_usuario, $mysqli){
+
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT id_prod, cant, preciou, precio, nomprod FROM prodvend where id_remito = $nremito")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($id_prod, $cant, $preciou,$precio,$nomprod);
+		while ($stmt->fetch()) {
+			$resultados[] = array($id_prod, $cant, $preciou,$precio,$nomprod);
+		}
+		return ($resultados);
+		
+	}
+
+}
 
 ?>
