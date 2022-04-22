@@ -17,6 +17,7 @@
 		"carrito2" => "shop/productos.php",
 		"productos" => "shop/productos.php",
 		"CrearCarpeta" => "crear/crearc.php",
+		"nuevocliente" => "administracion/clientenuevo.php",
 	];
 
 ?>
