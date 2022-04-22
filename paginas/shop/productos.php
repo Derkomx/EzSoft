@@ -83,7 +83,6 @@ $cliente = $_GET['hash'];
         //toma los datos almacenados en el cache
         var x = JSON.parse(localStorage.getItem('carrito'));
         Notiflix.Loading.Circle('Cargando...');
-        var tipo = 'remito';
         const cCantidad = Object.values(carrito).reduce((acc, {
         cantidad
         }) => acc + cantidad, 0)
@@ -92,11 +91,12 @@ $cliente = $_GET['hash'];
         precio
         }) => acc + cantidad * precio, 0)
         var subtotal = cPrecio;
+        var cliente2 = <?php echo $cliente?>;
         //crea un registro en tabla remitos y devuelve el id del registro
         $.ajax({
             type: 'POST',
             url: 'Inyector.php',
-            data: {Archivo: 'productos2.php', Tipo: tipo, subtotal: subtotal},
+            data: {Archivo: 'productos2.php', Tipo: 'remito', subtotal: subtotal, cliente: cliente2},
             dataType: 'html',
             success: function(data) {
                 var Resultad = JSON.parse(data);
@@ -115,6 +115,7 @@ $cliente = $_GET['hash'];
                         var titulo = producto.title;
                         console.log(titulo);
                         //console.log(y)
+                        
                 ////////////////////////////////////////////////////        
                         $.ajax({
                             type: 'POST',

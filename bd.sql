@@ -21,14 +21,16 @@ USE `ezsoft`;
 
 -- Volcando estructura para tabla ezsoft.clientes
 CREATE TABLE IF NOT EXISTS `clientes` (
-  `id_cliente` int(11) DEFAULT NULL,
+  `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   `direccion` varchar(50) DEFAULT NULL,
   `provincia` varchar(50) DEFAULT NULL,
-  `codpos` int(11) DEFAULT NULL,
+  `codpos` varchar(50) DEFAULT NULL,
   `telefono` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `email` varchar(50) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  KEY `id_cliente` (`id_cliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -87,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `prodvend` (
   `precio` int(11) DEFAULT NULL,
   `nomprod` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `remitos` (
   `subtotal` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_remito`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 

@@ -17,7 +17,7 @@ $tipo = $_POST['Tipo'];
 
     }else if($tipo == 'remito'){
         $usu = $usuario;
-        $cli = 1;
+        $cli = $_POST['cliente'];
         $now = time();
         $subtotal = $_POST['subtotal'];
         $sql = "INSERT INTO remitos (id_remito, id_usu, id_cli, fecha, subtotal) VALUES ('', $usu, $cli, $now, $subtotal)";

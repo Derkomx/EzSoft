@@ -79,12 +79,20 @@ function todosclientes($id_usuario, $mysqli){
 function ventastot($id_usuario, $mysqli){
 
     $resultados = [];
-    if ($stmt = $mysqli->prepare("SELECT id_prod, cant, preciou, precio, nomprod FROM prodvend where id_remito = $nremito")) {
+    if ($stmt = $mysqli->prepare("SELECT id_remito, id_cli, fecha, subtotal FROM remitos where id_usu = $id_usuario")) {
         $stmt->execute();
         $stmt->store_result();
-		$stmt->bind_result($id_prod, $cant, $preciou,$precio,$nomprod);
+		$stmt->bind_result($id_remito, $id_cli, $fecha, $subtotal);
 		while ($stmt->fetch()) {
-			$resultados[] = array($id_prod, $cant, $preciou,$precio,$nomprod);
+            if ($stmt2 = $mysqli->prepare("SELECT nombre FROM clientes where id_cliente = $id_cli")) {
+                $stmt2->execute();
+                $stmt2->store_result();
+                $stmt2->bind_result($nombre);
+                $stmt2 ->fetch();
+                $fecha2 = date('d-m-Y',$fecha);
+                $resultados[] = array($id_remito, $id_cli, $nombre, $fecha2, $subtotal);
+            }
+            
 		}
 		return ($resultados);
 		
