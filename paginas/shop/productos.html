@@ -112,13 +112,14 @@
                         var prodv = producto.id;
                         var preciou = producto.precio;
                         var precio = producto.precio * producto.cantidad;
-                        //console.log(preciou);
+                        var titulo = producto.title;
+                        console.log(titulo);
                         //console.log(y)
                 ////////////////////////////////////////////////////        
                         $.ajax({
                             type: 'POST',
                             url: 'Inyector.php',
-                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, preciou: preciou, precio: precio},
+                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, preciou: preciou, precio: precio, titulo: titulo},
                             dataType: 'html',
                             success: function(data) {
                                 var Resultado = JSON.parse(data);

@@ -114,25 +114,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    
                                                         <?php
                                                         $productos = [];
                                                         $productos = prodenremito($nremito, $mysqli);
-                                                            foreach($productos as $ID) {                                                           
-                                                                echo 
+                                                            foreach($productos as $ID) {    
+                                                                $s = 'nombre';                                                       
+                                                                echo    '<tr>'.
                                                                         '<td>'.$ID[1].'</td>'.
-                                                                        '<td>'.NOMBRE.'</td>'.
+                                                                        '<td>'.$s.'</td>'.
                                                                         '<td>'.$ID[0].'</td>'.
                                                                         '<td>'.$ID[2].'</td>'.
-                                                                        '<td>$'.$ID[3].'</td>';
+                                                                        '<td>$'.$ID[3].'</td>'.
+                                                                        '</tr>';
                                                             }
-                                                        ?>
-                                                        <td>1</td>
-                                                        <td>Tintura Roja marca random</td>
-                                                        <td>43</td>
-                                                        <td> Te deja el pelo rojo </td>
-                                                        <td>$1500</td>
-                                                    </tr>
+                                                        ?>                                                    
                                                 </tbody>
                                             </table>
                                         </div>
