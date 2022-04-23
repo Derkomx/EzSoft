@@ -129,6 +129,11 @@
                         "Seccion" => "admclientes",
                         "Archivo" => "administracion/admcliente.php",
                     ],
+					"Cuentas Clientes" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "ctasclientes",
+                        "Archivo" => "administracion/ctascliente.php",
+                    ],
 					"Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "Inicio",

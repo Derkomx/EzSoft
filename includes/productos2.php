@@ -33,5 +33,5 @@ $tipo = $_POST['Tipo'];
             echo json_encode(array("success" => $res));
             mysqli_close($mysqli);
         }
-    }else
+    }
 ?>

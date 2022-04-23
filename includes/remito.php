@@ -127,4 +127,26 @@ function dtoscliente($hash, $mysqli){
 	}
 }
 
+function clisaldos($id_usuario, $mysqli){
+
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT id_cliente, nombre FROM clientes where id_usuario = $id_usuario")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($id_cliente, $nombre);
+		while ($stmt->fetch()) {
+            if ($stmt2 = $mysqli->prepare("SELECT saldo FROM cuentaclientes where id_cliente = $id_cliente AND id_usuario = $id_usuario")) {
+                $stmt2->execute();
+                $stmt2->store_result();
+                $stmt2->bind_result($saldo);
+                while ($stmt2->fetch()) {
+                $resultados[] = array($id_cliente, $nombre, $saldo);
+                }
+            }         
+		}
+		return ($resultados);
+	}
+}
+
+
 ?>

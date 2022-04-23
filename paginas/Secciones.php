@@ -20,6 +20,7 @@
 		"nuevocliente" => "administracion/clientenuevo.php",
 		"ventas" => "administracion/ventas.php",
 		"vercliente" => "administracion/vercliente.php",
+		"ctascliente" => "administracion/ctascliente.php"
 	];
 
 ?>

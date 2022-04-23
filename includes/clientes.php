@@ -9,10 +9,22 @@ $email = $_POST['email'];
 $tipo = $_POST['tipo'];
 //cambiar despues por el usuario en sesion
 $usuario = 1;
+$saldo = 0;
 if ($tipo == 'nuevo'){
-$sql = "INSERT INTO clientes (id_cliente, nombre, direccion, provincia, codpos, telefono, email, id_usuario) VALUES ('', '$nombre', '$direccion', '$provincia', '$codpos', '$telefono', '$email', $usuario)";
-$result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
-echo json_encode(array("location" => 'nais'));
+    if ($stmt = $mysqli->prepare("INSERT INTO clientes (id_cliente, nombre, direccion, provincia, codpos, telefono, email, id_usuario) VALUES ('', '$nombre', '$direccion', '$provincia', '$codpos', '$telefono', '$email', $usuario)")) {
+        $stmt->execute();
+        if ($stmt2 = $mysqli->prepare("SELECT id_cliente FROM clientes WHERE id_usuario = ? ORDER BY id_cliente DESC LIMIT 1")) {
+            $stmt2 ->bind_param('s', $usuario);
+            $stmt2 ->execute();
+            $stmt2 ->store_result();
+            $stmt2 ->bind_result($id_cliente);
+            $stmt2 ->fetch();
+            if ($stmt3 = $mysqli->prepare("INSERT INTO cuentaclientes (id, id_cliente, id_usuario, saldo) VALUES ('', '$id_cliente', '$usuario', '$saldo')")) {
+                $stmt3 ->execute();
+                echo json_encode(array("location" => 'nais'));
+            }
+        }   
+    }
 }
 if ($tipo == 'actualizar'){
     $idcliente = $_POST['id'];
