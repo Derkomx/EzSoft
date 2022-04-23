@@ -134,7 +134,7 @@
                         "Seccion" => "ctasclientes",
                         "Archivo" => "administracion/ctascliente.php",
                     ],
-					"Cargar Productos" => [
+					"**Cargar Productos**" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "Inicio",
                         "Archivo" => "404.php",
@@ -144,7 +144,7 @@
                         "Seccion" => "ventas",
                         "Archivo" => "administracion/ventas.php",
                     ],
-					"Estadisticas" => [
+					"**Estadisticas**" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "Inicio",
                         "Archivo" => "404.php",

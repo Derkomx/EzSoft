@@ -148,5 +148,20 @@ function clisaldos($id_usuario, $mysqli){
 	}
 }
 
+function climovimientos($cliente, $mysqli){
+    $id_usuario = 1;
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT tmovimiento, valor, fecha FROM movcuentaclientes where id_cliente = $cliente and id_usuario = $id_usuario")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($movimiento, $valor, $fecha);
+        $fecha2 = date('d-m-Y',$fecha);
+		while ($stmt->fetch()) {
+			$resultados[] = array($movimiento, $valor, $fecha2);
+		}
+		return ($resultados);
+		
+	}
+}
 
 ?>
