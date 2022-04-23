@@ -124,6 +124,11 @@
                         "Seccion" => "nuevocliente",
                         "Archivo" => "administracion/clientenuevo.php",
                     ],
+					"Administrar Clientes" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "admclientes",
+                        "Archivo" => "administracion/admcliente.php",
+                    ],
 					"Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "Inicio",

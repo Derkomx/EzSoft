@@ -19,6 +19,7 @@
 		"CrearCarpeta" => "crear/crearc.php",
 		"nuevocliente" => "administracion/clientenuevo.php",
 		"ventas" => "administracion/ventas.php",
+		"vercliente" => "administracion/vercliente.php",
 	];
 
 ?>

@@ -30,9 +30,13 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `email` varchar(50) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   KEY `id_cliente` (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.clientes: ~3 rows (aproximadamente)
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `direccion`, `provincia`, `codpos`, `telefono`, `email`, `id_usuario`) VALUES
+	(6, 'Pato', 'algo', 'corrientes', '3220', '123151', 'adsfasdf@asdfadfs.com', 1),
+	(7, 'ranom', 'asdfadsf', 'Misiones', '652123', '2146523', 'asdjfhadsf@gmail.com', 1),
+	(8, 'Juan Manuel Armas', 'Ushuaia 1688', 'Rio Negro ', '8332', '1125820013', 'juanmaarmas698@gmail.com', 1);
 
 -- Volcando estructura para tabla ezsoft.intentos_logueo
 CREATE TABLE IF NOT EXISTS `intentos_logueo` (
@@ -40,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `intentos_logueo` (
   `hora` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.intentos_logueo: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla ezsoft.menu
 CREATE TABLE IF NOT EXISTS `menu` (
@@ -65,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.menu: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla ezsoft.products
 CREATE TABLE IF NOT EXISTS `products` (
@@ -77,7 +81,11 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id_prod`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.products: ~3 rows (aproximadamente)
+INSERT INTO `products` (`id_prod`, `id_user`, `nomprod`, `fileprod`, `prevent`) VALUES
+	(1, 1, 'tintura', NULL, 25.00),
+	(2, 1, 'lapices', NULL, 500.00),
+	(3, 1, 'libros', NULL, 500.00);
 
 -- Volcando estructura para tabla ezsoft.prodvend
 CREATE TABLE IF NOT EXISTS `prodvend` (
@@ -89,9 +97,13 @@ CREATE TABLE IF NOT EXISTS `prodvend` (
   `precio` int(11) DEFAULT NULL,
   `nomprod` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.prodvend: ~3 rows (aproximadamente)
+INSERT INTO `prodvend` (`id`, `id_remito`, `id_prod`, `cant`, `preciou`, `precio`, `nomprod`) VALUES
+	(51, 61, 1, 1, 25, 25, 'tintura'),
+	(52, 61, 2, 1, 500, 500, 'lapices'),
+	(53, 61, 3, 1, 500, 500, 'libros');
 
 -- Volcando estructura para tabla ezsoft.remitos
 CREATE TABLE IF NOT EXISTS `remitos` (
@@ -102,9 +114,11 @@ CREATE TABLE IF NOT EXISTS `remitos` (
   `subtotal` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_remito`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.remitos: ~1 rows (aproximadamente)
+INSERT INTO `remitos` (`id_remito`, `id_usu`, `id_cli`, `fecha`, `subtotal`, `total`) VALUES
+	(61, 1, 6, '1650658824', 1025, NULL);
 
 -- Volcando estructura para tabla ezsoft.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -117,7 +131,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `email` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.usuarios: ~1 rows (aproximadamente)
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `direccion`, `provincia`, `codpos`, `telefono`, `email`) VALUES
+	(1, 'EzSoft Juanma', 'Ushuaia 1688', 'Rio Negro', 8332, '112582013', 'juanmaarmas698@gmail.com');
 
 -- Volcando estructura para tabla ezsoft.usuarios2
 CREATE TABLE IF NOT EXISTS `usuarios2` (
@@ -140,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `usuarios2` (
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla ezsoft.usuarios2: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

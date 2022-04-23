@@ -1,5 +1,6 @@
 <?php
 include_once '../../includes/MySQL.php';
+
 function prodenremito($nremito, $mysqli){
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT id_prod, cant, preciou, precio, nomprod FROM prodvend where id_remito = $nremito")) {
@@ -97,7 +98,33 @@ function ventastot($id_usuario, $mysqli){
 		return ($resultados);
 		
 	}
+}
+function verclientes($id_usuario, $mysqli){
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT id_cliente, nombre, provincia, telefono, email FROM clientes where id_usuario = $id_usuario")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($id_cliente, $nombre, $provincia, $telefono, $email);
+		while ($stmt->fetch()) {
+			$resultados[] = array($id_cliente, $nombre, $provincia, $telefono, $email);
+		}
+		return ($resultados);
+		
+	}
+}
 
+function dtoscliente($hash, $mysqli){
+    $resultados = "";
+    if ($stmt = $mysqli->prepare("SELECT nombre, direccion, provincia, codpos, telefono, email FROM clientes where id_cliente = $hash")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($nombre,$direccion, $provincia, $codpos, $telefono, $email);
+		$stmt->fetch();
+		$resultados = array($nombre,$direccion, $provincia, $codpos, $telefono, $email);
+		return ($resultados);
+
+		
+	}
 }
 
 ?>

@@ -15,10 +15,18 @@
 </section>
 <div class="login-page">
     <div class="form">
-        <h2 aligncenter>Cliente</h2>
+        <h2 aligncenter>Actualizar Cliente</h2>
+
+        <?php
+        include "includes/remito.php";
+        $hash = $_GET['hash'];
+        $datos = [];
+        $datos = dtoscliente($hash, $mysqli);
+        //echo $datos;
+        ?>
 
         <div class="input-group mb-0">
-            <input id="nombre" name="nombre" type="text" placeholder="Nombre" autocomplete="off" class="form-control" />
+            <input id="nombre" name="nombre" type="text" placeholder="Nombre" autocomplete="off" class="form-control" value = "<?php echo $datos[0];?>"/>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -28,7 +36,7 @@
 
         <div class="input-group mb-0">
             <input id="direccion" name="direccion" type="text" placeholder="Direccion" autocomplete="off"
-                class="form-control" />
+                class="form-control" value = "<?php echo $datos[1];?>" />
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-map-marker-alt"></span>
@@ -38,7 +46,7 @@
 
         <div class="input-group mb-0">
             <input id="provincia" name="provincia" type="text" placeholder="Provincia" autocomplete="off"
-                class="form-control" />
+                class="form-control" value = "<?php echo $datos[2];?>"/>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-map-marker-alt"></span>
@@ -48,7 +56,7 @@
 
         <div class="input-group mb-0">
             <input id="codpos" name="codpos" type="text" placeholder="Codigo Postal" autocomplete="off"
-                class="form-control" />
+                class="form-control" value = "<?php echo $datos[3];?>"/>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-map-marker-alt"></span>
@@ -58,7 +66,7 @@
 
         <div class="input-group mb-0">
             <input id="telefono" name="telefono" type="text" placeholder="Telefono de contacto" autocomplete="off"
-                class="form-control" />
+                class="form-control" value = "<?php echo $datos[4];?>"/>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-phone"></span>
@@ -67,7 +75,7 @@
         </div>
 
         <div class="input-group mb-0">
-            <input id="correo" name="Correo" type="email" placeholder="Email" autocomplete="off" class="form-control" />
+            <input id="correo" name="Correo" type="email" placeholder="Email" autocomplete="off" class="form-control" value = "<?php echo $datos[5];?>"/>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-at"></span>
@@ -87,6 +95,7 @@ function cliente() {
     var codpos = document.getElementById("codpos").value;
     var telefono = document.getElementById("telefono").value;
     var email = document.getElementById("correo").value;
+    var idcl = <?php echo $hash;?>;
 
     // Si no escribió se notifica
     if (nombre.length == 0) {
@@ -123,40 +132,41 @@ function cliente() {
     Notiflix.Loading.Circle('Cargando...');
 
     $.ajax({
-            type: 'POST',
-            url: 'Inyector.php',
-            data: {
-                Archivo: 'clientes.php',
-                nombre: nombre,
-                direccion: direccion,
-                provincia: provincia,
-                codpos: codpos,
-                telefono: telefono,
-                email: email,
-                tipo: 'nuevo'
-            },
-            dataType: 'html',
-            success: function(data) {
-                var Resultado = JSON.parse(data);
-                Notiflix.Loading.Remove();
+        type: 'POST',
+        url: 'Inyector.php',
+        data: {
+            Archivo: 'clientes.php',
+            nombre: nombre,
+            direccion: direccion,
+            provincia: provincia,
+            codpos: codpos,
+            telefono: telefono,
+            email: email,
+            tipo: 'actualizar',
+            id: idcl
+        },
+        dataType: 'html',
+        success: function(data) {
+            var Resultado = JSON.parse(data);
+            Notiflix.Loading.Remove();
 
-                if (Resultado.error) {
-                    Notiflix.Notify.Failure(Resultado.error);
-                    return;
-                }
+            if (Resultado.error) {
+                Notiflix.Notify.Failure(Resultado.error);
+                return;
+            }
 
-                if (Resultado.location) {
+            if (Resultado.location) {
 
-                    Notiflix.Report.Success(
-                        'Exito',
-                            'Su cliente fue cargado correctamente, precione aceptar para concluir el registro."',
-                            'aceptar',
-                            () => {
-                                document.location = '/ezSoft/';
-                            },
-                    )
-                    };
-                },
-            });
-    }
+                Notiflix.Report.Success(
+                    'Exito',
+                    'Su cliente fue actualizado correctamente, precione aceptar para concluir."',
+                    'aceptar',
+                    () => {
+                        document.location = '/ezSoft/';
+                    },
+                )
+            };
+        },
+    });
+}
 </script>
