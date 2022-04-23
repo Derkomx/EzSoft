@@ -45,7 +45,7 @@
 									$clientes = ventastot($id_usuario, $mysqli);
 									foreach($clientes as $name) {
 										echo '<tr>
-										<td><a href="paginas/shop/remito.php?remito='.$name[0].'&hash='.$name[1].'">'.$name[0].'</td>
+										<td><a href="?Seccion=remito&remito='.$name[0].'&hash='.$name[1].'">'.$name[0].'</td>
 										<td>'.$name[2].'</a></td>'.
                                         '<td>'.$name[3].'</td>'.
                                         '<td>$'.$name[4].'</td>'.

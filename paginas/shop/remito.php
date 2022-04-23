@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>-Ez Soft-</title>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../librerias/lte/css/adminlte.min.css">
+
 </head>
 
-<body class="hold-transition sidebar-mini">
+<!--<body class="hold-transition sidebar-mini">-->
     <div class="wrapper">
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -54,7 +44,7 @@
                                             <h4>
                                                 <i class="fas fa-globe"></i> Ez Soft
                                                 <?php
-                                                include '../../includes/remito.php';
+                                                include 'includes/remito.php';
                                                 $nremito = $_GET['remito'];
                                                 $client = $_GET['hash'];
                                                 $vend = 1;
@@ -120,8 +110,8 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
-                                                        <?php
+
+                                                    <?php
                                                         $productos = [];
                                                         $productos = prodenremito($nremito, $mysqli);
                                                             foreach($productos as $ID) {                                                                                                                      
@@ -133,7 +123,7 @@
                                                                         '<td>$'.$ID[3].'</td>'.
                                                                         '</tr>';
                                                             }
-                                                        ?>                                                    
+                                                        ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -143,7 +133,7 @@
 
                                     <div class="row">
                                         <!-- /.col -->
-                                        <div class="col-6">
+                                        <div class="col">
                                             <p class="lead">Fecha de presupuesto: <?php echo $fecha; ?></p>
 
                                             <div class="table-responsive">
@@ -189,30 +179,11 @@
         </div>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        Copyright &copy; 2022 <a href="">Ez-Soft</a>.
-        <div class="float-right d-none d-sm-inline-block">
-            <b> Ver.</b> 1.0.0
-        </div>
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
     <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="../../librerias/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../librerias/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../librerias/lte/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../lbirerias/lte/js/demo.js"></script>
+
     <script>
     document.querySelector("#BTNACEPTAR").addEventListener("click", function() {
         var div = document.querySelector("#R_X");
@@ -223,7 +194,7 @@
     function imprimirElemento(elemento) {
         var ventana = window.open('', '', 'height=600,width=800 resizable=yes');
         ventana.document.write('<html><head><title>' + document.title + '</title>');
-        ventana.document.write('<link rel="stylesheet" href="../../librerias/lte/css/adminlte.min.css">');
+        ventana.document.write('<link rel="stylesheet" href="librerias/lte/css/adminlte.min.css">');
         ventana.document.write('</head><body >');
         ventana.document.write(elemento.innerHTML);
         ventana.document.write('</body></html>');
@@ -235,6 +206,27 @@
         return true;
     }
     </script>
-</body>
+<!--</body>-->
+<?php
+    //<!-- Font Awesome -->
+    //<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    //<!-- Theme style -->
+    //<link rel="stylesheet" href="librerias/lte/css/adminlte.min.css">
 
-</html>
+
+
+
+    ////////////////////////////////////////////
+
+
+
+    //<!-- jQuery -->
+    //<script src="librerias/jquery/jquery.min.js"></script>
+    //<!-- Bootstrap 4 -->
+    //<script src="librerias/bootstrap/js/bootstrap.bundle.min.js"></script>
+    //<!-- AdminLTE App -->
+    //<script src="librerias/lte/js/adminlte.min.js"></script>
+    //<!-- AdminLTE for demo purposes -->
+    //<script src="lbirerias/lte/js/demo.js"></script>
+
+?>

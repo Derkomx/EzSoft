@@ -12,7 +12,6 @@ $cliente = $_GET['hash'];
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
 </head>
 
-<body>
     <div class="container">
         <h4>Carrito de compras</h4>
         <table class="table">
@@ -82,7 +81,6 @@ $cliente = $_GET['hash'];
     function comprar() {
         //toma los datos almacenados en el cache
         var x = JSON.parse(localStorage.getItem('carrito'));
-        Notiflix.Loading.Circle('Cargando...');
         const cCantidad = Object.values(carrito).reduce((acc, {
         cantidad
         }) => acc + cantidad, 0)
@@ -92,6 +90,7 @@ $cliente = $_GET['hash'];
         }) => acc + cantidad * precio, 0)
         var subtotal = cPrecio;
         var cliente2 = <?php echo $cliente?>;
+        Notiflix.Loading.Circle('Cargando...');
         //crea un registro en tabla remitos y devuelve el id del registro
         $.ajax({
             type: 'POST',
@@ -137,7 +136,8 @@ $cliente = $_GET['hash'];
                                     hash = <?php echo $cliente?>;
                                     pintarCarrito()
                                     /////////////////////////////////////////////
-                                    window.open('/ezSoft/paginas/shop/remito.php?remito='+Resultad.success+'&hash='+hash)
+                                    location.href = ('?Seccion=remito&remito='+Resultad.success+'&hash='+hash)
+                                    //window.open('/ezSoft/?Seccion=remito&remito='+Resultad.success+'&hash='+hash)
                                     /////////////////////////////////////////////
                                 }
                         /////////////////////////////////////////////  
@@ -152,4 +152,3 @@ $cliente = $_GET['hash'];
     </script>                
 
     
-</body>

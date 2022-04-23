@@ -319,7 +319,12 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 	<!-- Modernizr JS -->
 	<script src="librerias/modernizr-3.5.0.min.js"></script>	
 	<!-- SweetAlert 2 -->
-	<script src="librerias/sweetalert2.all.min.js"></script>	
+	<script src="librerias/sweetalert2.all.min.js"></script>
+	<!-- notiflix nuevo -->	
+	<script src="librerias/dist/notiflix-confirm-aio-3.2.5.min.js"></script>
+	<!--<link rel="stylesheet" href="librerias/dist/notiflix-3.2.5.min.css" />
+	<script src="librerias/dist/notiflix-3.2.5.min.js"></script>
+	<script src="librerias/dist/notiflix-aio-3.2.5.min.js"></script>-->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed single">
 	<div class="wrapper">

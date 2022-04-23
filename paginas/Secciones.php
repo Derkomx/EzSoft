@@ -22,6 +22,7 @@
 		"vercliente" => "administracion/vercliente.php",
 		"ctascliente" => "administracion/ctascliente.php",
 		"verctacliente" => "administracion/ctacliente.php",
+		"remito" => "shop/remito.php",
 	];
 
 ?>
