@@ -11,7 +11,10 @@ $cliente = $_GET['hash'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
 </head>
-
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
+  </div>
     <div class="container">
         <h4>Carrito de compras</h4>
         <table class="table">

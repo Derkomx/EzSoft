@@ -15,13 +15,13 @@ function prodenremito($nremito, $mysqli){
 	}
 }
 function subtotal($nremito, $mysqli){
-    $resultados = '';
-    if ($stmt = $mysqli->prepare("SELECT subtotal FROM remitos where id_remito = $nremito")) {
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT subtotal, descuento, total FROM remitos where id_remito = $nremito")) {
         $stmt->execute();
         $stmt->store_result();
-		$stmt->bind_result($subtotal);
+		$stmt->bind_result($subtotal, $descuento, $total);
 		$stmt ->fetch();
-        $resultados = $subtotal;
+        $resultados = array($subtotal, $descuento, $total);
 		return ($resultados);
 		
 	}

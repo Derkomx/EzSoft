@@ -23,6 +23,7 @@
 		"ctascliente" => "administracion/ctascliente.php",
 		"verctacliente" => "administracion/ctacliente.php",
 		"remito" => "shop/remito.php",
+		"remitofinal" => "shop/rremitofinal.php",
 	];
 
 ?>

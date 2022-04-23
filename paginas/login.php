@@ -16,6 +16,10 @@
  <title>-Ez Soft-</title>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
+  </div>
     <div class="login">
         <div class="form-container">
           <img src=""

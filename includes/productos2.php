@@ -33,5 +33,47 @@ $tipo = $_POST['Tipo'];
             echo json_encode(array("success" => $res));
             mysqli_close($mysqli);
         }
+    }else if ($tipo == 'remito2'){
+        $total = $_POST['total'];
+        $remito = $_POST['remito'];
+        $idcliente = $_POST['hash'];
+        $descuento = $_POST['descuento'];
+        $pago = $_POST['pago'];
+        $fecha = time();
+        $id_usuario = 1;
+        if ($stmt = $mysqli->prepare("UPDATE remitos SET descuento = '$descuento', total = '$total' WHERE id_remito = '$remito' AND id_cli = '$idcliente'")) {
+            $stmt->execute();
+            if ($stmt2 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$total' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
+                $stmt2 ->execute();
+                if ($stmt3 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha) VALUES ('', '$idcliente', '$id_usuario', 'COMPRA', '$total', '$fecha')")) {
+                    $stmt3 ->execute();
+                    if ($stmt4 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha) VALUES ('', '$idcliente', '$id_usuario', 'PAGO', '$pago', '$fecha')")) {
+                        $stmt4 ->execute();
+                        if ($stmt5 = $mysqli->prepare("SELECT saldo FROM cuentaclientes WHERE id_cliente = ? AND id_usuario = ?")) {
+                            $stmt5->bind_param('ii', $idcliente, $id_usuario);
+                            $stmt5->execute();
+                            $stmt5->store_result();
+                            $stmt5->bind_result($saldo);
+                            $stmt5->fetch();
+                            $saldonvo = ($saldo-$pago);
+                            if ($stmt6 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$saldonvo' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
+                                $stmt6 ->execute();
+                                echo json_encode(array("success" => "$remito" ));
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }else if ($tipo == 'cancelaremito'){
+        $remito = $_POST['remito'];
+        $cliente = $_POST['hash'];
+        $id_usuario = 1;
+        if ($stmt = $mysqli->prepare("DELETE FROM remitos WHERE id_remito = $remito AND id_cli = $cliente AND id_usu = $id_usuario")) {
+            $stmt->execute();
+            echo json_encode(array("success" => "atr" ));
+        }
+       
     }
 ?>

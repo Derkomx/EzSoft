@@ -1,6 +1,6 @@
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/logo.jpg" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
   </div>
 <section class="content-header">
 	<div class="container-fluid">

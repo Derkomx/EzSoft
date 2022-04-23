@@ -1,3 +1,7 @@
+   <!-- Preloader -->
+   <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
+  </div>  
    <!-- Cabezera de contenido -->
    <section class="content-header">
 	<div class="container-fluid">
