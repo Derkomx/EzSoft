@@ -73,7 +73,7 @@ $cliente = $_GET['hash'];
                 <img src="" alt="" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">Titulo</h5>
-                    <p class="card-text">precio</p>
+                    <p class="card-text">$<span>Precio</span></p>
                     <button class="btn btn-dark">Comprar</button>
                 </div>
             </div>
@@ -115,7 +115,7 @@ $cliente = $_GET['hash'];
                         var preciou = producto.precio;
                         var precio = producto.precio * producto.cantidad;
                         var titulo = producto.title;
-                        console.log(titulo);
+                        //console.log(titulo);
                         //console.log(y)
                         
                 ////////////////////////////////////////////////////        

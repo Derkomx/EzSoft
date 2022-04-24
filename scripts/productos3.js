@@ -32,7 +32,7 @@ async function myAjax(data) {
     result = await $.ajax({
       type: 'POST',
       url: 'Inyector.php',
-      data: {Archivo: 'productos.php', Tipo: 'carga'},
+      data: {Archivo: 'productos3.php', Tipo: 'carga'},
       dataType: 'html',     
     })
     

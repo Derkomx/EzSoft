@@ -139,6 +139,11 @@
                         "Seccion" => "nuevoproducto",
                         "Archivo" => "administracion/cargarproducto.php",
                     ],
+                    "Eliminar Productos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "eliminarproducto",
+                        "Archivo" => "administracion/eliminarproducto.php",
+                    ],
 					"Ventas" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "ventas",

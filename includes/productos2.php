@@ -82,6 +82,14 @@ $tipo = $_POST['Tipo'];
             $stmt->execute();
             echo json_encode(array("success" => "atr" ));
         }
-       
+    }else if ($tipo == 'eliminar'){
+        $id_producto = $_POST['id'];
+        $id_usuario = 1;
+        if ($stmt = $mysqli->prepare("DELETE FROM products WHERE id_prod = $id_producto AND id_user = $id_usuario")) {
+            $stmt->execute();
+            echo json_encode(array("success" => "Bien!" ));
+        }else{
+            echo json_encode(array("error" => "Error en producto, contacte con el desarrollador" ));
+        }
     }
 ?>

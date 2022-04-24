@@ -122,8 +122,8 @@
                                                                         '<td>'.$ID[1].'</td>'.
                                                                         '<td>'.$ID[4].'</td>'.
                                                                         '<td>'.$ID[0].'</td>'.
-                                                                        '<td>$'.$ID[2].'</td>'.
-                                                                        '<td>$'.$ID[3].'</td>'.
+                                                                        '<td>$'.number_format($ID[2],2).'</td>'.
+                                                                        '<td>$'.number_format($ID[3],2).'</td>'.
                                                                         '</tr>';
                                                             }
                                                         ?>
@@ -147,15 +147,15 @@
                                                         $datos = subtotal($nremito, $mysqli);
                                                         ?>
                                                         <th style="width:50%">Subtotal:</th>
-                                                        <td>$<?php echo $datos[0]; ?></td>
+                                                        <td>$<?php echo number_format($datos[0],2); ?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Descuento:</th>
-                                                        <td>$<?php echo $datos[1];?></td>
+                                                        <td>$<?php echo number_format($datos[1],2);?></td>
                                                     </tr>
                                                     <tr>
                                                         <th>Total:</th>
-                                                        <td>$<?php echo $datos[2];?></td>
+                                                        <td>$<?php echo number_format($datos[2],2);?></td>
                                                     </tr>
                                                 </table>
                                             </div>

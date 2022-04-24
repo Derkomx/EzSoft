@@ -122,8 +122,8 @@
                                                                         '<td>'.$ID[1].'</td>'.
                                                                         '<td>'.$ID[4].'</td>'.
                                                                         '<td>'.$ID[0].'</td>'.
-                                                                        '<td>$'.$ID[2].'</td>'.
-                                                                        '<td>$'.$ID[3].'</td>'.
+                                                                        '<td>$'.number_format($ID[2],2).'</td>'.
+                                                                        '<td>$'.number_format($ID[3],2).'</td>'.
                                                                         '</tr>';
                                                             }
                                                         ?>
@@ -147,7 +147,7 @@
                                                         $subtotal = subtotal($nremito, $mysqli);
                                                         ?>
                                                     <th style="width:50%">Subtotal: $</th>
-                                                    <td id="sub">$<?php echo $subtotal[0];?></td>
+                                                    <td id="sub">$<?php echo number_format($subtotal[0],2);?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Descuento:</th>
@@ -200,7 +200,7 @@ function calcu() {
 <script>
 function aceptar(elemento) {
     var tot = document.getElementById("td").innerText;
-    var total = parseInt(tot.replace('$', ''))
+    var total = parseInt(tot.replace('$', ''));
     var nremito = <?php echo $nremito;?>;
     var hash = <?php echo $client;?>;
     var descuento = document.getElementById("desc").value;

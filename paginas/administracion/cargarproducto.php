@@ -168,7 +168,7 @@ function uploadJSON(theJSON) {
                         'El producto fue creado correctamente.',
                         'Aceptar',
                         function() {
-                            location.href = '?Inicio';
+                            window.location.reload();
                         }
                     );
                     return;

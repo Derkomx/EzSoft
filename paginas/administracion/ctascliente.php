@@ -49,7 +49,7 @@
 									foreach($clientes as $name) {
 										echo '<tr>
 										<td><a href="?Seccion=vercliente&hash='.$name[0].'">'.$name[1].'</td>'.
-										'<td><a href="?Seccion=verctacliente&hash='.$name[0].'">'.$name[2].'</td>'.
+										'<td><a href="?Seccion=verctacliente&hash='.$name[0].'">$'.number_format($name[2],2).'</td>'.
 										'</tr>';
 									}
 								?>

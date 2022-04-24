@@ -97,31 +97,7 @@ function cliente() {
         Notiflix.Notify.Failure("Debes ingresar un Nombre!");
         return;
     }
-    // Si no escribió se notifica
-    if (direccion.length == 0) {
-        Notiflix.Notify.Failure("Debes ingresar una Direccion!");
-        return;
-    }
-    // Si no escribió se notifica
-    if (provincia.length == 0) {
-        Notiflix.Notify.Failure("Debes ingresar una Provincia!");
-        return;
-    }
-    // Si no escribió se notifica
-    if (codpos.length == 0) {
-        Notiflix.Notify.Failure("Debes ingresar un Codigo Postal!");
-        return;
-    }
-    // Si no escribió se notifica
-    if (telefono.length == 0) {
-        Notiflix.Notify.Failure("Debes ingresar un Telefono de contacto!");
-        return;
-    }
-    // Si no escribió se notifica
-    if (email.length == 0) {
-        Notiflix.Notify.Failure("Debes ingresar un correo de contacto!");
-        return;
-    }
+
 
     // Activa la pantalla de carga
     Notiflix.Loading.Circle('Cargando...');

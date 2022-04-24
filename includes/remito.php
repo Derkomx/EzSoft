@@ -80,7 +80,7 @@ function todosclientes($id_usuario, $mysqli){
 function ventastot($id_usuario, $mysqli){
 
     $resultados = [];
-    if ($stmt = $mysqli->prepare("SELECT id_remito, id_cli, fecha, subtotal FROM remitos where id_usu = $id_usuario")) {
+    if ($stmt = $mysqli->prepare("SELECT id_remito, id_cli, fecha, subtotal FROM remitos WHERE id_usu = $id_usuario ORDER BY id_remito DESC")) {
         $stmt->execute();
         $stmt->store_result();
 		$stmt->bind_result($id_remito, $id_cli, $fecha, $subtotal);
@@ -163,5 +163,19 @@ function climovimientos($cliente, $mysqli){
 		
 	}
 }
+function totalproductos($id_usuario, $mysqli){
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT id_prod, nomprod, prevent, codigo  FROM products WHERE id_user = '$id_usuario'")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($id_prod, $nomprod, $precio, $codigo);
+		while ($stmt->fetch()) {
+			$resultados[] = array($id_prod, $nomprod, $precio, $codigo);
+		}
+		return ($resultados);
+		
+	}
+}
+
 
 ?>

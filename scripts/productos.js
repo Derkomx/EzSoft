@@ -49,8 +49,9 @@ const fetchData = async () => {
 // Pintar productos
 const pintarCards = data => {
     data.forEach(item => {
+        templateCard.querySelectorAll('div')[0].dataset.id = item.id_prod
         templateCard.querySelector('h5').textContent = item.nomprod
-        templateCard.querySelector('p').textContent = item.prevent
+        templateCard.querySelector('span').textContent = item.prevent
         templateCard.querySelector('button').dataset.id = item.id_prod
         let archi = item.fileprod;
         if (archi === null ){
@@ -76,10 +77,9 @@ const addCarrito = e => {
 }
 
 const setCarrito = item => {
-     console.log(item)
     const producto = {
         title: item.querySelector('h5').textContent,
-        precio: item.querySelector('p').textContent,
+        precio: item.querySelector('span').textContent,
         id: item.querySelector('button').dataset.id,
         cantidad: 1
     }
