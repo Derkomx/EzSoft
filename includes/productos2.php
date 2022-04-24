@@ -3,6 +3,14 @@ include_once 'MySQL.php';
 $usuario = 1;
 $tipo = $_POST['Tipo'];
     
+//tipos de tipo: 
+//prodvend(cuando se vende un producto), 
+//remito(devuelve los datos de un remito), 
+//remito2(carga los datos en el remito y crea los movimientos en la cuenta corriente del cliente)
+//cancelaremito(cuando estas ya en la previsualizacion del remito, al presionar boton cancelar al ir a pagar, borra el remito, por mas que no se lo haga no puede ser visualizado, pero mantiene una cierta limpieza en la base de datos)
+//nuevo(carga un producto nuevo al usuario)
+
+
     if($tipo == 'prodvend'){
         $datos = $_POST['datos'];
         $remito = $_POST['remito'];

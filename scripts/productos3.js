@@ -49,15 +49,11 @@ const fetchData = async () => {
 // Pintar productos
 const pintarCards = data => {
     data.forEach(item => {
-        templateCard.querySelector('h5').textContent = item.nomprod
-        templateCard.querySelector('p').textContent = item.prevent
-        templateCard.querySelector('button').dataset.id = item.id_prod
-        let archi = item.fileprod;
-        if (archi === null ){
-            templateCard.querySelector('img').setAttribute('src', 'productos/Preview/nulo.jpg');
-        }else{
-            templateCard.querySelector('img').setAttribute('src', 'productos/Preview/'+item.id_user+'/'+item.fileprod+'.jpeg');
-        }
+        templateCard.querySelectorAll('td')[0].textContent = item.codigo
+        templateCard.querySelectorAll('td')[1].textContent = item.nomprod
+        templateCard.querySelector('span').textContent = item.prevent
+        templateCard.querySelector('.btn-dark').dataset.id = item.id_prod
+        //////////////////////////////////////////////////////////////
         const clone = templateCard.cloneNode(true)
         fragment.appendChild(clone)
     })
@@ -76,11 +72,14 @@ const addCarrito = e => {
 }
 
 const setCarrito = item => {
-     console.log(item)
+    console.log(item)
+    var nombre = item.querySelector('td').textContent;
+    console.log(nombre)
+    // console.log(item)
     const producto = {
-        title: item.querySelector('h5').textContent,
-        precio: item.querySelector('p').textContent,
-        id: item.querySelector('button').dataset.id,
+        title: item.querySelector('td')[2].textContent,
+        precio: item.querySelector('span').textContent,
+        id: item.querySelector('.btn-dark').dataset.id,
         cantidad: 1
     }
     // console.log(producto)

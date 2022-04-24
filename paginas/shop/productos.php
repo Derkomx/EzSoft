@@ -1,4 +1,4 @@
-<?php
+<?php 
 $cliente = $_GET['hash'];
 ?>
 <head>
@@ -70,7 +70,7 @@ $cliente = $_GET['hash'];
     <template id="template-card">
         <div class="col-12 mb-2 col-md-4">
             <div class="card">
-                <img src="media/1.jfif" alt="Card image" class="card-img-top">
+                <img src="" alt="" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">Titulo</h5>
                     <p class="card-text">precio</p>
@@ -152,6 +152,6 @@ $cliente = $_GET['hash'];
             }
         });
     }
-    </script>                
+    </script>                 
 
     

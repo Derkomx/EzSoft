@@ -17,24 +17,88 @@ $cliente = $_GET['hash'];
     <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
 </div>
 <div class="container">
+    <h4>Carrito de compras</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Acción</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody id="items"></tbody>
+        <tfoot>
+            <tr id="footer">
+                <th scope="row" colspan="5">Carrito vacio - comience a comprar!</th>
+            </tr>
+        </tfoot>
+    </table>
+
     <h4>Productos</h4>
-            <div class="row" id="cards"></div>
+
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Codigo de Barra</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Agregar</th>
+            </tr>
+        </thead>
+
+        <tbody id="cards">
+            
+                <!--<div class="row" id="cards"></div>-->
+            
+        </tbody>
+    </table>
+
+
+
 </div>
-
-
-
-<template id="template-card">
-    <div class="col-12 mb-2 col-md-4">
-        <div class="card">
-            <img src="" alt="" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">Titulo</h5>
-                <p class="card-text">precio</p>
-            </div>
-        </div>
-    </div>
+<!------------------------------------------------------------------------------------------------------------->
+<template id="template-footer">
+    <th scope="row" colspan="2">Total productos</th>
+    <td>
+        <button class="btn btn-success btn-sm" onclick="comprar()">
+            Comprar
+        </button>
+    </td>
+    <td>
+        <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+            Vaciar Carro
+        </button>
+    </td>
+    <td class="font-weight-bold">$ <span>5000</span></td>
 </template>
-<script src="scripts/productos2.js"></script>
+<!------------------------------------------------------------------------------------------------------------->
+<template id="template-carrito">
+    <tr>
+        <th scope="row">id</th>
+        <td>Café</td>
+        <td>1</td>
+        <td>
+            <button class="btn btn-info btn-sm">+</button>
+            <button class="btn btn-danger btn-sm">-</button>
+        </td>
+        <td>$ <span>500</span></td>
+    </tr>
+</template>
+<!------------------------------------------------------------------------------------------------------------->
+<template id="template-card">
+    <tr class="card-body">
+        <td>Codigo de Barra</td>
+        <td>Titulo</td>
+        <td>$ <span>500</span></td>
+        <td>
+            <button class="btn btn-dark">+</button>
+        </td>
+    </tr>
+</template>
+<!------------------------------------------------------------------------------------------------------------->
+<script src="scripts/productos3.js"></script>
 <script>
 function comprar() {
     //toma los datos almacenados en el cache

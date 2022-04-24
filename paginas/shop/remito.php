@@ -108,7 +108,7 @@
                                                     <th>Cantidad</th>
                                                     <th>Producto</th>
                                                     <th>Codigo de Producto</th>
-                                                    <th>Description</th>
+                                                    <th>Previo Unidad</th>
                                                     <th>Subtotal</th>
                                                 </tr>
                                             </thead>
@@ -122,7 +122,7 @@
                                                                         '<td>'.$ID[1].'</td>'.
                                                                         '<td>'.$ID[4].'</td>'.
                                                                         '<td>'.$ID[0].'</td>'.
-                                                                        '<td>'.$ID[2].'</td>'.
+                                                                        '<td>$'.$ID[2].'</td>'.
                                                                         '<td>$'.$ID[3].'</td>'.
                                                                         '</tr>';
                                                             }

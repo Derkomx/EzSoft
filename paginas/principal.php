@@ -110,7 +110,7 @@
                     ],
                 ],
             ],
-			"Comprar" => [
+			"Vender a Cliente" => [
                 "Icono" => "nav-icon fa fa-shopping-cart",
                 "Seccion" => "carrito",
                 "Archivo" => "shop/selcliente.php",
@@ -134,10 +134,10 @@
                         "Seccion" => "ctasclientes",
                         "Archivo" => "administracion/ctascliente.php",
                     ],
-					"**Cargar Productos**" => [
+					"Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "Inicio",
-                        "Archivo" => "404.php",
+                        "Seccion" => "nuevoproducto",
+                        "Archivo" => "administracion/cargarproducto.php",
                     ],
 					"Ventas" => [
                         "Icono" => "nav-icon fa fa-caret-right",

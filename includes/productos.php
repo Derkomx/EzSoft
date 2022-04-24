@@ -4,7 +4,7 @@ $usuario = 1;
 
 
         //fetch table rows from mysql db
-        $sql = "SELECT id_prod, nomprod, fileprod, prevent  FROM products WHERE id_user = ".$usuario."";
+        $sql = "SELECT id_prod, id_user, nomprod, fileprod, prevent, codigo  FROM products WHERE id_user = '$usuario'";
         $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
 
         //create an array

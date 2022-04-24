@@ -14,8 +14,9 @@
 	$Secciones[3] = [
 		"Inicio" => "404.php",
 		"carrito" => "shop/selcliente.php",
-		"carrito2" => "shop/productos.php",
-		"productos" => "shop/productos.php",
+		"carrito2" => "shop/productos2.php",
+		"productoscatalogo" => "shop/productos.php",
+		"productostabla" => "shop/productos3.php",
 		"CrearCarpeta" => "crear/crearc.php",
 		"nuevocliente" => "administracion/clientenuevo.php",
 		"ventas" => "administracion/ventas.php",
@@ -24,6 +25,7 @@
 		"verctacliente" => "administracion/ctacliente.php",
 		"remito" => "shop/remito.php",
 		"remitofinal" => "shop/rremitofinal.php",
+		"nuevoproducto" => "administracion/cargarproducto.php",
 	];
 
 ?>
