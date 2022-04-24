@@ -149,10 +149,10 @@
                         "Seccion" => "ventas",
                         "Archivo" => "administracion/ventas.php",
                     ],
-					"**Estadisticas**" => [
+					"Estadisticas" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "Inicio",
-                        "Archivo" => "404.php",
+                        "Seccion" => "estadisticas",
+                        "Archivo" => "administracion/estadisticas.php",
                     ],
 				],
 			],

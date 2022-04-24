@@ -27,6 +27,7 @@
 		"remitofinal" => "shop/rremitofinal.php",
 		"nuevoproducto" => "administracion/cargarproducto.php",
 		"eliminarproducto" => "administracion/eliminarproducto.php",
+		"estadisticas" => "administracion/estadisticas.php",
 	];
 
 ?>
