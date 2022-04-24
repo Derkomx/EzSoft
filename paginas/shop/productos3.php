@@ -41,22 +41,17 @@ $cliente = $_GET['hash'];
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Codigo de Barra</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Agregar</th>
+                <th scope="col">#</th>
+                <th scope="col">Codigo de Barra</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Agregar</th>
             </tr>
         </thead>
 
-        <tbody id="cards">
-            
-                <!--<div class="row" id="cards"></div>-->
-            
-        </tbody>
+        <tbody id="cards"></tbody>
+        <!--<div class="row" id="cards"></div>-->
     </table>
-
-
-
 </div>
 <!------------------------------------------------------------------------------------------------------------->
 <template id="template-footer">
@@ -89,6 +84,7 @@ $cliente = $_GET['hash'];
 <!------------------------------------------------------------------------------------------------------------->
 <template id="template-card">
     <tr class="card-body">
+        <th scope="row">id</th> 
         <td>Codigo de Barra</td>
         <td>Titulo</td>
         <td>$ <span>500</span></td>

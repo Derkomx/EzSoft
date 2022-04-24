@@ -5,7 +5,9 @@ const templateCard = document.getElementById('template-card').content
 const templateFooter = document.getElementById('template-footer').content
 const templateCarrito = document.getElementById('template-carrito').content
 const fragment = document.createDocumentFragment()
+let fila = {}
 let carrito = {}
+let data = {}
 
 // Eventos
 // El evento DOMContentLoaded es disparado cuando el documento HTML ha sido completamente cargado y parseado
@@ -23,7 +25,7 @@ items.addEventListener('click', e => {
     btnAumentarDisminuir(e)
 })
 
-async function myAjax(param) {
+async function myAjax(data) {
   let result
   try {
     
@@ -42,47 +44,66 @@ async function myAjax(param) {
 
 // Traer productos
 const fetchData = async () => {
-    const data = await myAjax()
+    data = await myAjax()
     pintarCards(data)
 };
 
 // Pintar productos
-const pintarCards = data => {
-    data.forEach(item => {
-        templateCard.querySelectorAll('td')[0].textContent = item.codigo
-        templateCard.querySelectorAll('td')[1].textContent = item.nomprod
-        templateCard.querySelector('span').textContent = item.prevent
-        templateCard.querySelector('.btn-dark').dataset.id = item.id_prod
+const pintarCards = (data) => {
+    var i = -1;
+    Object.values(data).forEach(item => {
+        i++
+        //data.forEach(item => {
+        templateCard.querySelector('th').textContent = item[0]
+        templateCard.querySelectorAll('td')[0].textContent = item[5]
+        templateCard.querySelectorAll('td')[1].textContent = item[2]
+        templateCard.querySelector('span').textContent = item[4]
+        templateCard.querySelector('.btn-dark').dataset.id = i
         //////////////////////////////////////////////////////////////
         const clone = templateCard.cloneNode(true)
         fragment.appendChild(clone)
     })
     cards.appendChild(fragment)
+    $(document).ready(function() {
+        $('#example1').DataTable({
+            responsive: true,
+            language: {
+                search: "Buscar:",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                zeroRecords: "No se encontraron resultados",
+                infoEmpty: "Mostrando 0 de 0 de 0 entradas",
+                lengthMenu: "Mostrar _MENU_ entradas",
+                infoFiltered: "(filtrado de _MAX_ total entradas)",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+            }
+        });
+    });
 }
 
 
 // Agregar al carrito
 const addCarrito = e => {
+
     if (e.target.classList.contains('btn-dark')) {
-        //console.log(e.target.dataset.id)
-        //console.log(e.target.parentElement)
-        setCarrito(e.target.parentElement)
+        //(data[e.target.dataset.id].id_prod) = (data[e.target.dataset.id].id_prod - 1)
+        setCarrito(data[e.target.dataset.id])
     }
     e.stopPropagation()
 }
 
 const setCarrito = item => {
-    console.log(item)
-    var nombre = item.querySelector('td').textContent;
-    console.log(nombre)
-    // console.log(item)
     const producto = {
-        title: item.querySelector('td')[2].textContent,
-        precio: item.querySelector('span').textContent,
-        id: item.querySelector('.btn-dark').dataset.id,
+        title: item[2],
+        precio: item[4],
+        id: item[0],
         cantidad: 1
     }
-    // console.log(producto)
+
     if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1
     }
@@ -158,6 +179,7 @@ const btnAumentarDisminuir = e => {
     if (e.target.classList.contains('btn-info')) {
         const producto = carrito[e.target.dataset.id]
         producto.cantidad++
+        //console.log(e.target.dataset.id)
         carrito[e.target.dataset.id] = {
             ...producto
         }
