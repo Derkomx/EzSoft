@@ -1,6 +1,8 @@
 <?php
-include_once 'MySQL.php';
-$usuario = 1;
+	session_start();
+	include_once 'MySQL.php';
+	include 'functions.php';
+$usuario = $_SESSION['id_usuario'];
 $tipo = $_POST['Tipo'];
     
 //tipos de tipo: 
@@ -28,18 +30,27 @@ $tipo = $_POST['Tipo'];
         $cli = $_POST['cliente'];
         $now = time();
         $subtotal = $_POST['subtotal'];
-        $sql = "INSERT INTO remitos (id_remito, id_usu, id_cli, fecha, subtotal) VALUES ('', $usu, $cli, $now, $subtotal)";
-        $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
+        if ($stmt1 = $mysqli->prepare("SELECT id_remito FROM remitos WHERE id_usu = ? ORDER BY id_remito DESC LIMIT 1")) {
+            $stmt1->bind_param('s', $usu);
+            $stmt1->execute();
+            $stmt1->store_result();
+            $stmt1->bind_result($idremito);
+            $stmt1->fetch();
+            $idres = $idremito+1;
         
-        if ($stmt = $mysqli->prepare("SELECT id_remito FROM remitos WHERE id_usu = ? ORDER BY id_remito DESC LIMIT 1")) {
-            $stmt->bind_param('s', $usu);
-            $stmt->execute();
-            $stmt->store_result();
-            $stmt->bind_result($remito);
-            $stmt->fetch();
-            $res = $remito;
-            echo json_encode(array("success" => $res));
-            mysqli_close($mysqli);
+            $sql = "INSERT INTO remitos (id_remito, id_usu, id_cli, fecha, subtotal) VALUES ($idres, $usu, $cli, $now, $subtotal)";
+            $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
+        
+                if ($stmt = $mysqli->prepare("SELECT id_remito FROM remitos WHERE id_usu = ? ORDER BY id_remito DESC LIMIT 1")) {
+                    $stmt->bind_param('s', $usu);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($remito);
+                    $stmt->fetch();
+                    $res = $remito;
+                    echo json_encode(array("success" => $res));
+                    mysqli_close($mysqli);
+                }
         }
     }else if ($tipo == 'remito2'){
         $total = $_POST['total'];
@@ -48,7 +59,7 @@ $tipo = $_POST['Tipo'];
         $descuento = $_POST['descuento'];
         $pago = $_POST['pago'];
         $fecha = time();
-        $id_usuario = 1;
+        $id_usuario = $usuario;
         if ($stmt = $mysqli->prepare("UPDATE remitos SET descuento = '$descuento', total = '$total' WHERE id_remito = '$remito' AND id_cli = '$idcliente'")) {
             $stmt->execute();
             if ($stmt2 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$total' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
@@ -77,14 +88,14 @@ $tipo = $_POST['Tipo'];
     }else if ($tipo == 'cancelaremito'){
         $remito = $_POST['remito'];
         $cliente = $_POST['hash'];
-        $id_usuario = 1;
+        $id_usuario = $usuario;
         if ($stmt = $mysqli->prepare("DELETE FROM remitos WHERE id_remito = $remito AND id_cli = $cliente AND id_usu = $id_usuario")) {
             $stmt->execute();
             echo json_encode(array("success" => "atr" ));
         }
     }else if ($tipo == 'eliminar'){
         $id_producto = $_POST['id'];
-        $id_usuario = 1;
+        $id_usuario = $usuario;
         if ($stmt = $mysqli->prepare("DELETE FROM products WHERE id_prod = $id_producto AND id_user = $id_usuario")) {
             $stmt->execute();
             echo json_encode(array("success" => "Bien!" ));

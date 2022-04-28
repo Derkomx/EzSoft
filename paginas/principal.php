@@ -1,5 +1,4 @@
 <?php
-	$_SESSION['nivel'] = 3;
 	//trae el lvl de usuario
 	$lvlusr = $_SESSION['nivel'];
 	//$lvlusr = 3;
@@ -8,7 +7,7 @@
 		error_reporting(0);
 	}
 	//$id_usuario = $_SESSION['id_usuario'];
-	$id_usuario = 1;
+	$id_usuario = $_SESSION['id_usuario'];
 	//trae array con los nombres de librerias/lteintos Menu
 	$arraymenu = itemsmenu($id_usuario,$mysqli);
 	//$arraymenu = [];
@@ -153,6 +152,11 @@
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "estadisticas",
                         "Archivo" => "administracion/estadisticas.php",
+                    ],
+                    "Datos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "Datos",
+                        "Archivo" => "administracion/datos.php",
                     ],
 				],
 			],

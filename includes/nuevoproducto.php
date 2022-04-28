@@ -1,5 +1,7 @@
 <?php
-include_once 'MySQL.php';
+	session_start();
+	include_once 'MySQL.php';
+	include 'functions.php';
 
 $Tipo = $JSONContent['Tipo'];
     $Titulo = $JSONContent['titulo'];
@@ -7,7 +9,7 @@ $Tipo = $JSONContent['Tipo'];
     $precio = $JSONContent['precio'];
     $codigo = $JSONContent['codigo'];
      if ($Tipo == 'nuevo'){
-        $id_usuario = 1;
+        $id_usuario = $_SESSION['id_usuario'];
         if ($stmt = $mysqli->prepare("INSERT INTO products (id_user, nomprod, prevent, codigo) VALUES (?, ?, ?, ?)")) {
             $stmt->bind_param('isds', $id_usuario, $Titulo, $precio, $codigo);
             $stmt->execute();

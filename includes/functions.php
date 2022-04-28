@@ -64,8 +64,7 @@ function login($cuil, $password, $mysqli) {
                     $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
                     $usuavio = $_SESSION['id_usuario'];
 
-					// Ultima Visita
-					$mysqli->query("INSERT INTO visitas (id_usuario, fecha) VALUES ( $usuavio, now())");
+					
 
                     return true;
                 } else {
@@ -75,10 +74,62 @@ function login($cuil, $password, $mysqli) {
 						echo json_encode(array("error" => "Se superaron los intentos de ingreso, intenta más tarde."));
                         exit();
                     }
-
                     return false;
                 }
             }
+        }
+    }else if ($stmt2 = $mysqli->prepare("SELECT id_usuario, cuil, password, nivel, salt, activo, email FROM usuarios2 WHERE email = ? LIMIT 1")){
+            $stmt2->bind_param('s', $cuil);
+            $stmt2->execute();
+            $stmt2->store_result();
+    
+            $stmt2->bind_result($id_usuario, $cuil, $db_password, $nivel, $salt, $activo, $email);
+            $stmt2->fetch();
+    
+            $password = hash('sha512', $password . $salt);
+            if ($stmt->num_rows == 1) {
+                if (checkbrute($id_usuario, $mysqli) == true) {
+                    return false;
+                } else {
+                    if ($db_password == $password) {
+                        if ($activo == 0) {
+                            // Si no está activa la cuenta, notifica
+                            echo json_encode(array("inactive" => true));
+                            exit();
+                        }
+                        if(!isset($_SESSION)) 
+                        { 
+                            session_start(); 
+                        } 
+                        $user_browser = $_SERVER['HTTP_USER_AGENT'];
+    
+                        $id_usuario = preg_replace("/[^0-9]+/", "", $id_usuario);
+                        $_SESSION['id_usuario'] = $id_usuario;
+    
+                        $cuil = preg_replace("/[^0-9]+/", "", $cuil);
+    
+                        $_SESSION['cuil'] = $cuil;
+                        
+                        $_SESSION['nivel'] = $nivel;
+    
+                        $_SESSION['email'] = $email;
+                        
+                        $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
+                        $usuavio = $_SESSION['id_usuario'];
+    
+    
+                        return true;
+                    } else {
+                        $now = time();
+                        if (!$mysqli->query("INSERT INTO intentos_logueo(id_usuario, hora) VALUES ('$id_usuario', '$now')")) {
+                            // Si se superaron los limites de intentos, se da aviso
+                            echo json_encode(array("error" => "Se superaron los intentos de ingreso, intenta más tarde."));
+                            exit();
+                        }
+    
+                        return false;
+                    }
+                }
         } else {
             return false;
         }
@@ -145,7 +196,7 @@ function login_check($mysqli) {
         return false;
     }
 }
-
+ 
 
 function isLogged() {
 	//session_start();
@@ -154,6 +205,24 @@ function isLogged() {
         return $_SESSION['nivel'];
     } else {
         return false;
+    }
+}
+
+function completo($user, $mysqli){
+    if ($stmt = $mysqli->prepare("SELECT verificado2 FROM usuarios2 WHERE id_usuario = ? LIMIT 1")) {
+        $stmt->bind_param('s', $user);
+
+        $stmt->execute();
+        $stmt->store_result();
+
+		$stmt->bind_result($verificado);
+        $stmt->fetch();
+		
+		return ($verificado);
+
+	} else {
+        header("Location: ../error.php?err=Error de Base de datos: No se pudo realizar declaracion.");
+        exit();
     }
 }
 

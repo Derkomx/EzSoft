@@ -15,7 +15,8 @@ if (isset($_GET['Token']) || isset($_GET['Recovery']) || isset($_GET['cambiarEma
 }
     // Se chequea si el usuario está en una sesión
     //agregar un ! en isLogged cuando se pueda registrar usuarios :v
-if(isLogged()){
+if(!isLogged()){
+
     // Se chequea si hay un enlace
     if (isset($_GET['Enlace'])) {
         // Se obtiene el enlace donde se encuentra el usuario
@@ -36,18 +37,26 @@ if(isLogged()){
 
         // De otra forma, si los enlaces son incorrectos, se carga el ingreso
         else {
-            include 'paginas/login.php';
+            include 'paginas/inicio.php';
             die();
         }
     }
     // Si está en el inicio, o no hay enlace, se lo envía al ingreso
     else {
-        include 'paginas/login.php';
+        include 'paginas/inicio.php';
         die();
     }
-}
+}else{
+    $user = $_SESSION['id_usuario'];
+    $Verificado = completo($user, $mysqli);
 
+    if ($Verificado == 0) {
+        include 'paginas/administracion/datos.php';
+        exit();
+    }
     $Nivel = isLogged();
+    $Seccion = (!isset($_GET['Seccion'])) ? 'Inicio' : $_GET['Seccion'];
     include 'paginas/principal.php';
+}
 
 ?>

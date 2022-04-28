@@ -44,7 +44,7 @@
                                <tbody>
                                    <?php 
 									include 'includes/remito.php';
-									$id_usuario = 1;
+									$id_usuario = $_SESSION['id_usuario'];
 									$clientes = clisaldos($id_usuario, $mysqli);
 									foreach($clientes as $name) {
 										echo '<tr>

@@ -1,5 +1,9 @@
 <?php
+session_start();
 include_once '../../includes/MySQL.php';
+
+//include_once '../../includes/MySQL.php';
+include '../../includes/functions.php';
 
 function prodenremito($nremito, $mysqli){
     $resultados = [];
@@ -28,7 +32,7 @@ function subtotal($nremito, $mysqli){
 }
 function datosvendedor($vend, $mysqli){
     $resultados = '';
-    $idusuario=$vend;
+    $idusuario= $_SESSION['id_usuario'];
     if ($stmt = $mysqli->prepare("SELECT nombre, direccion, provincia, codpos, telefono, email FROM usuarios where id_usuario = $idusuario")) {
         $stmt->execute();
         $stmt->store_result();
@@ -40,7 +44,7 @@ function datosvendedor($vend, $mysqli){
 	}
 }
 function datoscliente($client, $vend, $mysqli){
-    $idusuario = $vend;
+    $idusuario = $_SESSION['id_usuario'];
     $resultados = '';
     $idcliente=$client;
     if ($stmt = $mysqli->prepare("SELECT nombre, direccion, provincia, codpos, telefono, email FROM clientes where id_cliente = $idcliente AND id_usuario = $idusuario")) {
@@ -65,6 +69,7 @@ function fecharemito($nremito , $mysqli){
 	}
 }
 function todosclientes($id_usuario, $mysqli){
+    $id_usuario = $_SESSION['id_usuario'];
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT id_cliente, nombre FROM clientes where id_usuario = $id_usuario")) {
         $stmt->execute();
@@ -78,14 +83,15 @@ function todosclientes($id_usuario, $mysqli){
 	}
 }
 function ventastot($id_usuario, $mysqli){
+    $id_usuario = $_SESSION['id_usuario'];
 
     $resultados = [];
-    if ($stmt = $mysqli->prepare("SELECT id_remito, id_cli, fecha, subtotal FROM remitos WHERE id_usu = $id_usuario ORDER BY id_remito DESC")) {
+    if ($stmt = $mysqli->prepare("SELECT id_remito, id_cli, fecha, total FROM remitos WHERE id_usu = $id_usuario AND total > 0 ORDER BY id_remito DESC")) {
         $stmt->execute();
         $stmt->store_result();
 		$stmt->bind_result($id_remito, $id_cli, $fecha, $subtotal);
 		while ($stmt->fetch()) {
-            if ($stmt2 = $mysqli->prepare("SELECT nombre FROM clientes where id_cliente = $id_cli")) {
+            if ($stmt2 = $mysqli->prepare("SELECT nombre FROM clientes where id_cliente = $id_cli ")) {
                 $stmt2->execute();
                 $stmt2->store_result();
                 $stmt2->bind_result($nombre);
@@ -100,6 +106,7 @@ function ventastot($id_usuario, $mysqli){
 	}
 }
 function verclientes($id_usuario, $mysqli){
+    $id_usuario = $_SESSION['id_usuario'];
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT id_cliente, nombre, provincia, telefono, email FROM clientes where id_usuario = $id_usuario")) {
         $stmt->execute();
@@ -128,7 +135,7 @@ function dtoscliente($hash, $mysqli){
 }
 
 function clisaldos($id_usuario, $mysqli){
-
+    $id_usuario = $_SESSION['id_usuario'];
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT id_cliente, nombre FROM clientes where id_usuario = $id_usuario")) {
         $stmt->execute();
@@ -149,7 +156,7 @@ function clisaldos($id_usuario, $mysqli){
 }
 
 function climovimientos($cliente, $mysqli){
-    $id_usuario = 1;
+    $id_usuario = $_SESSION['id_usuario'];
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT tmovimiento, valor, fecha FROM movcuentaclientes where id_cliente = $cliente and id_usuario = $id_usuario")) {
         $stmt->execute();
@@ -164,6 +171,7 @@ function climovimientos($cliente, $mysqli){
 	}
 }
 function totalproductos($id_usuario, $mysqli){
+    $id_usuario = $_SESSION['id_usuario'];
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT id_prod, nomprod, prevent, codigo  FROM products WHERE id_user = '$id_usuario'")) {
         $stmt->execute();

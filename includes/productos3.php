@@ -1,6 +1,8 @@
 <?php
-include_once 'MySQL.php';
-$id_usuario = 1;
+	session_start();
+	include_once 'MySQL.php';
+	include 'functions.php';
+$id_usuario = $_SESSION['id_usuario'];
 
         //fetch table rows from mysql db
         //$sql = "SELECT id_prod, id_user, nomprod, fileprod, prevent, codigo  FROM products WHERE id_user = '$usuario'";

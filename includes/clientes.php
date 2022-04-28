@@ -1,5 +1,7 @@
 <?php
-include_once 'MySQL.php';
+	session_start();
+	include_once 'MySQL.php';
+	include 'functions.php';
 $nombre = $_POST['nombre'];
 $direccion = $_POST['direccion'];
 $provincia = $_POST['provincia'];
@@ -8,7 +10,7 @@ $telefono = $_POST['telefono'];
 $email = $_POST['email'];
 $tipo = $_POST['tipo'];
 //cambiar despues por el usuario en sesion
-$usuario = 1;
+$usuario = $_SESSION['id_usuario'];
 $saldo = 0;
 if ($tipo == 'nuevo'){
     if ($stmt = $mysqli->prepare("INSERT INTO clientes (id_cliente, nombre, direccion, provincia, codpos, telefono, email, id_usuario) VALUES ('', '$nombre', '$direccion', '$provincia', '$codpos', '$telefono', '$email', $usuario)")) {
