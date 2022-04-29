@@ -1,3 +1,7 @@
+ <?php
+ include 'includes/remito.php';
+ $id_usuario = $_SESSION['id_usuario'];
+ ?>
  <!-- Preloader -->
  <div class="preloader flex-column justify-content-center align-items-center">
      <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
@@ -30,7 +34,10 @@
                  <!-- small box -->
                  <div class="small-box bg-info">
                      <div class="inner">
-                         <h3>150</h3>
+                         <?php
+                         $cantprod = cantprod($id_usuario, $mysqli);
+                         ?>
+                         <h3><?php echo $cantprod; ?></h3>
 
                          <p>Productos</p>
                      </div>
@@ -42,8 +49,11 @@
              <div class="col-lg-3 col-6">
                  <!-- small box -->
                  <div class="small-box bg-info">
-                     <div class="inner">
-                         <h3>12502</h3>
+                     <div class="inner">     
+                        <?php
+                         $cantvent = cantventas($id_usuario, $mysqli);
+                         ?>
+                         <h3><?php echo $cantvent; ?></h3>
 
                          <p>Ventas</p>
                      </div>
@@ -56,7 +66,10 @@
                  <!-- small box -->
                  <div class="small-box bg-success">
                      <div class="inner">
-                         <h3>15</h3>
+                        <?php
+                         $cantclientes = cantclientes($id_usuario, $mysqli);
+                         ?>
+                         <h3><?php echo $cantclientes; ?></h3>
 
                          <p>Clientes</p>
                      </div>
@@ -69,7 +82,10 @@
                  <!-- small box -->
                  <div class="small-box bg-warning">
                      <div class="inner">
-                         <h3>$<span>12502</span></h3>
+                     <?php
+                         $balancecuentas = balancecuentas($id_usuario, $mysqli);
+                         ?>
+                         <h3>$<?php echo $balancecuentas; ?></h3>
 
                          <p>Balance Cuentas Corriente</p>
                      </div>
@@ -90,21 +106,20 @@
                          <table id="1" class="table table-bordered table-striped">
                              <thead>
                                  <tr>
-                                     <th>#</th>
+                                     <th>Cantidad Vendida</th>
                                      <th>Nombre</th>
                                      <th>Precio</th>
                                  </tr>
                              </thead>
                              <tbody>
                                  <?php 
-									include 'includes/remito.php';
-									$id_usuario = $_SESSION['id_usuario'];
-									$clientes = ventastot($id_usuario, $mysqli);
-									foreach($clientes as $name) {
+                                    $productos = [];
+                                    $productos = prodmasvend($id_usuario, $mysqli);
+									foreach($productos as $name2) {
 										echo '<tr>
-										<td><a href="?Seccion=remitofinal&remito='.$name[0].'&hash='.$name[1].'">'.$name[0].'</td>
-										<td>'.$name[2].'</a></td>'.
-                                        '<td>'.$name[3].'</td>'.
+										<td>'.$name2[3].'</td>
+										<td>'.$name2[1].'</a></td>'.
+                                        '<td>$'.number_format($name2[2],2).'</td>'.
 										'</tr>';
 									}
 								?>
@@ -124,17 +139,17 @@
                          <table id="2" class="table table-bordered table-striped">
                              <thead>
                                  <tr>
-                                     <th>ID</th>
+                                     <th>Cantidad de Compras</th>
                                      <th>Cliente</th>
                                  </tr>
                              </thead>
                              <tbody>
                                  <?php 
-									//$clientes = ventastot($id_usuario, $mysqli);
+									$clientes = clientesmascompras($id_usuario, $mysqli);
 									foreach($clientes as $name) {
 										echo '<tr>
-										<td><a href="?Seccion=remitofinal&remito='.$name[0].'&hash='.$name[1].'">'.$name[0].'</td>
-										<td>'.$name[2].'</a></td>'.
+										<td>'.$name[0].'</td>
+										<td>'.$name[1].'</a></td>'.
 										'</tr>';
 									}
 								?>

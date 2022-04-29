@@ -42,7 +42,7 @@
                             <!-- Main content -->
                             <div class="invoice p-3 mb-3">
                                 <div class="row justify-content-md-center">
-                                    <h1>X</h1>
+                                    <h1>RECIBO</h1>
                                 </div>
                                 <div class="p-5  row justify-content-md-center">
                                     <i></i> DOCUMENTO NO VALIDO COMO FACTURA
@@ -54,10 +54,10 @@
                                             <i class="fas fa-globe"></i> Recibo by Ez-Soft
                                             <?php
                                                 include 'includes/remito.php';
-                                                $nremito = $_GET['remito'];
+                                                $nremito = $_GET['recibo'];
                                                 $client = $_GET['hash'];
-                                                $vend = 1;
-                                                $fecha = fecharemito($nremito, $mysqli); 
+                                                $vend = $_SESSION['id_usuario'];
+                                                $fecha = fecharecibo($nremito, $mysqli); 
                                                 ?>
                                             <small class="float-right">Fecha: <?php echo $fecha; ?></small>
                                         </h4>
@@ -68,6 +68,22 @@
                                 <div class="row invoice-info">
                                     <div class="col-sm-4 invoice-col">
                                         De:
+                                        <address>
+                                            <?php
+                                                $cliente = [];
+                                                $cliente = datoscliente($client, $vend, $mysqli);                                                
+                                                ?>
+                                            <strong><?php echo $cliente[0];?></strong><br>
+                                            <?php echo $cliente[1];?><br>
+                                            <?php echo $cliente[2];?>, <?php echo $cliente[3];?><br>
+                                            <?php echo $cliente[4];?><br>
+                                            <?php echo $cliente[5];?>
+                                        </address>
+                                        
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-4 invoice-col">
+                                        Para
                                         <address>
                                             <?php 
                                                 $vendedor = [];
@@ -82,21 +98,6 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
-                                        Para
-                                        <address>
-                                            <?php
-                                                $cliente = [];
-                                                $cliente = datoscliente($client, $vend, $mysqli);                                                
-                                                ?>
-                                            <strong><?php echo $cliente[0];?></strong><br>
-                                            <?php echo $cliente[1];?><br>
-                                            <?php echo $cliente[2];?>, <?php echo $cliente[3];?><br>
-                                            <?php echo $cliente[4];?><br>
-                                            <?php echo $cliente[5];?>
-                                        </address>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 invoice-col">
                                         <b>Recibo N° <?php echo $nremito; ?></b><br>
                                         <br>
 
@@ -104,69 +105,17 @@
                                     </div>
                                     <!-- /.col -->
                                 </div>
-                                <!-- /.row -->
-
-                                <!-- Table row -->
-                                <div class="p-4 row">
-                                    <div class="col-12 table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cantidad</th>
-                                                    <th>Producto</th>
-                                                    <th>Codigo de Producto</th>
-                                                    <th>Precio Unitario</th>
-                                                    <th>Subtotal</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <?php
-                                                        $productos = [];
-                                                        $productos = prodenremito($nremito, $mysqli);
-                                                            foreach($productos as $ID) {                                                                                                                      
-                                                                echo    '<tr>'.
-                                                                        '<td>'.$ID[1].'</td>'.
-                                                                        '<td>'.$ID[4].'</td>'.
-                                                                        '<td>'.$ID[0].'</td>'.
-                                                                        '<td>$'.number_format($ID[2],2).'</td>'.
-                                                                        '<td>$'.number_format($ID[3],2).'</td>'.
-                                                                        '</tr>';
-                                                            }
-                                                        ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                                <!-- /.row -->
+                               
 
                                 <div class="p-5 row">
                                     <!-- /.col -->
                                     <div class="col">
+                                        
                                         <div class="table-responsive">
-                                            <table class="table">
-                                                <tr>
-                                                    <?php 
-                                                        $datos=[];
-                                                        $datos = subtotal($nremito, $mysqli);
-                                                        $datos2 = [];
-                                                        $datos2 = ctacliente($client, $nremito, $mysqli);
-                                                        ?>
-                                                    <th style="width:50%">Subtotal:</th>
-                                                    <td>$<?php echo number_format($datos[0],2); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Descuento:</th>
-                                                    <td>$<?php echo number_format($datos[1],2);?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total:</th>
-                                                    <td>$<?php echo number_format($datos[2],2);?></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="table-responsive">
+                                            <?php 
+                                            $datos2 = [];
+                                            $datos2 = ctacliente2($client, $nremito, $mysqli);
+                                            ?>
                                             <table class="table">
                                                 <tr>
                                                     <th>Abonado:</th>

@@ -87,7 +87,7 @@
         </div>
 
         <div class="input-group mb-0">
-            <input id="telefono" name="telefono" type="text" placeholder="Telefono de contacto" autocomplete="off"
+            <input id="telefono" name="telefono" type="text" placeholder="CUIT" autocomplete="off"
                 class="form-control" />
             <div class="input-group-append">
                 <div class="input-group-text">

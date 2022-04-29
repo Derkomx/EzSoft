@@ -28,6 +28,8 @@
 		"nuevoproducto" => "administracion/cargarproducto.php",
 		"eliminarproducto" => "administracion/eliminarproducto.php",
 		"estadisticas" => "administracion/estadisticas.php",
+		"pago"=>"administracion/pago.php",
+		"pagofinal"=>"administracion/pagofinal.php",
 	];
 
 ?>

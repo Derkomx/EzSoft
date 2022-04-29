@@ -133,6 +133,11 @@
                         "Seccion" => "ctasclientes",
                         "Archivo" => "administracion/ctascliente.php",
                     ],
+                    "Nuevo Pago de Cliente" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "pagocliente",
+                        "Archivo" => "administracion/pagocliente.php",
+                    ],
 					"Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "nuevoproducto",
@@ -153,11 +158,11 @@
                         "Seccion" => "estadisticas",
                         "Archivo" => "administracion/estadisticas.php",
                     ],
-                    "Datos" => [
-                        "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "Datos",
-                        "Archivo" => "administracion/datos.php",
-                    ],
+                    //"Datos" => [
+                    //    "Icono" => "nav-icon fa fa-caret-right",
+                    //    "Seccion" => "Datos",
+                    //    "Archivo" => "administracion/datos.php",
+                    //],
 				],
 			],
     ];

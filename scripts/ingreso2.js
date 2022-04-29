@@ -89,9 +89,8 @@ function InicioSesion(e) {
                         localStorage.setItem("Recordar", 1);
                         localStorage.setItem("user", user);
                     }
-                    console.log(clave)
-                    console.log(Resultado.location)
-                        //location.reload();
+
+                    location.reload();
                     return;
                 }
 

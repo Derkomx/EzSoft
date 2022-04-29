@@ -4,10 +4,10 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
 </head>
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+<!-- Preloader -->
+<div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="media/logo.png" alt="Ez - Soft" height="60" width="60">
-  </div>
+</div>
 <!--<body class="hold-transition sidebar-mini">-->
 <div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
@@ -50,7 +50,7 @@
                                                 include 'includes/remito.php';
                                                 $nremito = $_GET['remito'];
                                                 $client = $_GET['hash'];
-                                                $vend = 1;
+                                                $vend = $_SESSION['id_usuario'];
                                                 $fecha = fecharemito($nremito, $mysqli); 
                                                 ?>
                                             <small class="float-right">Fecha: <?php echo $fecha; ?></small>
@@ -91,9 +91,9 @@
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
-                                        <b>Remito N° <?php echo $nremito; ?></b><br>
+                                        <b>Presupuesto N° <?php echo $nremito; ?></b><br>
                                         <br>
-                                        <b>Fecha de Pago: <?php echo $fecha; ?></b> <br>
+                                        <b>Fecha de Presupuesto: <?php echo $fecha; ?></b> <br>
                                     </div>
                                     <!-- /.col -->
                                 </div>
@@ -157,6 +157,14 @@
                                                     <th>Total:</th>
                                                     <td id="td">$<?php echo $subtotal[0]; ?></td>
                                                 </tr>
+                                                <tr>
+                                                    <th>Modo de Pago:</th>
+                                                    <select name="metodo" id="metodo">
+                                                        <option value="EFECTIVO">EFECTIVO</option>
+                                                        <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+                                                        <option value="CHEQUE">CHEQUE</option>
+                                                    </select>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>
@@ -204,9 +212,10 @@ function aceptar(elemento) {
     var nremito = <?php echo $nremito;?>;
     var hash = <?php echo $client;?>;
     var descuento = document.getElementById("desc").value;
+    var metodo = document.getElementById("metodo").value;
     Notiflix.Confirm.prompt(
         'PAGO',
-        'El total a abonar es de ' + tot + ', ingrese lo que abonara y presione Aceptar',
+        'El total a abonar es de ' + tot + ' por '+ metodo +', ingrese lo que abonara y presione Aceptar',
         '',
         'Aceptar',
         'Cancelar',
@@ -222,7 +231,8 @@ function aceptar(elemento) {
                     hash: hash,
                     descuento: descuento,
                     total: total,
-                    pago: pago
+                    pago: pago,
+                    metodo: metodo
                 },
                 dataType: 'html',
                 success: function(data) {

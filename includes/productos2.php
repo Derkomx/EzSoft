@@ -20,7 +20,8 @@ $tipo = $_POST['Tipo'];
         $precio = $_POST['precio'];
         $preciou = $_POST['preciou'];
         $titulo = $_POST['titulo'];
-        $sql = "INSERT INTO prodvend (id, id_remito, id_prod, cant, preciou, precio, nomprod) VALUES ('', $remito, $datos, $cant, $preciou, $precio, '$titulo')";
+        $usuario = $_SESSION['id_usuario'];
+        $sql = "INSERT INTO prodvend (id, id_remito, id_prod, cant, preciou, precio, nomprod, id_usuario) VALUES ('', $remito, $datos, $cant, $preciou, $precio, '$titulo', '$usuario')";
         $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
 
         echo json_encode(array("success" => "aber"));
@@ -52,38 +53,56 @@ $tipo = $_POST['Tipo'];
                     mysqli_close($mysqli);
                 }
         }
+        // remito2 Genera el remito, actualiza el saldo en la cuenta corriente, crea los movimientos en las cuentas
     }else if ($tipo == 'remito2'){
         $total = $_POST['total'];
         $remito = $_POST['remito'];
         $idcliente = $_POST['hash'];
         $descuento = $_POST['descuento'];
         $pago = $_POST['pago'];
+        $metodo = $_POST['metodo'];
         $fecha = time();
         $id_usuario = $usuario;
+        //actualiza el remito
         if ($stmt = $mysqli->prepare("UPDATE remitos SET descuento = '$descuento', total = '$total' WHERE id_remito = '$remito' AND id_cli = '$idcliente'")) {
             $stmt->execute();
-            if ($stmt2 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$total' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
-                $stmt2 ->execute();
-                if ($stmt3 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha) VALUES ('', '$idcliente', '$id_usuario', 'COMPRA', '$total', '$fecha')")) {
-                    $stmt3 ->execute();
-                    if ($stmt4 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha) VALUES ('', '$idcliente', '$id_usuario', 'PAGO', '$pago', '$fecha')")) {
-                        $stmt4 ->execute();
-                        if ($stmt5 = $mysqli->prepare("SELECT saldo FROM cuentaclientes WHERE id_cliente = ? AND id_usuario = ?")) {
-                            $stmt5->bind_param('ii', $idcliente, $id_usuario);
-                            $stmt5->execute();
-                            $stmt5->store_result();
-                            $stmt5->bind_result($saldo);
-                            $stmt5->fetch();
-                            $saldonvo = ($saldo-$pago);
-                            if ($stmt6 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$saldonvo' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
-                                $stmt6 ->execute();
-                                echo json_encode(array("success" => "$remito" ));
+            //consulta el saldo para despues utilizarlo
+            if($stmt8 = $mysqli->prepare("SELECT saldo FROM cuentaclientes WHERE id_cliente = ? AND id_usuario = ?")) {
+                $stmt8->bind_param('ii', $idcliente, $id_usuario);
+                $stmt8->execute();
+                $stmt8->store_result();
+                $stmt8->bind_result($usaldo);
+                $stmt8->fetch();
+                $utotal = ($total + $usaldo);
+                //actualiza el saldo si es que pago menos del total de la factura, teniendo en cuenta el saldo anterior
+                if ($stmt2 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$utotal' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
+                    $stmt2 ->execute();
+                    if($stmt7 = $mysqli->prepare("SELECT id FROM remitos WHERE id_cli = $idcliente AND id_usu = $id_usuario AND id_remito = $remito")){
+                        $stmt7->execute();
+                        $stmt7->store_result();
+                        $stmt7->bind_result($id);
+                        $stmt7->fetch();
+                        if ($stmt3 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha) VALUES ('', '$idcliente', '$id_usuario', 'COMPRA', '$total', '$fecha')")) {
+                            $stmt3 ->execute();
+                            if ($stmt4 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha, modpago, id_remito) VALUES ('', '$idcliente', '$id_usuario', 'PAGO', '$pago', '$fecha', '$metodo', '$id')")) {
+                                $stmt4 ->execute();
+                                if ($stmt5 = $mysqli->prepare("SELECT saldo FROM cuentaclientes WHERE id_cliente = ? AND id_usuario = ?")) {
+                                    $stmt5->bind_param('ii', $idcliente, $id_usuario);
+                                    $stmt5->execute();
+                                    $stmt5->store_result();
+                                    $stmt5->bind_result($saldo);
+                                    $stmt5->fetch();
+                                    $saldonvo = ($saldo-$pago);
+                                    if ($stmt6 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$saldonvo' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
+                                        $stmt6 ->execute();
+                                        echo json_encode(array("success" => "$remito" ));
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
-            
         }
     }else if ($tipo == 'cancelaremito'){
         $remito = $_POST['remito'];
@@ -102,5 +121,46 @@ $tipo = $_POST['Tipo'];
         }else{
             echo json_encode(array("error" => "Error en producto, contacte con el desarrollador" ));
         }
+    }else if ($tipo == 'nuevopago'){
+        $usu = $usuario;
+        $cli = $_POST['hash'];
+        $now = time();
+        $pago = $_POST['pago'];
+        $metodo = $_POST['metodo'];
+        if ($stmt1 = $mysqli->prepare("SELECT id_recibo FROM recibo WHERE id_usuario = ? ORDER BY id_recibo DESC LIMIT 1")) {
+            $stmt1->bind_param('s', $usu);
+            $stmt1->execute();
+            $stmt1->store_result();
+            $stmt1->bind_result($idrecibo);
+            $stmt1->fetch();
+            $idrec = $idrecibo+1;      
+            $sql = "INSERT INTO recibo (id_recibo, id_usuario, id_cliente, metodo, valor, fecha) VALUES ('$idrec', '$usu', '$cli', '$metodo', '$pago', '$now')";
+            $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
+                if ($stmt = $mysqli->prepare("SELECT id FROM recibo WHERE id_usuario = ? AND id_recibo = '$idrec' ORDER BY id_recibo DESC LIMIT 1")) {
+                    $stmt->bind_param('s', $usu);
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($remito);
+                    $stmt->fetch();
+                    $res = $remito;
+                    if($stmt2 = $mysqli->prepare("SELECT saldo FROM cuentaclientes WHERE id_cliente = ? AND id_usuario = ?")) {
+                        $stmt2->bind_param('ii', $cli, $usu);
+                        $stmt2->execute();
+                        $stmt2->store_result();
+                        $stmt2->bind_result($usaldo);
+                        $stmt2->fetch();
+                        $utotal = ($usaldo - $pago);
+                        //actualiza el saldo si es que pago menos del total de la factura, teniendo en cuenta el saldo anterior
+                        if ($stmt2 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$utotal' WHERE id_cliente = '$cli' AND id_usuario = '$usu'")) {
+                            $stmt2 ->execute();
+                            if ($stmt3 = $mysqli->prepare("INSERT INTO movcuentaclientes (id, id_cliente, id_usuario, tmovimiento, valor, fecha, modpago, id_recibo) VALUES ('', '$cli', '$usu', 'PAGO', '$pago', '$now', '$metodo', '$res')")) {
+                                $stmt3 ->execute();
+                            echo json_encode(array("success" => $idrec));
+                            mysqli_close($mysqli);
+                            }
+                        }
+                    }
+                }
     }
+}
 ?>
