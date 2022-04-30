@@ -1,5 +1,5 @@
  <?php
- include 'includes/remito.php';
+ include 'includes/funciones.php';
  $id_usuario = $_SESSION['id_usuario'];
  ?>
  <!-- Preloader -->
@@ -59,6 +59,38 @@
                      </div>
                      <div class="icon">
                          <i class="ion ion-bag"></i>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3 col-6">
+                 <!-- small box -->
+                 <div class="small-box bg-success">
+                     <div class="inner">
+                         <?php
+                         $totaldia = movimientos_hoy($mysqli);
+                         ?>
+                         <h3>$<?php echo number_format($totaldia,2); ?></h3>
+
+                         <p>Generado Hoy</p>
+                     </div>
+                     <div class="icon">
+                         <i class="ion ion-android-cart"></i>
+                     </div>
+                 </div>
+             </div>
+             <div class="col-lg-3 col-6">
+                 <!-- small box -->
+                 <div class="small-box bg-success">
+                     <div class="inner">
+                         <?php
+                         $totalmes = movimientos_mes($mysqli);
+                         ?>
+                         <h3>$<?php echo number_format($totalmes,2); ?></h3>
+
+                         <p>Generado Este Mes</p>
+                     </div>
+                     <div class="icon">
+                         <i class="ion ion-android-cart"></i>
                      </div>
                  </div>
              </div>

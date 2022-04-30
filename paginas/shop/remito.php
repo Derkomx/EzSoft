@@ -47,7 +47,7 @@
                                         <h4>
                                             <i class="fas fa-globe"></i> Ez Soft
                                             <?php
-                                                include 'includes/remito.php';
+                                                include 'includes/funciones.php';
                                                 $nremito = $_GET['remito'];
                                                 $client = $_GET['hash'];
                                                 $vend = $_SESSION['id_usuario'];
@@ -159,11 +159,13 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Modo de Pago:</th>
-                                                    <select name="metodo" id="metodo">
-                                                        <option value="EFECTIVO">EFECTIVO</option>
-                                                        <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-                                                        <option value="CHEQUE">CHEQUE</option>
-                                                    </select>
+                                                    <td>
+                                                        <select name="metodo" id="metodo">
+                                                            <option value="EFECTIVO">EFECTIVO</option>
+                                                            <option value="TRANSFERENCIA">TRANSFERENCIA</option>
+                                                            <option value="CHEQUE">CHEQUE</option>
+                                                        </select>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -198,8 +200,8 @@
 <script>
 function calcu() {
     var desc = document.getElementById("desc").value;
-    var sub2 = document.getElementById("sub").innerText;
-    var sub = parseInt(sub2.replace('$', ''))
+    //var sub2 = document.getElementById("sub").innerText;
+    var sub = <?php echo $subtotal[0]; ?>;
     var calc = '$' + (sub - desc);
     document.getElementById("td").innerHTML = calc;
 }
@@ -215,7 +217,7 @@ function aceptar(elemento) {
     var metodo = document.getElementById("metodo").value;
     Notiflix.Confirm.prompt(
         'PAGO',
-        'El total a abonar es de ' + tot + ' por '+ metodo +', ingrese lo que abonara y presione Aceptar',
+        'El total a abonar es de ' + tot + ' por ' + metodo + ', ingrese lo que abonara y presione Aceptar',
         '',
         'Aceptar',
         'Cancelar',
@@ -225,7 +227,7 @@ function aceptar(elemento) {
                 type: 'POST',
                 url: 'Inyector.php',
                 data: {
-                    Archivo: 'productos2.php',
+                    Archivo: 'ajax.php',
                     Tipo: 'remito2',
                     remito: nremito,
                     hash: hash,
@@ -257,7 +259,7 @@ function aceptar(elemento) {
                 type: 'POST',
                 url: 'Inyector.php',
                 data: {
-                    Archivo: 'productos2.php',
+                    Archivo: 'ajax.php',
                     Tipo: 'cancelaremito',
                     remito: nremito,
                     hash: hash,
@@ -283,25 +285,6 @@ function aceptar(elemento) {
 </script>
 <!--</body>-->
 <?php
-    //<!-- Font Awesome -->
-    //<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    //<!-- Theme style -->
-    //<link rel="stylesheet" href="librerias/lte/css/adminlte.min.css">
 
-
-
-
-    ////////////////////////////////////////////
-
-
-
-    //<!-- jQuery -->
-    //<script src="librerias/jquery/jquery.min.js"></script>
-    //<!-- Bootstrap 4 -->
-    //<script src="librerias/bootstrap/js/bootstrap.bundle.min.js"></script>
-    //<!-- AdminLTE App -->
-    //<script src="librerias/lte/js/adminlte.min.js"></script>
-    //<!-- AdminLTE for demo purposes -->
-    //<script src="lbirerias/lte/js/demo.js"></script>
 
 ?>

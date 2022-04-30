@@ -47,7 +47,7 @@
                                         <h4>
                                             <i class="fas fa-globe"></i> Ez Soft
                                             <?php
-                                                include 'includes/remito.php';
+                                                include 'includes/funciones.php';
                                                 $nremito = 0;
                                                 $client = $_GET['hash'];
                                                 $vend = $_SESSION['id_usuario'];
@@ -168,7 +168,7 @@ function aceptar(elemento) {
                 type: 'POST',
                 url: 'Inyector.php',
                 data: {
-                    Archivo: 'productos2.php',
+                    Archivo: 'ajax.php',
                     Tipo: 'nuevopago',
                     metodo: metodo,
                     hash: hash,

@@ -53,7 +53,7 @@
                                         <h4>
                                             <i class="fas fa-globe"></i> Recibo by Ez-Soft
                                             <?php
-                                                include 'includes/remito.php';
+                                                include 'includes/funciones.php';
                                                 $nremito = $_GET['remito'];
                                                 $client = $_GET['hash'];
                                                 $vend = 1;

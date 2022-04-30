@@ -98,7 +98,7 @@ $cliente = $_GET['hash'];
         $.ajax({
             type: 'POST',
             url: 'Inyector.php',
-            data: {Archivo: 'productos2.php', Tipo: 'remito', subtotal: subtotal, cliente: cliente2},
+            data: {Archivo: 'ajax.php', Tipo: 'remito', subtotal: subtotal, cliente: cliente2},
             dataType: 'html',
             success: function(data) {
                 var Resultad = JSON.parse(data);
@@ -122,7 +122,7 @@ $cliente = $_GET['hash'];
                         $.ajax({
                             type: 'POST',
                             url: 'Inyector.php',
-                            data: {Archivo: 'productos2.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, preciou: preciou, precio: precio, titulo: titulo},
+                            data: {Archivo: 'ajax.php', datos: prodv, Tipo: 'prodvend',remito: Resultad.success, cant: prodc, preciou: preciou, precio: precio, titulo: titulo},
                             dataType: 'html',
                             success: function(data) {
                                 var Resultado = JSON.parse(data);

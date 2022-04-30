@@ -43,7 +43,7 @@
 
                             <tbody>
                                 <?php 
-									include 'includes/remito.php';
+									include 'includes/funciones.php';
 									$id_usuario = $_SESSION['id_usuario'];
 									$clientes = todosclientes($id_usuario, $mysqli);
 									//href="?Seccion=productos&hash='.$name[0].'"

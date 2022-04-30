@@ -342,4 +342,38 @@ if($stmt3 = $mysqli->prepare("SELECT id FROM recibo WHERE id_recibo = '$nremito'
     }
 }
 }
+function movimientos_hoy($mysqli){
+    $usuario = $_SESSION['id_usuario'];
+    $hoydate = date('d-m-Y');
+    $finhoydate = date("d-m-Y",strtotime($hoydate."+ 1 days"));
+    $hoy = strtotime($hoydate);
+    $mañana = strtotime($finhoydate);
+    $resultados = '';
+    if ($stmt = $mysqli->prepare("SELECT SUM(total) FROM remitos where id_usu = $usuario AND fecha < $mañana AND fecha > $hoy ")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($total);
+		$stmt ->fetch();
+        $resultados = $total;
+		return ($resultados);
+		
+	}
+}
+function movimientos_mes($mysqli){
+    $usuario = $_SESSION['id_usuario'];
+    $mes1 = date('01-m-Y');
+    $mes2 = date("t-m-Y");
+    $principiomes = strtotime($mes1);
+    $findemes = strtotime($mes2);
+    $resultados = '';
+    if ($stmt = $mysqli->prepare("SELECT SUM(total) FROM remitos where id_usu = $usuario AND fecha < $findemes AND fecha > $principiomes ")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($total);
+		$stmt ->fetch();
+        $resultados = $total;
+		return ($resultados);
+		
+	}
+}
 ?>

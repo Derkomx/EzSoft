@@ -45,7 +45,7 @@
                                </thead>
                                <tbody>
                                    <?php 
-									include 'includes/remito.php';
+									include 'includes/funciones.php';
 									$id_usuario = $_SESSION['id_usuario'];
 									$clientes = totalproductos($id_usuario, $mysqli);
 									foreach($clientes as $name) {
@@ -111,7 +111,7 @@ function eliminar(btn) {
                     type: 'POST',
                     url: 'Inyector.php',
                     data: {
-                        Archivo: 'productos2.php',
+                        Archivo: 'ajax.php',
                         Tipo: 'eliminar',
                         id: btn.id,
                     },

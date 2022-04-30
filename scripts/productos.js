@@ -24,24 +24,24 @@ items.addEventListener('click', e => {
 })
 
 async function myAjax(param) {
-  let result
-  try {
-    
-    result = await $.ajax({
-      type: 'POST',
-      url: 'Inyector.php',
-      data: {Archivo: 'productos.php', Tipo: 'carga'},
-      dataType: 'html',     
-    })
-    
-    return JSON.parse(result)
-  } catch (error) {
-    console.error(error)
-  }
-} 
+    let result
+    try {
+
+        result = await $.ajax({
+            type: 'POST',
+            url: 'Inyector.php',
+            data: { Archivo: 'ajax.php', Tipo: 'carga2' },
+            dataType: 'html',
+        })
+
+        return JSON.parse(result)
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 // Traer productos
-const fetchData = async () => {
+const fetchData = async() => {
     const data = await myAjax()
     pintarCards(data)
 };
@@ -54,10 +54,10 @@ const pintarCards = data => {
         templateCard.querySelector('span').textContent = item.prevent
         templateCard.querySelector('button').dataset.id = item.id_prod
         let archi = item.fileprod;
-        if (archi === null ){
+        if (archi === null) {
             templateCard.querySelector('img').setAttribute('src', 'productos/Preview/nulo.jpg');
-        }else{
-            templateCard.querySelector('img').setAttribute('src', 'productos/Preview/'+item.id_user+'/'+item.fileprod+'.jpeg');
+        } else {
+            templateCard.querySelector('img').setAttribute('src', 'productos/Preview/' + item.id_user + '/' + item.fileprod + '.jpeg');
         }
         const clone = templateCard.cloneNode(true)
         fragment.appendChild(clone)
@@ -78,12 +78,12 @@ const addCarrito = e => {
 
 const setCarrito = item => {
     const producto = {
-        title: item.querySelector('h5').textContent,
-        precio: item.querySelector('span').textContent,
-        id: item.querySelector('button').dataset.id,
-        cantidad: 1
-    }
-    // console.log(producto)
+            title: item.querySelector('h5').textContent,
+            precio: item.querySelector('span').textContent,
+            id: item.querySelector('button').dataset.id,
+            cantidad: 1
+        }
+        // console.log(producto)
     if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1
     }
@@ -133,10 +133,10 @@ const pintarFooter = () => {
         cantidad
     }) => acc + cantidad, 0)
     const nPrecio = Object.values(carrito).reduce((acc, {
-        cantidad,
-        precio
-    }) => acc + cantidad * precio, 0)
-    // console.log(nPrecio)
+            cantidad,
+            precio
+        }) => acc + cantidad * precio, 0)
+        // console.log(nPrecio)
 
     //templateFooter.querySelectorAll('td')[0].textContent = nCantidad
     templateFooter.querySelector('span').textContent = nPrecio
@@ -159,22 +159,22 @@ const btnAumentarDisminuir = e => {
     if (e.target.classList.contains('btn-info')) {
         const producto = carrito[e.target.dataset.id]
         producto.cantidad++
-        carrito[e.target.dataset.id] = {
-            ...producto
-        }
+            carrito[e.target.dataset.id] = {
+                ...producto
+            }
         pintarCarrito()
     }
 
     if (e.target.classList.contains('btn-danger')) {
         const producto = carrito[e.target.dataset.id]
         producto.cantidad--
-        if (producto.cantidad === 0) {
-            delete carrito[e.target.dataset.id]
-        } else {
-            carrito[e.target.dataset.id] = {
-                ...producto
+            if (producto.cantidad === 0) {
+                delete carrito[e.target.dataset.id]
+            } else {
+                carrito[e.target.dataset.id] = {
+                    ...producto
+                }
             }
-        }
         pintarCarrito()
     }
     e.stopPropagation()

@@ -43,7 +43,7 @@
                                </thead>
                                <tbody>
                                    <?php 
-									include 'includes/remito.php';
+									include 'includes/funciones.php';
 									$id_usuario = $_SESSION['id_usuario'];
 									$clientes = clisaldos($id_usuario, $mysqli);
 									foreach($clientes as $name) {

@@ -43,7 +43,7 @@
                                </thead>
                                <tbody>
                                    <?php 
-									include 'includes/remito.php';
+									include 'includes/funciones.php';
 									$cliente = $_GET['hash'];
 									$clientes = climovimientos($cliente, $mysqli);
 									foreach($clientes as $name) {

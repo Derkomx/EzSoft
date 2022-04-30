@@ -26,24 +26,25 @@ items.addEventListener('click', e => {
 })
 
 async function myAjax(data) {
-  let result
-  try {
-    
-    result = await $.ajax({
-      type: 'POST',
-      url: 'Inyector.php',
-      data: {Archivo: 'productos3.php', Tipo: 'carga'},
-      dataType: 'html',     
-    })
-    
-    return JSON.parse(result)
-  } catch (error) {
-    console.error(error)
-  }
-} 
+    let result
+    try {
+
+        result = await $.ajax({
+            type: 'POST',
+            url: 'Inyector.php',
+            //data: { Archivo: 'productos3.php', Tipo: 'carga' },
+            data: { Archivo: 'ajax.php', Tipo: 'carga' },
+            dataType: 'html',
+        })
+
+        return JSON.parse(result)
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 // Traer productos
-const fetchData = async () => {
+const fetchData = async() => {
     data = await myAjax()
     pintarCards(data)
 };
@@ -59,7 +60,7 @@ const pintarCards = (data) => {
         templateCard.querySelectorAll('td')[1].textContent = item[2]
         templateCard.querySelector('span').textContent = item[4]
         templateCard.querySelector('.btn-dark').dataset.id = i
-        //////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
         const clone = templateCard.cloneNode(true)
         fragment.appendChild(clone)
     })
@@ -153,10 +154,10 @@ const pintarFooter = () => {
         cantidad
     }) => acc + cantidad, 0)
     const nPrecio = Object.values(carrito).reduce((acc, {
-        cantidad,
-        precio
-    }) => acc + cantidad * precio, 0)
-    // console.log(nPrecio)
+            cantidad,
+            precio
+        }) => acc + cantidad * precio, 0)
+        // console.log(nPrecio)
 
     //templateFooter.querySelectorAll('td')[0].textContent = nCantidad
     templateFooter.querySelector('span').textContent = nPrecio
@@ -179,23 +180,23 @@ const btnAumentarDisminuir = e => {
     if (e.target.classList.contains('btn-info')) {
         const producto = carrito[e.target.dataset.id]
         producto.cantidad++
-        //console.log(e.target.dataset.id)
-        carrito[e.target.dataset.id] = {
-            ...producto
-        }
+            //console.log(e.target.dataset.id)
+            carrito[e.target.dataset.id] = {
+                ...producto
+            }
         pintarCarrito()
     }
 
     if (e.target.classList.contains('btn-danger')) {
         const producto = carrito[e.target.dataset.id]
         producto.cantidad--
-        if (producto.cantidad === 0) {
-            delete carrito[e.target.dataset.id]
-        } else {
-            carrito[e.target.dataset.id] = {
-                ...producto
+            if (producto.cantidad === 0) {
+                delete carrito[e.target.dataset.id]
+            } else {
+                carrito[e.target.dataset.id] = {
+                    ...producto
+                }
             }
-        }
         pintarCarrito()
     }
     e.stopPropagation()

@@ -54,7 +54,7 @@ function comprar() {
         type: 'POST',
         url: 'Inyector.php',
         data: {
-            Archivo: 'productos2.php',
+            Archivo: 'ajax.php',
             Tipo: 'remito',
             subtotal: subtotal,
             cliente: cliente2
@@ -83,7 +83,7 @@ function comprar() {
                         type: 'POST',
                         url: 'Inyector.php',
                         data: {
-                            Archivo: 'productos2.php',
+                            Archivo: 'ajax.php',
                             datos: prodv,
                             Tipo: 'prodvend',
                             remito: Resultad.success,

@@ -106,14 +106,14 @@ function cliente() {
             type: 'POST',
             url: 'Inyector.php',
             data: {
-                Archivo: 'clientes.php',
+                Archivo: 'ajax.php',
                 nombre: nombre,
                 direccion: direccion,
                 provincia: provincia,
                 codpos: codpos,
                 telefono: telefono,
                 email: email,
-                tipo: 'nuevo'
+                Tipo: 'nuevo'
             },
             dataType: 'html',
             success: function(data) {

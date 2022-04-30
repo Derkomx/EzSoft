@@ -22,7 +22,7 @@
         <h2 aligncenter>Actualizar Cliente</h2>
 
         <?php
-        include "includes/remito.php";
+        include "includes/funciones.php";
         $hash = $_GET['hash'];
         $datos = [];
         $datos = dtoscliente($hash, $mysqli);
@@ -139,14 +139,14 @@ function cliente() {
         type: 'POST',
         url: 'Inyector.php',
         data: {
-            Archivo: 'clientes.php',
+            Archivo: 'ajax.php',
             nombre: nombre,
             direccion: direccion,
             provincia: provincia,
             codpos: codpos,
             telefono: telefono,
             email: email,
-            tipo: 'actualizar',
+            Tipo: 'actualizar',
             id: idcl
         },
         dataType: 'html',
