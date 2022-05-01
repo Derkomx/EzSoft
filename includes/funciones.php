@@ -1,9 +1,9 @@
 <?php
-session_start();
-include_once '../../includes/MySQL.php';
+//session_start();
+//include_once '../../includes/MySQL.php';
 
 //include_once '../../includes/MySQL.php';
-include '../../includes/functions.php';
+//include '../../includes/functions.php';
 
 function prodenremito($nremito, $mysqli){
     $usuario = $_SESSION['id_usuario'];

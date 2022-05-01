@@ -54,6 +54,14 @@ if(!isLogged()){
         include 'paginas/administracion/datos.php';
         exit();
     }
+
+    $activo = activo($user, $mysqli);
+
+    if ($activo == 1) {
+        include 'paginas/404-2.php';
+        exit();
+    }
+
     $Nivel = isLogged();
     $Seccion = (!isset($_GET['Seccion'])) ? 'Inicio' : $_GET['Seccion'];
     include 'paginas/principal.php';

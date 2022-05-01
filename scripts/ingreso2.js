@@ -79,16 +79,7 @@ function InicioSesion(e) {
                 }
 
                 if (Resultado.location) {
-                    // Se borran los datos almacenados si existen
-                    localStorage.setItem("Recordar", 0);
-                    localStorage.setItem("user", false);
 
-                    // Recordar datos
-                    if (document.getElementById("Recordar").checked) {
-                        // Si está seleccionado "Recordar user", se almacena para usarlo la próxima vez
-                        localStorage.setItem("Recordar", 1);
-                        localStorage.setItem("user", user);
-                    }
 
                     location.reload();
                     return;

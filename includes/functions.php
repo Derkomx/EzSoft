@@ -5,8 +5,10 @@
 include_once 'Configuracion.php';
 
 function sec_session_start() {
+    
     $session_name = 'sec_session_id';
     $secure = SECURE;
+    
 
     $httponly = true;
    ini_set('session.use_only_cookies', true);
@@ -50,6 +52,12 @@ function login($cuil, $password, $mysqli) {
 					} 
                     $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
+                    if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 1800)) {
+                        session_unset(); 
+                        session_destroy();  
+                    }
+                    $_SESSION['start'] = time();
+
                     $id_usuario = preg_replace("/[^0-9]+/", "", $id_usuario);
                     $_SESSION['id_usuario'] = $id_usuario;
 
@@ -61,10 +69,7 @@ function login($cuil, $password, $mysqli) {
 
 					$_SESSION['email'] = $email;
 					
-                    $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
-                    $usuavio = $_SESSION['id_usuario'];
-
-					
+                    $_SESSION['login_string'] = hash('sha512', $password . $user_browser);				
 
                     return true;
                 } else {
@@ -101,6 +106,13 @@ function login($cuil, $password, $mysqli) {
                         { 
                             session_start(); 
                         } 
+
+                        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 1800)) {
+                            session_unset(); 
+                            session_destroy();  
+                        }
+                        $_SESSION['start'] = time();
+
                         $user_browser = $_SERVER['HTTP_USER_AGENT'];
     
                         $id_usuario = preg_replace("/[^0-9]+/", "", $id_usuario);
@@ -210,6 +222,24 @@ function isLogged() {
 
 function completo($user, $mysqli){
     if ($stmt = $mysqli->prepare("SELECT verificado2 FROM usuarios2 WHERE id_usuario = ? LIMIT 1")) {
+        $stmt->bind_param('s', $user);
+
+        $stmt->execute();
+        $stmt->store_result();
+
+		$stmt->bind_result($verificado);
+        $stmt->fetch();
+		
+		return ($verificado);
+
+	} else {
+        header("Location: ../error.php?err=Error de Base de datos: No se pudo realizar declaracion.");
+        exit();
+    }
+}
+
+function activo($user, $mysqli){
+    if ($stmt = $mysqli->prepare("SELECT denegado FROM usuarios2 WHERE id_usuario = ? LIMIT 1")) {
         $stmt->bind_param('s', $user);
 
         $stmt->execute();

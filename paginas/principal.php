@@ -13,6 +13,7 @@
 	//$arraymenu = [];
 	// Array limpio
 	$MenuArr = [];
+    
 
 	// Menú de nivel 3 (Usuario normal)
 	$MenuArr[3] = [
@@ -166,6 +167,203 @@
 				],
 			],
     ];
+    $MenuArr[9] = [
+        "Inicio" => [
+            "Icono" => "nav-icon fas fa-home",
+            "Seccion" => "Inicio",
+            "Archivo" => "404.php",
+            ],
+
+        "Productos" => [
+            "Icono" => "nav-icon fa fa-cubes",
+            "Tipo" => "Sub-menu",
+            "Menu" => [
+                "Todos" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carrito2&hash=1",
+                    "Archivo" => "shop/productos.php",
+                ],
+                "$arraymenu[0]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=1",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                
+                "$arraymenu[1]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=2",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[2]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=3",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[3]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=4",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[4]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=5",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[5]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=6",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[6]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=7",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[7]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=8",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[8]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=9",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[9]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=10",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[10]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=11",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[11]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=12",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[12]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=13",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[13]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=14",
+                    "Archivo" => "m1/inicio.php",
+                ],
+                "$arraymenu[14]" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "carpeta&core=15",
+                    "Archivo" => "m1/inicio.php",
+                ],
+            ],
+        ],
+        "Vender a Cliente" => [
+            "Icono" => "nav-icon fa fa-shopping-cart",
+            "Seccion" => "carrito",
+            "Archivo" => "shop/selcliente.php",
+        ],
+        "Administracion" => [
+            "Icono" => "nav-icon fa fa-suitcase",
+            "Tipo" => "Sub-menu",
+            "Menu" => [
+                "Cargar Cliente" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "nuevocliente",
+                    "Archivo" => "administracion/clientenuevo.php",
+                ],
+                "Administrar Clientes" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "admclientes",
+                    "Archivo" => "administracion/admcliente.php",
+                ],
+                "Cuentas Clientes" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "ctasclientes",
+                    "Archivo" => "administracion/ctascliente.php",
+                ],
+                "Nuevo Pago de Cliente" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "pagocliente",
+                    "Archivo" => "administracion/pagocliente.php",
+                ],
+                "Cargar Productos" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "nuevoproducto",
+                    "Archivo" => "administracion/cargarproducto.php",
+                ],
+                "Eliminar Productos" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "eliminarproducto",
+                    "Archivo" => "administracion/eliminarproducto.php",
+                ],
+                "Ventas" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "ventas",
+                    "Archivo" => "administracion/ventas.php",
+                ],
+                "Estadisticas" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "estadisticas",
+                    "Archivo" => "administracion/estadisticas.php",
+                ],
+                //"Datos" => [
+                //    "Icono" => "nav-icon fa fa-caret-right",
+                //    "Seccion" => "Datos",
+                //    "Archivo" => "administracion/datos.php",
+                //],
+                ],
+            ],
+            "ROOT" => [
+                "Icono" => "nav-icon fa fa-suitcase",
+                "Tipo" => "Sub-menu",
+                "Menu" => [
+                    "Usuarios" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "listausuarios",
+                        "Archivo" => "ROOT/usuarios.php",
+                    ],
+                    "Usuarios Email Activo" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "emailsactivos",
+                        "Archivo" => "ROOT/emailactivo.php",
+                    ],
+                    "Usuarios Email Inactivo" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "emailsinactivos",
+                        "Archivo" => "ROOT/emailinactivo.php",
+                    ],
+                    "Usuarios con Datos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "condatos",
+                        "Archivo" => "ROOT/condatos.php",
+                    ],
+                    "Usuarios sin Datos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "sindatos",
+                        "Archivo" => "ROOT/sindatos.php",
+                    ],
+                    "Usuarios ACTIVOS" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "usuariosactivos",
+                        "Archivo" => "ROOT/activo.php",
+                    ],
+                    "Usuarios INACTIVOS" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "usuariosinactivos",
+                        "Archivo" => "ROOT/inactivo.php",
+                    ],
+                    "Estadisticas" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "estadisticasroot",
+                        "Archivo" => "ROOT/estadisticas.php",
+                    ],
+                ],
+            ],
+];
 // Clase del menú
 	class Menu {
 		// Propiedades
@@ -366,7 +564,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 						    echo '<img src="media/logo.png" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">';
 						?>
 
-                <span class="brand-text font-weight-light">User Ver. 1.0.0</span>
+                <span class="brand-text font-weight-light">Ge-Soft Ver. 1.0.0</span>
             </a>
 
             <!-- Sidebar -->
@@ -378,7 +576,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
                         <!-- Add icons to the links using the .nav-icon class
 					with font-awesome or any other icon font library -->
                         <?php
-						$nMenu = new Menu($MenuArr[3]);
+						$nMenu = new Menu($MenuArr[$lvlusr]);
 						$nMenu->crearMenu();
 					?>
 
@@ -401,8 +599,8 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 					$Seccion = $_GET['Seccion'];
 				}
 
-				if (null == $nMenu->obtenerArchivo() && null !== $Secciones[3][$Seccion]) {
-					include './paginas/'.$Secciones[3][$Seccion];
+				if (null == $nMenu->obtenerArchivo() && null !== $Secciones[$lvlusr][$Seccion]) {
+					include './paginas/'.$Secciones[$lvlusr][$Seccion];
 				} elseif (null !== $nMenu->obtenerArchivo()) {
 					include './paginas/'.$nMenu->obtenerArchivo();
 				} else {
