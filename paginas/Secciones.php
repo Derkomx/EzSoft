@@ -29,6 +29,7 @@
 		"pagocliente"=>"administracion/pagocliente.php",
 		"cierredia"=>"administracion/cierredia.php",
 		"movsdia"=>"administracion/movsdia.php",
+		"detallesmovdia"=>"administracion/detallemovsdia.php",
 		//datos.php de seccion DATOS no esta agregado ya que se redirije una sola vez en el sistema//
 		///////////////////////////////////////////////
 	];
@@ -56,6 +57,7 @@
 		"pagocliente"=>"administracion/pagocliente.php",
 		"cierredia"=>"administracion/cierredia.php",
 		"movsdia"=>"administracion/movsdia.php",
+		"detallesmovdia"=>"administracion/detallemovsdia.php",
 		//datos.php de seccion DATOS no esta agregado ya que se redirije una sola vez en el sistema//
 		///////////////////////////////////////////////
 		"listausuarios"=>"ROOT/usuarios.php",

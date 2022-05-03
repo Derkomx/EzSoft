@@ -50,7 +50,7 @@
 									//href="?Seccion=productos&hash='.$name[0].'"
 									foreach($cajas as $name) {
 										echo '<tr>
-										<td>'.$name[0].'</td>
+                                        <td class = "seleccionar">'.$name[0].'</td>
 										<td>$'.$name[1].'</td>
                                         <td>$'.$name[2].'</td>'.
 										'</tr>';
@@ -85,4 +85,29 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+<script>
+
+$(document).ready(function() { //Espera a que el documento este listo
+    $(".seleccionar").click(function(evento) { //selecciono el td que tenga de nombre de clase "editar"
+        
+        var fecha = $(this);
+
+
+        Notiflix.Confirm.show(
+            'Aviso',
+            'Estas ver los movimientos de el dia ' + fecha.html() +
+            '',
+            'Si',
+            'No',
+            function Si() {
+                location.href = ('?Seccion=detallesmovdia&hash=' + fecha.html());
+            },
+            function No() {
+                return;
+            },
+        )
+        
+    })
+})
 </script>

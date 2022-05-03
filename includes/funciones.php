@@ -403,4 +403,19 @@ function todoslosproductos($mysqli){
         return ($resultados);
     }
 }
+function movimientosdia($hoy, $finhoy, $mysqli){
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $id_usuario = $_SESSION['id_usuario'];
+    $resultado=[];
+    if($stmt = $mysqli->prepare("SELECT tmovimiento, valor, fecha, modpago, id_remito, id_recibo FROM movcuentaclientes WHERE id_usuario = $id_usuario AND fecha > $hoy AND fecha < $finhoy")){
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($tmovimiento, $valor, $fecha, $modpago, $id_remito, $id_recibo);
+        while ($stmt->fetch()) {
+            $fecha = date('d-m-Y H:i:s', $fecha);
+			$resultado[] = array($tmovimiento, $valor, $fecha, $modpago, $id_remito, $id_recibo);
+		}
+        return ($resultado);
+    }
+}
 ?>
