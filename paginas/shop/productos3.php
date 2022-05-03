@@ -84,7 +84,7 @@ $cliente = $_GET['hash'];
 <!------------------------------------------------------------------------------------------------------------->
 <template id="template-card">
     <tr class="card-body">
-        <th scope="row">id</th> 
+        <th scope="row">id</th>
         <td>Codigo de Barra</td>
         <td>Titulo</td>
         <td>$ <span>500</span></td>
@@ -137,43 +137,69 @@ function comprar() {
                     var titulo = producto.title;
                     console.log(titulo);
                     //console.log(y)
-
-                    ////////////////////////////////////////////////////        
                     $.ajax({
                         type: 'POST',
                         url: 'Inyector.php',
                         data: {
                             Archivo: 'ajax.php',
                             datos: prodv,
-                            Tipo: 'prodvend',
-                            remito: Resultad.success,
+                            Tipo: 'haystock',
                             cant: prodc,
-                            preciou: preciou,
-                            precio: precio,
-                            titulo: titulo
                         },
                         dataType: 'html',
                         success: function(data) {
-                            var Resultado = JSON.parse(data);
+                            var Resultado3 = JSON.parse(data);
                             Notiflix.Loading.Remove();
 
-                            if (Resultado.error) {
-                                Notiflix.Notify.Failure(Resultado.error);
+                            if (Resultado3.error) {
+                                Notiflix.Notify.Failure("solo tienes " + Resultado3
+                                    .error + " " + titulo);
                                 return;
-                                console.log(Resultado.error)
+                            }
+                            if (Resultado3.success) {
+                                ////////////////////////////////////////////////////        
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'Inyector.php',
+                                    data: {
+                                        Archivo: 'ajax.php',
+                                        datos: prodv,
+                                        Tipo: 'prodvend',
+                                        remito: Resultad.success,
+                                        cant: prodc,
+                                        preciou: preciou,
+                                        precio: precio,
+                                        titulo: titulo
+                                    },
+                                    dataType: 'html',
+                                    success: function(data) {
+                                        var Resultado = JSON.parse(data);
+                                        Notiflix.Loading.Remove();
 
+                                        if (Resultado.error) {
+                                            Notiflix.Notify.Failure(
+                                                Resultado.error);
+                                            return;
+                                            console.log(Resultado.error)
+
+                                        }
+                                        if (Resultado.success) {
+                                            carrito = {}
+                                            hash = <?php echo $cliente?>;
+                                            pintarCarrito()
+                                            /////////////////////////////////////////////
+                                            location.href = (
+                                                '?Seccion=remito&remito=' +
+                                                Resultad
+                                                .success + '&hash=' +
+                                                hash)
+                                            //window.open('/ezSoft/?Seccion=remito&remito='+Resultad.success+'&hash='+hash)
+                                            /////////////////////////////////////////////
+                                        }
+                                        /////////////////////////////////////////////  
+                                    }
+                                });
                             }
-                            if (Resultado.success) {
-                                carrito = {}
-                                hash = <?php echo $cliente?>;
-                                pintarCarrito()
-                                /////////////////////////////////////////////
-                                location.href = ('?Seccion=remito&remito=' + Resultad
-                                    .success + '&hash=' + hash)
-                                //window.open('/ezSoft/?Seccion=remito&remito='+Resultad.success+'&hash='+hash)
-                                /////////////////////////////////////////////
-                            }
-                            /////////////////////////////////////////////  
                         }
                     });
                 })

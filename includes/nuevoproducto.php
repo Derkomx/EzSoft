@@ -8,10 +8,11 @@ $Tipo = $JSONContent['Tipo'];
     $Imagen = $JSONContent['imagen'];
     $precio = $JSONContent['precio'];
     $codigo = $JSONContent['codigo'];
+    $stock = $JSONContent['stock'];
      if ($Tipo == 'nuevo'){
         $id_usuario = $_SESSION['id_usuario'];
-        if ($stmt = $mysqli->prepare("INSERT INTO products (id_user, nomprod, prevent, codigo) VALUES (?, ?, ?, ?)")) {
-            $stmt->bind_param('isds', $id_usuario, $Titulo, $precio, $codigo);
+        if ($stmt = $mysqli->prepare("INSERT INTO products (id_user, nomprod, prevent, codigo, stock) VALUES (?, ?, ?, ?, ?)")) {
+            $stmt->bind_param('isdsi', $id_usuario, $Titulo, $precio, $codigo, $stock);
             $stmt->execute();
             if($stmt2 = $mysqli->prepare("SELECT id_prod FROM products WHERE id_user = ? and nomprod = ? ORDER BY id_prod DESC LIMIT 1")){
                 $stmt2->bind_param('is', $id_usuario, $Titulo);

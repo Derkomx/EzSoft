@@ -59,6 +59,15 @@
                 </div>
             </div>
         </div>
+        <div class="input-group mb-0">
+            <input id="stock" name="stock" type="text" placeholder="Stock" autocomplete="off"
+                class="form-control" />
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                </div>
+            </div>
+        </div>
 
         <button type="submit" onclick="aceptar()">Aceptar</button>
     </div>
@@ -70,6 +79,7 @@ function aceptar() {
     var codigo = document.getElementById("codigo").value;
     var titulo = document.getElementById("titulo").value;
     var precio = document.getElementById("precio").value;
+    var stock = document.getElementById("stock").value;
 
     // Si no escribió se notifica
     if (titulo.length == 0) {
@@ -86,6 +96,10 @@ function aceptar() {
         codigo = 0;
         
     }
+    if (stock.length == 0){
+        stock = 0;
+    }
+
     Notiflix.Loading.Circle('Cargando...');
     var theJSON = {
         Archivo: 'nuevoproducto.php',
@@ -93,12 +107,13 @@ function aceptar() {
         titulo: titulo,
         imagen: imagen,
         precio: precio,
-        codigo: codigo
+        codigo: codigo,
+        stock: stock
     };
-    console.log(imagen);
-    console.log(codigo);
-    console.log(titulo);
-    console.log(precio);
+    //console.log(imagen);
+    //console.log(codigo);
+    //console.log(titulo);
+    //console.log(precio);
     uploadJSON(theJSON);
 }
 

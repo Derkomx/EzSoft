@@ -11,6 +11,8 @@
 //remito2(carga los datos en el remito y crea los movimientos en la cuenta corriente del cliente)
 //cancelaremito(cuando estas ya en la previsualizacion del remito, al presionar boton cancelar al ir a pagar, borra el remito, por mas que no se lo haga no puede ser visualizado, pero mantiene una cierta limpieza en la base de datos)
 //nuevo(carga un producto nuevo al usuario)
+//stock actualiza el stock de un producto
+//precio actualiza el precio de un producto
 
 
     if($tipo == 'prodvend'){
@@ -23,7 +25,6 @@
         $usuario = $_SESSION['id_usuario'];
         $sql = "INSERT INTO prodvend (id, id_remito, id_prod, cant, preciou, precio, nomprod, id_usuario) VALUES ('', $remito, $datos, $cant, $preciou, $precio, '$titulo', '$usuario')";
         $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
-
         echo json_encode(array("success" => "aber"));
 
     }else if($tipo == 'remito'){
@@ -64,6 +65,26 @@
         $fecha = time();
         $id_usuario = $usuario;
         //actualiza el remito
+        /////////////////////////stock/////////////////////////////////
+        if($stmt11 = $mysqli->prepare("SELECT id, cant, id_prod FROM prodvend WHERE id_remito = $remito AND id_usuario = $usuario")){
+            $stmt11->execute();
+            $stmt11->store_result();
+            $stmt11->bind_result($id, $cant, $id_prod);
+            while($stmt11->fetch()){
+                if($stmt13 = $mysqli->prepare("SELECT stock FROM products WHERE id_prod = $id_prod AND id_user = $usuario")){
+                    $stmt13->execute();
+                    $stmt13->store_result();
+                    $stmt13->bind_result($stock);
+                    $stmt13->fetch();
+                    $nstock = $stock - $cant;
+                    if($stmt12 = $mysqli->prepare("UPDATE products SET stock = $nstock WHERE id_user = $usuario AND id_prod = $id_prod")){
+                        $stmt12->execute();
+                        //echo json_encode(array("success" => "aber"));
+                    }
+                }
+            }
+        
+        ////////////////////finstock//////////////////////////////////////
         if ($stmt = $mysqli->prepare("UPDATE remitos SET descuento = '$descuento', total = '$total' WHERE id_remito = '$remito' AND id_cli = '$idcliente'")) {
             $stmt->execute();
             //consulta el saldo para despues utilizarlo
@@ -95,7 +116,10 @@
                                     $saldonvo = ($saldo-$pago);
                                     if ($stmt6 = $mysqli->prepare("UPDATE cuentaclientes SET saldo = '$saldonvo' WHERE id_cliente = '$idcliente' AND id_usuario = '$id_usuario'")) {
                                         $stmt6 ->execute();
+                                        if ($stmt7 = $mysqli->prepare("UPDATE prodvend SET concretado = 1 WHERE id_usuario = $usuario AND id_remito = $remito")) {
+                                            $stmt7 ->execute();
                                         echo json_encode(array("success" => "$remito" ));
+                                        }
                                     }
                                 }
                             }
@@ -104,6 +128,8 @@
                 }
             }
         }
+        //
+    }
     }else if ($tipo == 'cancelaremito'){
         $remito = $_POST['remito'];
         $cliente = $_POST['hash'];
@@ -161,7 +187,8 @@
                         }
                     }
                 }
-    }
+            }
+            
 }else if ($tipo == 'nuevo'){
     $nombre = $_POST['nombre'];
     $direccion = $_POST['direccion'];
@@ -209,9 +236,23 @@
         }
         echo json_encode($resultados);
     }
-}else if($tipo = 'carga2'){
+
+}else if ($tipo == 'nuevodatos'){
+    $nombre = $_POST['nombre'];
+    $direccion = $_POST['direccion'];
+    $provincia = $_POST['provincia'];
+    $codpos = $_POST['codpos'];
+    $telefono = $_POST['telefono'];
+    $email = $_POST['email'];
+    if ($stmt = $mysqli->prepare("INSERT INTO usuarios (id_usuario, nombre, direccion, provincia, codpos, telefono, email) VALUES ( '$usuario' , '$nombre', '$direccion', '$provincia', '$codpos', '$telefono', '$email')")) {
+        $stmt->execute();
+            if ($stmt2 = $mysqli->prepare("UPDATE usuarios2 SET verificado2 = '1' WHERE id_usuario = $usuario"))
+            $stmt2->execute();
+            echo json_encode(array("location" => "(づ｡◕‿‿◕｡)づ"));
+    }
+}else if($tipo == 'carga2'){
     //fetch table rows from mysql db
-    $sql = "SELECT id_prod, id_user, nomprod, fileprod, prevent, codigo  FROM products WHERE id_user = '$usuario'";
+    $sql = "SELECT id_prod, id_user, nomprod, fileprod, prevent, codigo  FROM products WHERE id_user = '$usuario' AND stock > 0";
     $result = mysqli_query($mysqli, $sql) or die("Error in Selecting " . mysqli_error($mysqli));
 
     //create an array
@@ -223,20 +264,56 @@
     echo json_encode($emparray);
 
     //close the db connection
-    mysqli_close($mysqli);
-}else if ($tipo == 'nuevodatos'){
-    $nombre = $_POST['nombre'];
-    $direccion = $_POST['direccion'];
-    $provincia = $_POST['provincia'];
-    $codpos = $_POST['codpos'];
-    $telefono = $_POST['telefono'];
-    $email = $_POST['email'];
-    if ($stmt = $mysqli->prepare("INSERT INTO usuarios (id_usuario, nombre, direccion, provincia, codpos, telefono, email) VALUES ( '$usuario' , '$nombre', '$direccion', '$provincia', '$codpos', '$telefono', '$email')")) {
+    //mysqli_close($mysqli);
+}else if ($tipo == 'stock'){
+    $dato = $_POST['data'];
+    $producto = $_POST['prod'];
+    if ($stmt = $mysqli->prepare("SELECT stock FROM products WHERE id_user = $usuario AND id_prod = $producto LIMIT 1")) {
         $stmt->execute();
-        if ($stmt2 = $mysqli->prepare("UPDATE usuarios2 SET verificado2 = '1'"))
+        $stmt->store_result();
+        $stmt->bind_result($stock);
+        $stmt->fetch();
+        $nstock = ($stock+$dato);
+        if ($stmt2 = $mysqli->prepare("UPDATE products SET stock = $nstock WHERE id_prod = $producto AND id_user = $usuario")){
         $stmt2->execute();
-        echo json_encode(array("location" => "(づ｡◕‿‿◕｡)づ"));
+        echo json_encode(array("success" => "(づ｡◕‿‿◕｡)づ"));
+        }
+    }
+}else if ($tipo == 'precio'){
+    $dato = $_POST['data'];
+    $producto = $_POST['prod'];
+    if ($stmt = $mysqli->prepare("SELECT prevent FROM products WHERE id_user = $usuario AND id_prod = $producto")) {
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($precio);
+        $stmt->fetch();
+        if ($stmt2 = $mysqli->prepare("UPDATE products SET prevent = $dato WHERE id_prod = $producto AND id_user = $usuario")){
+        $stmt2->execute();
+        echo json_encode(array("success" => "(づ｡◕‿‿◕｡)づ"));
+        }else{
+            echo json_encode(array("error" => "(╯ ͡❛ ͜ʖ ͡❛)╯┻━┻"));
+        }
+    }else{
+        echo json_encode(array("error" => "(╯ ͡❛ ͜ʖ ͡❛)╯┻━┻"));
+    }
+
+}else if ($tipo == 'haystock'){
+    $dato = $_POST['datos'];
+    $cant = $_POST['cant'];
+    if ($stmt = $mysqli->prepare("SELECT stock FROM products WHERE id_user = $usuario AND id_prod = $dato")) {
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($stock);
+        $stmt->fetch();
+        if ($stock >= $cant){
+        echo json_encode(array("success" => "(づ｡◕‿‿◕｡)づ"));
+        }else{
+            echo json_encode(array("error" => $stock));
+        }
+    }else{
+        echo json_encode(array("error" => "(╯ ͡❛ ͜ʖ ͡❛)╯┻━┻"));
     }
 
 }
+
 ?>

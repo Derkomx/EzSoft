@@ -1,18 +1,12 @@
 <?php
-/*
-	Archivo: Secciones.php
-	Autor: Armas, Juan Manuel
-	Proposito: Funcionamiento de las secciones aparte del menú
-	Fecha: 07/01/2021
-	Ultima edición: 08/01/2021
-*/
+
 
 	// Array limpio
 	$Secciones = [];
 
 	// Secciones de nivel 3 (Usuario)
 	$Secciones[3] = [
-		"Inicio" => "404.php",
+		"Inicio" => "administracion/estadisticas.php",
 		///////////////////////////////////////////////////
 		"carrito" => "shop/selcliente.php",
 		"carrito2" => "shop/productos2.php",
@@ -33,6 +27,8 @@
 		"pagofinal"=>"administracion/pagofinal.php",
 		"admclientes"=>"administracion/admcliente.php",
 		"pagocliente"=>"administracion/pagocliente.php",
+		"cierredia"=>"administracion/cierredia.php",
+		"movsdia"=>"administracion/movsdia.php",
 		//datos.php de seccion DATOS no esta agregado ya que se redirije una sola vez en el sistema//
 		///////////////////////////////////////////////
 	];
@@ -58,6 +54,8 @@
 		"pagofinal"=>"administracion/pagofinal.php",
 		"admclientes"=>"administracion/admcliente.php",
 		"pagocliente"=>"administracion/pagocliente.php",
+		"cierredia"=>"administracion/cierredia.php",
+		"movsdia"=>"administracion/movsdia.php",
 		//datos.php de seccion DATOS no esta agregado ya que se redirije una sola vez en el sistema//
 		///////////////////////////////////////////////
 		"listausuarios"=>"ROOT/usuarios.php",
@@ -67,7 +65,10 @@
 		"sindatos"=>"ROOT/sindatos.php",
 		"usuariosactivos"=>"ROOT/activo.php",
 		"usuariosinactivos"=>"ROOT/inactivo.php",
-		"estadisticasroot"=>"ROOT/estadisticas.php"
+		"estadisticasroot"=>"ROOT/estadisticas.php",
+		"elegirtabla"=>"ROOT/elegirtabla.php",
+		"vertablas"=>"ROOT/vertablas.php",
+		"tabla"=>"ROOT/vistatabla.php",
 	];
 
 

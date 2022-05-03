@@ -5,7 +5,7 @@
 //include_once '../../includes/MySQL.php';
 //include '../../includes/functions.php';
 
-function prodenremito($nremito, $mysqli){
+function prodenremito($nremito, $mysqli){ 
     $usuario = $_SESSION['id_usuario'];
     $resultados = [];
     if ($stmt = $mysqli->prepare("SELECT id_prod, cant, preciou, precio, nomprod FROM prodvend where id_remito = $nremito AND id_usuario = $usuario")) {
@@ -213,7 +213,7 @@ if($stmt3 = $mysqli->prepare("SELECT id FROM remitos WHERE id_remito = '$nremito
 }
 function prodmasvend($id_usuario, $mysqli){
     $Resultado = [];
-    if($stmt = $mysqli->prepare("SELECT id_prod, COUNT( id_prod ) AS total FROM  prodvend WHERE id_usuario = '$id_usuario' GROUP BY id_prod ORDER BY total DESC")){
+    if($stmt = $mysqli->prepare("SELECT id_prod, COUNT( id_prod ) AS total FROM  prodvend WHERE id_usuario = '$id_usuario' and concretado = 1 GROUP BY id_prod ORDER BY total DESC")){
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($id_prod, $total);
@@ -223,7 +223,7 @@ function prodmasvend($id_usuario, $mysqli){
                 $stmt1->store_result();
                 $stmt1->bind_result($nombre, $precio);
                 $stmt1->fetch();
-                if($stmt2 = $mysqli->prepare("SELECT SUM(cant) FROM prodvend WHERE id_prod = '$id_prod'")){
+                if($stmt2 = $mysqli->prepare("SELECT SUM(cant) FROM prodvend WHERE id_prod = '$id_prod' AND concretado = 1")){
                     $stmt2->execute();
                     $stmt2->store_result();
                     $stmt2->bind_result($cantvend);
@@ -233,7 +233,6 @@ function prodmasvend($id_usuario, $mysqli){
             }
         }
         return($Resultado);
-
     }
 }
 function cantprod($id_usuario, $mysqli){
@@ -344,8 +343,8 @@ if($stmt3 = $mysqli->prepare("SELECT id FROM recibo WHERE id_recibo = '$nremito'
 }
 function movimientos_hoy($mysqli){
     $usuario = $_SESSION['id_usuario'];
-    $hoydate = date('d-m-Y');
-    $finhoydate = date("d-m-Y",strtotime($hoydate."+ 1 days"));
+    $hoydate = date('d-m-Y h:i:s');
+    $finhoydate = date("d-m-Y h:i:s",strtotime($hoydate."+ 1 days"));
     $hoy = strtotime($hoydate);
     $mañana = strtotime($finhoydate);
     $resultados = '';
@@ -375,5 +374,33 @@ function movimientos_mes($mysqli){
 		return ($resultados);
 		
 	}
+}
+function cajausuario($id_usuario, $mysqli){
+    $id_usuario = $_SESSION['id_usuario'];
+    $resultados = [];
+    if ($stmt = $mysqli->prepare("SELECT fecha, total, caja  FROM cierredia WHERE id_usuario = '$id_usuario'")) {
+        $stmt->execute();
+        $stmt->store_result();
+		$stmt->bind_result($fecha, $total, $caja);
+		while ($stmt->fetch()) {
+            $fecha = date('d-m-Y', $fecha);
+			$resultados[] = array($fecha, $total, $caja);
+		}
+		return ($resultados);
+		
+	}
+}
+function todoslosproductos($mysqli){
+    $id_usuario = $_SESSION['id_usuario'];
+    $redultados = [];
+    if($stmt = $mysqli->prepare("SELECT id_prod, nomprod, fileprod, prevent, stock FROM  products WHERE id_user = $id_usuario")){
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($id_prod, $nomprod, $fileprod, $prevent, $stock);
+        while ($stmt->fetch()) {
+			$resultados[] = array($id_prod, $nomprod, $fileprod, $prevent, $stock);
+		}
+        return ($resultados);
+    }
 }
 ?>

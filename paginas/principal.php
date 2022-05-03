@@ -17,10 +17,11 @@
 
 	// Menú de nivel 3 (Usuario normal)
 	$MenuArr[3] = [
-            "Inicio" => [
+           
+            "Home" => [
                 "Icono" => "nav-icon fas fa-home",
-                "Seccion" => "Inicio",
-                "Archivo" => "404.php",
+                "Seccion" => "estadisticas",
+                "Archivo" => "administracion/estadisticas.php",
             ],
 
             "Productos" => [
@@ -115,6 +116,11 @@
                 "Seccion" => "carrito",
                 "Archivo" => "shop/selcliente.php",
             ],
+            "Nuevo Pago de Cliente" => [
+                "Icono" => "nav-icon fa fa-paper-plane" ,
+                "Seccion" => "pagocliente",
+                "Archivo" => "administracion/pagocliente.php",
+            ],
 			"Administracion" => [
                 "Icono" => "nav-icon fa fa-suitcase",
                 "Tipo" => "Sub-menu",
@@ -134,11 +140,6 @@
                         "Seccion" => "ctasclientes",
                         "Archivo" => "administracion/ctascliente.php",
                     ],
-                    "Nuevo Pago de Cliente" => [
-                        "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "pagocliente",
-                        "Archivo" => "administracion/pagocliente.php",
-                    ],
 					"Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "nuevoproducto",
@@ -154,10 +155,10 @@
                         "Seccion" => "ventas",
                         "Archivo" => "administracion/ventas.php",
                     ],
-					"Estadisticas" => [
+                    "Cierre de Caja" => [
                         "Icono" => "nav-icon fa fa-caret-right",
-                        "Seccion" => "estadisticas",
-                        "Archivo" => "administracion/estadisticas.php",
+                        "Seccion" => "cierredia",
+                        "Archivo" => "administracion/cierredia.php",
                     ],
                     //"Datos" => [
                     //    "Icono" => "nav-icon fa fa-caret-right",
@@ -171,7 +172,7 @@
         "Inicio" => [
             "Icono" => "nav-icon fas fa-home",
             "Seccion" => "Inicio",
-            "Archivo" => "404.php",
+            "Archivo" => "ROOT/inicio.php",
             ],
 
         "Productos" => [
@@ -266,6 +267,11 @@
             "Seccion" => "carrito",
             "Archivo" => "shop/selcliente.php",
         ],
+        "Nuevo Pago de Cliente" => [
+            "Icono" => "nav-icon fa fa-paper-plane" ,
+            "Seccion" => "pagocliente",
+            "Archivo" => "administracion/pagocliente.php",
+        ],
         "Administracion" => [
             "Icono" => "nav-icon fa fa-suitcase",
             "Tipo" => "Sub-menu",
@@ -284,11 +290,6 @@
                     "Icono" => "nav-icon fa fa-caret-right",
                     "Seccion" => "ctasclientes",
                     "Archivo" => "administracion/ctascliente.php",
-                ],
-                "Nuevo Pago de Cliente" => [
-                    "Icono" => "nav-icon fa fa-caret-right",
-                    "Seccion" => "pagocliente",
-                    "Archivo" => "administracion/pagocliente.php",
                 ],
                 "Cargar Productos" => [
                     "Icono" => "nav-icon fa fa-caret-right",
@@ -310,11 +311,12 @@
                     "Seccion" => "estadisticas",
                     "Archivo" => "administracion/estadisticas.php",
                 ],
-                //"Datos" => [
-                //    "Icono" => "nav-icon fa fa-caret-right",
-                //    "Seccion" => "Datos",
-                //    "Archivo" => "administracion/datos.php",
-                //],
+                "Cierre de Caja" => [
+                    "Icono" => "nav-icon fa fa-caret-right",
+                    "Seccion" => "cierredia",
+                    "Archivo" => "administracion/cierredia.php",
+                ],
+
                 ],
             ],
             "ROOT" => [
@@ -361,7 +363,17 @@
                         "Seccion" => "estadisticasroot",
                         "Archivo" => "ROOT/estadisticas.php",
                     ],
+                    "Cierre Diario" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "cierrediario",
+                        "Archivo" => "ROOT/cierrediario.php",
+                    ],
                 ],
+            ],
+            "ROOT TABLAS" => [
+                "Icono" => "nav-icon fa fa-shopping-cart",
+                "Seccion" => "vertablas",
+                "Archivo" => "ROOT/vertablas.php",
             ],
 ];
 // Clase del menú
@@ -538,6 +550,9 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
     <!--<link rel="stylesheet" href="librerias/dist/notiflix-3.2.5.min.css" />
 	<script src="librerias/dist/notiflix-3.2.5.min.js"></script>
 	<script src="librerias/dist/notiflix-aio-3.2.5.min.js"></script>-->
+    <!-- flatpickr -->
+    <link rel="stylesheet" href="librerias/flatpickr.min.css">
+    <script src="librerias/flatpickr.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed single">
@@ -653,6 +668,7 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
     <script src="librerias/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="librerias/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="librerias/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
 
 </body>
 
