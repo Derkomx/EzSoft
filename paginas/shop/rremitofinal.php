@@ -51,7 +51,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h4>
-                                            <i class="fas fa-globe"></i> Recibo by Ez-Soft
+                                            <!--<i class="fas fa-globe"></i> Recibo by Ez-Soft-->
                                             <?php
                                                 include 'includes/funciones.php';
                                                 $nremito = $_GET['remito'];
@@ -108,13 +108,13 @@
 
                                 <!-- Table row -->
                                 <div class="p-4 row">
-                                    <div class="col-12 table-responsive">
+                                    <div class="col-xs 12 table-responsive">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Cantidad</th>
                                                     <th>Producto</th>
-                                                    <th>Codigo de Producto</th>
+
                                                     <th>Precio Unitario</th>
                                                     <th>Subtotal</th>
                                                 </tr>
@@ -128,7 +128,7 @@
                                                                 echo    '<tr>'.
                                                                         '<td>'.$ID[1].'</td>'.
                                                                         '<td>'.$ID[4].'</td>'.
-                                                                        '<td>'.$ID[0].'</td>'.
+                                                                        
                                                                         '<td>$'.number_format($ID[2],2).'</td>'.
                                                                         '<td>$'.number_format($ID[3],2).'</td>'.
                                                                         '</tr>';
@@ -191,6 +191,7 @@
                         <!-- this row will not appear when printing -->
                         <div class="row no-print">
                             <div class="col-12">
+                                <button id="BTNTICKET" type="button" class="btn btn-info float-left">Ticket</button>
                                 <button id="BTNACEPTAR" type="button" class="btn btn-success float-right">
                                     Descargar
                                 </button>
@@ -207,12 +208,92 @@
 </div>
 <!-- /.control-sidebar -->
 </div>
+<section id="R_T" hidden>
+    <div class="ticket">
+        <p class="centrado">X
+            <br>DOCUMENTO NO VALIDO COMO FACTURA
+        </p>
+        <p class="centrado"><?php echo $vendedor[0];?>
+            <br> <?php echo $vendedor[2];?>, <?php echo $vendedor[3];?>
+            <br><?php echo $fecha; ?>
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th class="cantidad">Cant.</th>
+                    <th class="producto">Producto</th>
+                    <th class="precio">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach($productos as $ID) {                                                                                                                      
+                    echo    '<tr>'.
+                            '<td class="cantidad">'.$ID[1].'</td>'.
+                            '<td class="producto">'.$ID[4].'</td>'.                                                                        
+                            '<td class="precio">$'.number_format($ID[3],2).'</td>'.
+                            '</tr>';
+                }
+            ?>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th class="cantidad2">Subtotal:</th>
+                    <th class="producto2">$<?php echo number_format($datos[0],2); ?></th>
+                </tr>
+            </thead>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th class="cantidad2">Descuento:</th>
+                    <th class="producto2">$<?php echo number_format($datos[1],2);?></th>
+                </tr>
+            </thead>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <th class="cantidad2">Total:</th>
+                    <th class="producto2">$<?php echo number_format($datos[2],2);?></th>
+                </tr>
+            </thead>
+        </table>
+        <p class="centrado">¡GRACIAS POR SU COMPRA!
+            <br>EZ-SOFT
+        </p>
+    </div>
+</section>
 <!-- ./wrapper -->
+<script>
+document.querySelector("#BTNTICKET").addEventListener("click", function() {
+    var div = document.querySelector("#R_T");
 
+    imprimirElemento2(div);
+});
+</script>
+<script>
+function imprimirElemento2(elemento) {
+    var ventana = window.open('', '', 'height=800px,width=600px resizable=yes');
+    ventana.document.write('<html><head><title>' + <?php echo $nremito ?> + '</title>');
+    ventana.document.write('<link rel="stylesheet" href="CSS/ticket.css">');
+    ventana.document.write('</head><body >');
+    ventana.document.write(elemento.innerHTML);
+    ventana.document.write('</body></html>');
+    ventana.document.close();
+    ventana.onload = function() {
+        ventana.print();
+    };
+    return true;
+}
+</script>
 
 <script>
 document.querySelector("#BTNACEPTAR").addEventListener("click", function() {
     var div = document.querySelector("#R_X");
+
     imprimirElemento(div);
 });
 </script>

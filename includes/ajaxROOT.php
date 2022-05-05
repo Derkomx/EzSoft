@@ -44,5 +44,24 @@
                     exit();
                 }
             }
+        }else if ($tipo == 'actualizardatos'){
+            $nombre = $_POST['nombre'];
+            $direccion = $_POST['direccion'];
+            $provincia = $_POST['provincia'];
+            $codpos = $_POST['codpos'];
+            $telefono = $_POST['telefono'];
+            $email = $_POST['email'];
+            $usuario2 = $_POST['usuario'];
+            if ($stmt2 = $mysqli->prepare("UPDATE usuarios SET nombre = '$nombre' , direccion = '$direccion' , provincia = '$provincia' , codpos = $codpos , telefono = '$telefono' , email = '$email' WHERE id_usuario = $usuario2")){
+                $stmt2->execute();
+                echo json_encode(array("location" => "(づ｡◕‿‿◕｡)づ"));
+                }
+        }else if ($tipo == 'actualizarnivel'){
+            $lvl = $_POST['lvl'];
+            $usuario2 = $_POST['usuario'];
+            if ($stmt2 = $mysqli->prepare("UPDATE usuarios2 SET nivel = $lvl WHERE id_usuario = $usuario2")){
+                $stmt2->execute();
+                echo json_encode(array("location" => "(づ｡◕‿‿◕｡)づ"));
+                }
         }
 ?>

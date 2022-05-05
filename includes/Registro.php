@@ -56,7 +56,7 @@
 		// Genera un código único de activación para la cuenta, mediante su CUIL y el timestamp
 		$activacion = md5($cuil.time());
 
-		if ($insert_stmt = $mysqli->prepare("INSERT INTO usuarios2 (cuil, nivel, email, password, salt, activo, activacion, alta) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())")) {
+		if ($insert_stmt = $mysqli->prepare("INSERT INTO usuarios2 (cuil, nivel, email, password, salt, activo, activacion, alta, denegado) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), 1)")) {
 			$insert_stmt->bind_param('sisssis', $cuil, $nivel, $email, $password, $random_salt, $activo, $activacion);
 		
 			if (!$insert_stmt->execute()) {

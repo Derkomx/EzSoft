@@ -34,7 +34,7 @@
 		///////////////////////////////////////////////
 	];
 	$Secciones[9] = [
-		"Inicio" => "404.php",
+		"Inicio" => "ROOT/inicio.php",
 		///////////////////////////////////////////////////
 		"carrito" => "shop/selcliente.php",
 		"carrito2" => "shop/productos2.php",
@@ -71,6 +71,13 @@
 		"elegirtabla"=>"ROOT/elegirtabla.php",
 		"vertablas"=>"ROOT/vertablas.php",
 		"tabla"=>"ROOT/vistatabla.php",
+		"selusuario"=>"ROOT/MODIFICACIONES/selusuario.php",
+		"datosroot"=>"ROOT/MODIFICACIONES/datos.php",
+		"clienteroot"=>"ROOT/MODIFICACIONES/clientes.php",
+		"nivelroot"=>"ROOT/MODIFICACIONES/niveles.php",
+		"productosroot"=>"ROOT/MODIFICACIONES/productos.php",
+		"reciboroot"=>"ROOT/MODIFICACIONES/recibos.php",
+		"remitoroot"=>"ROOT/MODIFICACIONES/remitos.php",
 	];
 
 

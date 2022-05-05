@@ -461,7 +461,180 @@ include_once 'MySQL.php';
                     exit();
                 }
             }      
-            
+            function todosusuarios($mysqli){
+                $usuario = $_SESSION['id_usuario'];
+            if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                $stmt->execute();
+                $stmt->store_result();
+                $stmt->bind_result($nivel);
+                $stmt->fetch();
+                if($nivel == 9){
+                    $Resultado = [];
+                    if($stmt2 = $mysqli->prepare("SELECT id_usuario, nombre FROM usuarios")){
+                        $stmt2->execute();
+                        $stmt2->store_result();
+                        $stmt2->bind_result($usuario, $nombre);
+                        while($stmt2->fetch()){
+                                $Resultado[] = array($usuario, $nombre);
+                            }
+                        }
+                        return $Resultado;
+                    }
+                }else{
+                    header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                    exit();
+                }
+            }
+            function datosusuario($usuario2, $mysqli){
+                $usuario = $_SESSION['id_usuario'];
+                if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($nivel);
+                    $stmt->fetch();
+                    if($nivel == 9){
+                        $Resultado = [];
+                        if($stmt2 = $mysqli->prepare("SELECT nombre, direccion, provincia, codpos, telefono, email FROM usuarios WHERE id_usuario = $usuario2")){
+                            $stmt2->execute();
+                            $stmt2->store_result();
+                            $stmt2->bind_result($nombre, $direccion, $provincia, $codpos, $telefono, $email);
+                            $stmt2->fetch();
+                            $Resultado[] = array($nombre, $direccion, $provincia, $codpos, $telefono, $email);
+                            return $Resultado;
+                        }                  
+                    }else{
+                        header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                        exit();
+                    }
+                }
+            }
+            function clientesusuario($usuario2, $mysqli){
+                $usuario = $_SESSION['id_usuario'];
+                if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($nivel);
+                    $stmt->fetch();
+                    if($nivel == 9){
+                        $Resultado = [];
+                        if($stmt2 = $mysqli->prepare("SELECT id_cliente, nombre, direccion, provincia, codpos, telefono, email FROM clientes WHERE id_usuario = $usuario2")){
+                            $stmt2->execute();
+                            $stmt2->store_result();
+                            $stmt2->bind_result($id_cliente, $nombre, $direccion, $provincia, $codpos, $telefono, $email);
+                            while($stmt2->fetch()){
+                                    $Resultado[] = array($id_cliente, $nombre, $direccion, $provincia, $codpos, $telefono, $email);
+                                }
+                            }
+                            return $Resultado;
+                    }else{
+                        header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                        exit();
+                    }
+                }
+            }
+            function nivelusuario($usuario2, $mysqli){
+                $usuario = $_SESSION['id_usuario'];
+                if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($nivel);
+                    $stmt->fetch();
+                    if($nivel == 9){
+                        
+                    }else{
+                        header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                        exit();
+                    }
+                }
+            }
+            function productosusuario($usuario2, $mysqli){
+                $usuario = $_SESSION['id_usuario'];
+                if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($nivel);
+                    $stmt->fetch();
+                    if($nivel == 9){
+                        $Resultado = [];
+                        if($stmt2 = $mysqli->prepare("SELECT id_prod, nomprod, fileprod, prevent, codigo, stock FROM products WHERE id_user = $usuario2")){
+                            $stmt2->execute();
+                            $stmt2->store_result();
+                            $stmt2->bind_result($id_prod, $nomprod, $fileprod, $prevent, $codigo, $stock);
+                            while($stmt2->fetch()){
+                                    $Resultado[] = array($id_prod, $nomprod, $fileprod, $prevent, $codigo, $stock);
+                                }
+                            }
+                            return $Resultado;
+                    }else{
+                        header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                        exit();
+                    }
+                }
+            }
+            function recibosusuario($usuario2, $mysqli){
+                date_default_timezone_set('America/Argentina/Buenos_Aires');
+                $usuario = $_SESSION['id_usuario'];
+                if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($nivel);
+                    $stmt->fetch();
+                    if($nivel == 9){
+                        $Resultado = [];
+                        if($stmt2 = $mysqli->prepare("SELECT id_recibo, id_cliente, metodo, valor, fecha FROM recibo WHERE id_usuario = $usuario2")){
+                            $stmt2->execute();
+                            $stmt2->store_result();
+                            $stmt2->bind_result($id_recibo, $id_cliente, $metodo, $valor, $fecha);
+                            while($stmt2->fetch()){
+                                $fecha = date('d-m-Y H:i:s', $fecha);
+                                    if($stmt3 = $mysqli->prepare("SELECT nombre FROM clientes WHERE id_cliente = $id_cliente AND id_usuario = $usuario2")){
+                                        $stmt3->execute();
+                                        $stmt3->store_result();
+                                        $stmt3->bind_result($nombre);
+                                        $stmt3->fetch();
+                                    $Resultado[] = array($id_recibo, $id_cliente, $nombre, $metodo, $valor, $fecha);
+                                    }
+                                }
+                            }
+                            return $Resultado;
+                    }else{
+                        header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                        exit();
+                    }
+                }
+            }
+            function remitosusuario($usuario2, $mysqli){
+                date_default_timezone_set('America/Argentina/Buenos_Aires');
+                $usuario = $_SESSION['id_usuario'];
+                if($stmt = $mysqli->prepare("SELECT nivel FROM usuarios2 WHERE id_usuario = $usuario")){
+                    $stmt->execute();
+                    $stmt->store_result();
+                    $stmt->bind_result($nivel);
+                    $stmt->fetch();
+                    if($nivel == 9){
+                        $Resultado = [];
+                        if($stmt2 = $mysqli->prepare("SELECT id_remito, id_cli, fecha, subtotal, descuento, total FROM remitos WHERE id_usu = $usuario2")){
+                            $stmt2->execute();
+                            $stmt2->store_result();
+                            $stmt2->bind_result($id_remito, $id_cli, $fecha, $subtotal, $descuento, $total);
+                            while($stmt2->fetch()){
+                                $fecha = date('d-m-Y H:i:s', $fecha);
+                                if($stmt3 = $mysqli->prepare("SELECT nombre FROM clientes WHERE id_cliente = $id_cli AND id_usuario = $usuario2")){
+                                    $stmt3->execute();
+                                    $stmt3->store_result();
+                                    $stmt3->bind_result($nombre);
+                                    $stmt3->fetch();
+                                $Resultado[] = array($id_remito, $id_cli, $nombre, $fecha, $subtotal, $descuento, $total);
+                                }
+                                }
+                            }
+                            return $Resultado;
+                    }else{
+                        header("Location: ../(ง ͡❛ ͜ʖ ͡❛)_งQue_queres_hacer_pibe?.");
+                        exit();
+                    }
+                }
+            }
             
 
 ?>

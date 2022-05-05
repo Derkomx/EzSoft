@@ -53,18 +53,14 @@ if(!isLogged()){
     if ($Verificado == 0) {
         include 'paginas/administracion/datos.php';
         exit();
-    }
+    }else{
 
-    $activo = activo($user, $mysqli);
 
-    if ($activo == 1) {
-        include 'paginas/404-2.php';
-        exit();
-    }
 
     $Nivel = isLogged();
     $Seccion = (!isset($_GET['Seccion'])) ? 'Inicio' : $_GET['Seccion'];
     include 'paginas/principal.php';
+    }
 }
 
 ?>

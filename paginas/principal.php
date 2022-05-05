@@ -1,4 +1,5 @@
-<?php
+<?php       
+
 	//trae el lvl de usuario
 	$lvlusr = $_SESSION['nivel'];
 	//$lvlusr = 3;
@@ -8,6 +9,8 @@
 	}
 	//$id_usuario = $_SESSION['id_usuario'];
 	$id_usuario = $_SESSION['id_usuario'];
+    $activo = activo($id_usuario, $mysqli);
+        
 	//trae array con los nombres de librerias/lteintos Menu
 	$arraymenu = itemsmenu($id_usuario,$mysqli);
 	//$arraymenu = [];
@@ -121,26 +124,38 @@
                 "Seccion" => "pagocliente",
                 "Archivo" => "administracion/pagocliente.php",
             ],
-			"Administracion" => [
-                "Icono" => "nav-icon fa fa-suitcase",
+			"Gestion de Clientes" => [
+                "Icono" => "nav-icon fa fa-address-book",
                 "Tipo" => "Sub-menu",
                 "Menu" => [
-					"Cargar Cliente" => [
+                    "Cargar Cliente" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "nuevocliente",
                         "Archivo" => "administracion/clientenuevo.php",
                     ],
-					"Administrar Clientes" => [
+                    "Administrar Clientes" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "admclientes",
                         "Archivo" => "administracion/admcliente.php",
                     ],
-					"Cuentas Clientes" => [
+                ],
+            ],
+            "Cuentas Corrientes" => [
+                "Icono" => "nav-icon fa fa-suitcase",
+                "Tipo" => "Sub-menu",
+                "Menu" => [
+                    "Cuentas Clientes" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "ctasclientes",
                         "Archivo" => "administracion/ctascliente.php",
                     ],
-					"Cargar Productos" => [
+                ],
+            ],
+            "Gestion de Productos" => [
+                "Icono" => "nav-icon fa fa-cubes",
+                "Tipo" => "Sub-menu",
+                "Menu" => [
+                    "Cargar Productos" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "nuevoproducto",
                         "Archivo" => "administracion/cargarproducto.php",
@@ -150,7 +165,13 @@
                         "Seccion" => "eliminarproducto",
                         "Archivo" => "administracion/eliminarproducto.php",
                     ],
-					"Ventas" => [
+                ],
+            ],
+            "Administracion" => [
+                "Icono" => "nav-icon fa fa-balance-scale",
+                "Tipo" => "Sub-menu",
+                "Menu" => [
+                    "Ventas" => [
                         "Icono" => "nav-icon fa fa-caret-right",
                         "Seccion" => "ventas",
                         "Archivo" => "administracion/ventas.php",
@@ -160,14 +181,15 @@
                         "Seccion" => "cierredia",
                         "Archivo" => "administracion/cierredia.php",
                     ],
+    
+                    ],
+                ],
+            ];
                     //"Datos" => [
                     //    "Icono" => "nav-icon fa fa-caret-right",
                     //    "Seccion" => "Datos",
                     //    "Archivo" => "administracion/datos.php",
                     //],
-				],
-			],
-    ];
     $MenuArr[9] = [
         "Inicio" => [
             "Icono" => "nav-icon fas fa-home",
@@ -181,7 +203,7 @@
             "Menu" => [
                 "Todos" => [
                     "Icono" => "nav-icon fa fa-caret-right",
-                    "Seccion" => "carrito2&hash=1",
+                    "Seccion" => "carrito2&h=1",
                     "Archivo" => "shop/productos.php",
                 ],
                 "$arraymenu[0]" => [
@@ -272,8 +294,8 @@
             "Seccion" => "pagocliente",
             "Archivo" => "administracion/pagocliente.php",
         ],
-        "Administracion" => [
-            "Icono" => "nav-icon fa fa-suitcase",
+        "Gestion de Clientes" => [
+            "Icono" => "nav-icon fa fa-address-book",
             "Tipo" => "Sub-menu",
             "Menu" => [
                 "Cargar Cliente" => [
@@ -286,11 +308,23 @@
                     "Seccion" => "admclientes",
                     "Archivo" => "administracion/admcliente.php",
                 ],
+            ],
+        ],
+        "Cuentas Corrientes" => [
+            "Icono" => "nav-icon fa fa-suitcase",
+            "Tipo" => "Sub-menu",
+            "Menu" => [
                 "Cuentas Clientes" => [
                     "Icono" => "nav-icon fa fa-caret-right",
                     "Seccion" => "ctasclientes",
                     "Archivo" => "administracion/ctascliente.php",
                 ],
+            ],
+        ],
+        "Gestion de Productos" => [
+            "Icono" => "nav-icon fa fa-cubes",
+            "Tipo" => "Sub-menu",
+            "Menu" => [
                 "Cargar Productos" => [
                     "Icono" => "nav-icon fa fa-caret-right",
                     "Seccion" => "nuevoproducto",
@@ -301,6 +335,12 @@
                     "Seccion" => "eliminarproducto",
                     "Archivo" => "administracion/eliminarproducto.php",
                 ],
+            ],
+        ],
+        "Administracion" => [
+            "Icono" => "nav-icon fa fa-balance-scale",
+            "Tipo" => "Sub-menu",
+            "Menu" => [
                 "Ventas" => [
                     "Icono" => "nav-icon fa fa-caret-right",
                     "Seccion" => "ventas",
@@ -371,9 +411,45 @@
                 ],
             ],
             "ROOT TABLAS" => [
-                "Icono" => "nav-icon fa fa-shopping-cart",
+                "Icono" => "nav-icon fa fa-suitcase",
                 "Seccion" => "vertablas",
                 "Archivo" => "ROOT/vertablas.php",
+            ],
+            "MOD ROOT" => [
+                "Icono" => "nav-icon fa fa-suitcase",
+                "Tipo" => "Sub-menu",
+                "Menu" => [
+                    "MOD Datos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "selusuario&mod=datosroot",
+                        "Archivo" => "ROOT/MODIFICACIONES/cierrediario.php",
+                    ],
+                    "MOD productos" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "selusuario&mod=productosroot",
+                        "Archivo" => "ROOT/MODIFICACIONES/cierrediario.php",
+                    ],
+                    "MOD remito" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "selusuario&mod=remitoroot",
+                        "Archivo" => "ROOT/MODIFICACIONES/cierrediario.php",
+                    ],
+                    "MOD recibo" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "selusuario&mod=reciboroot",
+                        "Archivo" => "ROOT/MODIFICACIONES/cierrediario.php",
+                    ],
+                    "MOD clientes" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "selusuario&mod=clienteroot",
+                        "Archivo" => "ROOT/MODIFICACIONES/cierrediario.php",
+                    ],
+                    "MOD niveles" => [
+                        "Icono" => "nav-icon fa fa-caret-right",
+                        "Seccion" => "selusuario&mod=nivelroot",
+                        "Archivo" => "ROOT/MODIFICACIONES/cierrediario.php",
+                    ],
+                ],
             ],
 ];
 // Clase del menú
@@ -615,11 +691,26 @@ date_default_timezone_set('America/Argentina/Buenos_Aires');
 				}
 
 				if (null == $nMenu->obtenerArchivo() && null !== $Secciones[$lvlusr][$Seccion]) {
+                    if ($activo == 1) {
+                        include 'paginas/404-2.php';
+                        exit();
+                    }else{
 					include './paginas/'.$Secciones[$lvlusr][$Seccion];
+                    }
 				} elseif (null !== $nMenu->obtenerArchivo()) {
+                    if ($activo == 1) {
+                        include 'paginas/404-2.php';
+                        exit();
+                    }else{
 					include './paginas/'.$nMenu->obtenerArchivo();
+                    }
 				} else {
+                    if ($activo == 1) {
+                        include 'paginas/404-2.php';
+                        exit();
+                    }else{
 					include './paginas/404.php';
+                    }
 				}
 			?>
         </div>

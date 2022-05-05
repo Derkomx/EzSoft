@@ -246,9 +246,10 @@
     $email = $_POST['email'];
     if ($stmt = $mysqli->prepare("INSERT INTO usuarios (id_usuario, nombre, direccion, provincia, codpos, telefono, email) VALUES ( '$usuario' , '$nombre', '$direccion', '$provincia', '$codpos', '$telefono', '$email')")) {
         $stmt->execute();
-            if ($stmt2 = $mysqli->prepare("UPDATE usuarios2 SET verificado2 = '1' WHERE id_usuario = $usuario"))
+            if ($stmt2 = $mysqli->prepare("UPDATE usuarios2 SET verificado2 = '1' WHERE id_usuario = $usuario")){
             $stmt2->execute();
             echo json_encode(array("location" => "(づ｡◕‿‿◕｡)づ"));
+            }
     }
 }else if($tipo == 'carga2'){
     //fetch table rows from mysql db
